@@ -1,0 +1,20 @@
+{
+  "folders": [
+	{
+		"path": "../html3"
+	},
+	{
+		"path": "../Js"
+	},
+	{
+		"path": "../html"
+	},
+	{
+		"path": "../jshtml"
+	}
+],
+  "settings": {
+    "liveServer.settings.multiRootWorkspaceName": "RepositorioDosCria",
+    "liveServer.settings.port": 5501
+  }
+}

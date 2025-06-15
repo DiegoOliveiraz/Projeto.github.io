@@ -1,0 +1,166 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Formulário Completo</title>
+    <link rel="stylesheet" href="formu.css" />
+     <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=6703&format=png&color=000000"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>    <form action="#" method="post" novalidate>
+      <!-- Nome -->
+      <label for="nome">Nome:</label>
+      <input
+        type="text"
+        id="nome"
+        name="nome"
+        required
+        placeholder="Digite seu nome"
+        pattern="^[A-Za-zÀ-ÿ\s]{3,50}$"
+      /><br /><br />
+
+      <!-- E-mail -->
+      <label for="email">E-mail:</label>
+      <input
+        type="email"
+        id="email"
+        name="email"
+        required
+        placeholder="Digite seu e-mail"
+        pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
+      /><br /><br />      <!-- Telefone -->
+      <label for="telefone">Telefone:</label>
+      <input
+        type="tel"
+        id="telefone"
+        name="telefone"
+        pattern="^\(\d{2}\)\s\d{4,5}-\d{4}$"
+        placeholder="(XX) XXXXX-XXXX"
+        required
+      /><br /><br />
+
+      <!-- Endereço -->
+      <label for="endereco">Endereço:</label>
+      <input
+        type="text"
+        id="endereco"
+        name="endereco"
+        required
+        placeholder="Digite seu endereço"
+      /><br /><br />
+
+      <!-- Data de Nascimento -->
+      <label for="data-nascimento">Data de Nascimento:</label>
+      <input
+        type="date"
+        id="data-nascimento"
+        name="data-nascimento"
+        required
+      /><br /><br />
+
+      <!-- Gênero -->
+      <label for="genero">Gênero:</label>
+      <select class="genero" name="genero" required>
+        <option value="" disabled selected>Selecione o gênero</option>
+        <option value="masculino">Masculino</option>
+        <option value="feminino">Feminino</option>
+        <option value="outro">Outro</option></select
+      ><br /><br />      <!-- Botão de Envio -->
+      <button type="submit" onclick="validarFormulario(event)">Enviar</button>
+    </form>
+
+    <script>
+      function validarFormulario(event) {
+        event.preventDefault();
+        const form = event.target.form;
+        
+        // Validar nome
+        const nome = document.getElementById('nome');
+        if (!nome.value.match(/^[A-Za-zÀ-ÿ\s]{3,50}$/)) {
+          alert('Por favor, insira um nome válido (mínimo 3 caracteres, apenas letras e espaços)');
+          nome.focus();
+          return;
+        }
+
+        // Validar email
+        const email = document.getElementById('email');
+        if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+          alert('Por favor, insira um email válido');
+          email.focus();
+          return;
+        }
+
+        // Validar telefone
+        const telefone = document.getElementById('telefone');
+        if (!telefone.value.match(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)) {
+          alert('Por favor, insira um telefone válido no formato (XX) XXXXX-XXXX');
+          telefone.focus();
+          return;
+        }
+
+        // Validar endereço
+        const endereco = document.getElementById('endereco');
+        if (endereco.value.length < 10) {
+          alert('Por favor, insira um endereço com pelo menos 10 caracteres');
+          endereco.focus();
+          return;
+        }
+
+        // Validar data de nascimento
+        const dataNascimento = document.getElementById('data-nascimento');
+        if (!dataNascimento.value) {
+          alert('Por favor, selecione sua data de nascimento');
+          dataNascimento.focus();
+          return;
+        }
+
+        // Verificar se é maior de idade
+        const hoje = new Date();
+        const nascimento = new Date(dataNascimento.value);
+        const idade = hoje.getFullYear() - nascimento.getFullYear();
+        const mesAtual = hoje.getMonth() - nascimento.getMonth();
+        
+        if (idade < 18 || (idade === 18 && mesAtual < 0)) {
+          alert('Você precisa ter pelo menos 18 anos para se cadastrar');
+          dataNascimento.focus();
+          return;
+        }
+
+        // Validar gênero
+        const genero = document.querySelector('select.genero');
+        if (!genero.value) {
+          alert('Por favor, selecione um gênero');
+          genero.focus();
+          return;
+        }
+
+        // Se todas as validações passarem, redireciona para a página de validação
+        window.location.href = 'validacao.html';
+      }
+
+      // Máscara para telefone
+      document.getElementById('telefone').addEventListener('input', function(e) {
+        let value = e.target.value.replace(/\D/g, '');
+        if (value.length <= 11) {
+          value = value.replace(/^(\d{2})(\d)/g, '($1) $2');
+          value = value.replace(/(\d)(\d{4})$/, '$1-$2');
+          e.target.value = value;
+        }
+      });
+
+      // Definir data máxima para nascimento (18 anos atrás)
+      const dataNascimentoInput = document.getElementById('data-nascimento');
+      const hoje = new Date();
+      const data18Anos = new Date(hoje.getFullYear() - 18, hoje.getMonth(), hoje.getDate());
+      dataNascimentoInput.max = data18Anos.toISOString().split('T')[0];
+    </script>
+  </body>
+</html>

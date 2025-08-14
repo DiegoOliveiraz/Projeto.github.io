@@ -21,7 +21,7 @@ let listaServicos = [
   },
   {
     nome: "Limpador de Piscina",
-    img: "/Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/LDP.jpg.jpg",
+    img: "/Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/LDP.jpg",
   },
   {
     nome: "Entregador",

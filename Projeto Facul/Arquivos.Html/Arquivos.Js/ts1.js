@@ -21,11 +21,11 @@ let listaServicos = [
   },
   {
     nome: "Limpador de Piscina",
-    img: "Arquivos.Css/Imagens/limpadordepiscina.jpg",
+    img: "/Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/LDP.jpg.jpg",
   },
   {
     nome: "Entregador",
-    img: "Arquivos.Css/Imagens/LDP.jpg",
+    img: "/Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/entregadorcria.jpeg",
   },
   {
     nome: "Pintor",
@@ -48,8 +48,23 @@ function criarGaleriaServicos() {
   // Limpa o container antes de adicionar os novos elementos
   servicosContainer.innerHTML = "";
 
-  // Para cada serviço no array, cria os elementos necessários
-  listaServicos.forEach((servico) => {
+  // Determina quantos serviços mostrar baseado no tamanho da tela
+  const larguraTela = window.innerWidth;
+  let maxServicos;
+
+  if (larguraTela <= 899) {
+    maxServicos = 6;
+  } else if (larguraTela >= 899 && larguraTela <= 1119) {
+    maxServicos = 8;
+  } else {
+    maxServicos = 10;
+  }
+
+  // Cria apenas a quantidade de serviços necessária
+  const servicosParaMostrar = listaServicos.slice(0, maxServicos);
+
+  // Para cada serviço selecionado, cria os elementos necessários
+  servicosParaMostrar.forEach((servico) => {
     // Criar elementos
     const servicoDiv = document.createElement("div");
     const link = document.createElement("a");
@@ -78,3 +93,6 @@ function criarGaleriaServicos() {
 
 // Executar a função quando o documento estiver carregado
 document.addEventListener("DOMContentLoaded", criarGaleriaServicos);
+
+// Atualizar a galeria quando a janela for redimensionada
+window.addEventListener("resize", criarGaleriaServicos);

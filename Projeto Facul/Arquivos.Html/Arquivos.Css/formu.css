@@ -4,7 +4,6 @@
   margin: 0;
   padding: 0;
   font-family: "Roboto", "Nunito Sans", sans-serif;
-  
 }
 
 body {
@@ -38,10 +37,7 @@ label {
   margin-bottom: 8px;
   font-weight: bold;
   color: #ffffff;
-  text-shadow:
-    -1px -1px 0 black,
-    1px -1px 0 black,
-    -1px 1px 0 black,
+  text-shadow: -1px -1px 0 black, 1px -1px 0 black, -1px 1px 0 black,
     1px 1px 0 black;
 }
 
@@ -86,4 +82,44 @@ button:hover {
 button:disabled {
   background-color: #cccccc;
   cursor: not-allowed;
+}
+
+/* Responsividade para tablet */
+@media (max-width: 900px) {
+  form {
+    max-width: 95vw;
+    padding: 18px 35px;
+  }
+  button {
+    font-size: 15px;
+    padding: 8px 12px;
+  }
+}
+
+/* Responsividade para celular */
+@media (max-width: 600px) {
+  body {
+    padding: 10px;
+    height: auto;
+    align-items: flex-start;
+    padding-top: 20px;
+  }
+  form {
+    max-width: 100vw;
+    padding: 15px 20px;
+    border-radius: 8px;
+  }
+  label {
+    font-size: 14px;
+  }
+  input,
+  select {
+    font-size: 14px;
+    padding: 8px;
+  }
+  button {
+    font-size: 14px;
+    padding: 8px 10px;
+    width: 100%;
+  }
 }

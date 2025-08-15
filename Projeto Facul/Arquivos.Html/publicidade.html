@@ -28,7 +28,7 @@
         --bg-color: #000000;
         --border-color: #1976d2;
         --card-bg: rgba(0, 0, 0, 0.8);
-        --bg-image: url("https://images.unsplash.com/photo-1559136555-9303baea8ebd?q=80&w=2070");
+        --bg-image: url("Arquivos.Css/Imagens/textured-black-background-vector.jpg");
       }
 
       [data-theme="light"] {
@@ -125,14 +125,18 @@
       }
 
       .navegacao a {
-        color: var(--primary-color);
+        color: #ffffff !important;
         text-decoration: none;
         font-size: 0.9rem;
         transition: color 0.3s ease;
       }
 
+      [data-theme="light"] .navegacao a {
+        color: #000000 !important;
+      }
+
       .navegacao a:hover {
-        opacity: 0.8;
+        color: var(--primary-color) !important;
       }
 
       /* Main Content */
@@ -310,15 +314,19 @@
       }
 
       .rodape-coluna a {
-        color: var(--text-color);
+        color: #ffffff;
         text-decoration: none;
         font-size: 0.9rem;
         opacity: 0.8;
         transition: all 0.3s ease;
       }
 
+      [data-theme="light"] .rodape-coluna a {
+        color: #000000 !important;
+      }
+
       .rodape-coluna a:hover {
-        color: var(--primary-color);
+        color: var(--primary-color) !important;
         opacity: 1;
       }
 
@@ -329,6 +337,32 @@
         color: var(--text-color);
         opacity: 0.7;
         font-size: 0.8rem;
+      }
+
+      .redes-sociais {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .redes-sociais a {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .redes-sociais a:hover {
+        transform: scale(1.1);
+      }
+
+      .redes-sociais img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      [data-theme="light"] .redes-sociais img {
+        filter: brightness(0) invert(0);
       }
 
       /* Responsive */
@@ -523,15 +557,25 @@
 
         <div class="rodape-coluna">
           <h3 class="rodape-titulo">Redes sociais</h3>
-          <a href="https://www.instagram.com/unifoa/" target="_blank"
-            >Instagram</a
-          >
-          <a href="https://x.com/home?lang=pt-br" target="_blank">Twitter</a>
-          <a
-            href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
-            target="_blank"
-            >Facebook</a
-          >
+          <div class="redes-sociais">
+            <a href="https://www.instagram.com/unifoa/" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-instagram-logo-500.png"
+                alt="Instagram"
+            /></a>
+            <a href="https://x.com/home?lang=pt-br" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-twitterx-500.png"
+                alt="Twitter"
+            /></a>
+            <a
+              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
+              target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-facebook-novo-500.png"
+                alt="Facebook"
+            /></a>
+          </div>
         </div>
       </div>
 

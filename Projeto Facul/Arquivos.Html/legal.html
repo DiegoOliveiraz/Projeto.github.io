@@ -125,14 +125,18 @@
       }
 
       .navegacao a {
-        color: var(--primary-color);
+        color: #ffffff !important;
         text-decoration: none;
         font-size: 0.9rem;
         transition: color 0.3s ease;
       }
 
+      [data-theme="light"] .navegacao a {
+        color: #000000 !important;
+      }
+
       .navegacao a:hover {
-        opacity: 0.8;
+        color: var(--primary-color) !important;
       }
 
       /* Main Content */
@@ -277,15 +281,19 @@
       }
 
       .rodape-coluna a {
-        color: var(--text-color);
+        color: #ffffff;
         text-decoration: none;
         font-size: 0.9rem;
         opacity: 0.8;
         transition: all 0.3s ease;
       }
 
+      [data-theme="light"] .rodape-coluna a {
+        color: #000000 !important;
+      }
+
       .rodape-coluna a:hover {
-        color: var(--primary-color);
+        color: var(--primary-color) !important;
         opacity: 1;
       }
 

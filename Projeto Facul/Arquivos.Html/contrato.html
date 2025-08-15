@@ -1,10 +1,9 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Contratação</title>
-    <link rel="stylesheet" href="Arquivos.Css/contrato.css" />
+    <title>Contratação - FastWork</title>
     <link
       rel="shortcut icon"
       href="https://img.icons8.com/?size=100&id=6703&format=png&color=000000"
@@ -14,49 +13,517 @@
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", "Nunito Sans", sans-serif;
+      }
+
+      :root {
+        --primary-color: #1976d2;
+        --secondary-color: #000000;
+        --text-color: #1976d2;
+        --bg-color: #000000;
+        --border-color: #1976d2;
+        --card-bg: rgba(0, 0, 0, 0.8);
+        --bg-image: url('Arquivos.Css/Imagens/textured-black-background-vector.jpg');
+      }
+
+      [data-theme="light"] {
+        --primary-color: #ffc107;
+        --secondary-color: #ffffff;
+        --text-color: #000000;
+        --bg-color: #ffffff;
+        --border-color: #ffc107;
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --bg-image: url('https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070');
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: var(--bg-color);
+        background-image: var(--bg-image);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+      }
+
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1);
+      }
+
+      .theme-icon {
+        font-size: 24px;
+        transition: transform 0.5s ease;
+      }
+
+      .moon {
+        color: white;
+      }
+
+      .sun {
+        color: #fff;
+        transform: rotate(180deg);
+      }
+
+      .cabecalho {
+        background-color: var(--secondary-color);
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .cabecalho-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .fastwork {
+        color: var(--primary-color);
+        font-size: 1.8rem;
+        font-weight: bold;
+        margin: 0;
+      }
+
+      .cabecalho-direita {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .navegacao {
+        display: flex;
+        gap: 20px;
+      }
+
+      .navegacao a {
+        color: #ffffff !important;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
+
+      [data-theme="light"] .navegacao a {
+        color: #000000 !important;
+      }
+
+      .navegacao a:hover {
+        color: var(--primary-color) !important;
+      }
+
+      .perfil {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-perfil {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
+        transition: all 0.3s ease;
+      }
+
+      .logo-perfil:hover {
+        transform: scale(1.1);
+        border-color: var(--primary-color);
+      }
+
+      .conteudo-principal {
+        flex: 1;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .hero-section {
+        text-align: center;
+        padding: 60px 0;
+        background: var(--card-bg);
+        border-radius: 20px;
+        margin-bottom: 40px;
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--border-color);
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(45deg, var(--primary-color), var(--text-color));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
+      }
+
+      .card {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 15px;
+        border: 2px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      .card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 3px solid var(--primary-color);
+        object-fit: cover;
+      }
+
+      .card h2 {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .card p {
+        color: var(--text-color);
+        margin-bottom: 10px;
+        line-height: 1.5;
+        opacity: 0.9;
+      }
+
+      .card button {
+        background: var(--primary-color);
+        color: white;
+        padding: 12px 30px;
+        border: none;
+        border-radius: 8px;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        margin-top: 15px;
+      }
+
+      .card button:hover {
+        background: var(--border-color);
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .rodape {
+        background-color: var(--secondary-color);
+        padding: 30px 0 10px;
+        border-top: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+        margin-top: auto;
+      }
+
+      .rodape-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .rodape-coluna {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .rodape-titulo {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
+      .rodape-coluna a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+      }
+
+      [data-theme="light"] .rodape-coluna a {
+        color: #000000 !important;
+      }
+
+      .rodape-coluna a:hover {
+        color: var(--primary-color) !important;
+        opacity: 1;
+      }
+
+      .rodape-creditos {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-color);
+        opacity: 0.7;
+        font-size: 0.8rem;
+      }
+
+      .redes-sociais {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .redes-sociais a {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .redes-sociais a:hover {
+        transform: scale(1.1);
+      }
+
+      .redes-sociais img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      [data-theme="light"] .redes-sociais img {
+        filter: brightness(0) invert(0);
+      }
+
+      @media (max-width: 768px) {
+        .cabecalho-container {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .container {
+          grid-template-columns: 1fr;
+        }
+
+        .theme-toggle {
+          width: 50px;
+          height: 50px;
+          top: 15px;
+          right: 15px;
+        }
+      }
+    </style>
   </head>
   <body>
-    <div class="container">
-      <h1>Contratação</h1>
-      <div class="card">
-        <img src="Arquivos.Css/Imagens/luis.png" alt="Foto de João Silva" />
-        <h2>João Silva</h2>
-        <p><strong>Profissão:</strong> Pedreiro</p>
-        <p><strong>Experiência:</strong> 5 anos</p>
-        <p>
-          <strong>Habilidades:</strong> Construção de alvenaria, leitura de
-          plantas, acabamento fino
-        </p>
-        <p><strong>Localização:</strong> São Paulo, SP</p>
-        <p><strong>Disponibilidade:</strong> Imediata</p>
-        <button>Contratar</button>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span class="theme-icon moon">🌙</span>
+    </button>
+
+    <header class="cabecalho">
+      <div class="cabecalho-container">
+        <h1 class="fastwork">
+          FastWork |
+          <small><small>Conexões Trabalhistas</small></small>
+        </h1>
+        <div class="cabecalho-direita">
+          <nav class="navegacao">
+            <a href="ts1.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="ajuda.html">Ajuda</a>
+          </nav>
+          <div class="perfil">
+            <a href="formu.html" target="_blank">
+              <img
+                class="logo-perfil"
+                src="Arquivos.Css/Imagens/svg avatar rlx.webp"
+                alt="Perfil"
+              />
+            </a>
+          </div>
+        </div>
       </div>
-      <div class="card">
-        <img src="Arquivos.Css/Imagens/elis.png" alt="Foto de Mario Oliveira" />
-        <h2>Mario Oliveira</h2>
-        <p><strong>Profissão:</strong> Servente de Pedreiro</p>
-        <p><strong>Experiência:</strong> 2 anos</p>
-        <p>
-          <strong>Habilidades:</strong> Preparação de materiais, suporte em
-          obras, limpeza de áreas
-        </p>
-        <p><strong>Localização:</strong> Rio de Janeiro, RJ</p>
-        <p><strong>Disponibilidade:</strong> 1 semana</p>
-        <button>Contratar</button>
+    </header>
+
+    <main class="conteudo-principal">
+      <section class="hero-section">
+        <h1 class="hero-title">Contratação</h1>
+        <p class="hero-subtitle">Encontre os melhores profissionais para seu projeto</p>
+      </section>
+
+      <div class="container">
+        <div class="card">
+          <img src="Arquivos.Css/Imagens/luis.png" alt="Foto de João Silva" />
+          <h2>João Silva</h2>
+          <p><strong>Profissão:</strong> Pedreiro</p>
+          <p><strong>Experiência:</strong> 5 anos</p>
+          <p><strong>Habilidades:</strong> Construção de alvenaria, leitura de plantas, acabamento fino</p>
+          <p><strong>Localização:</strong> São Paulo, SP</p>
+          <p><strong>Disponibilidade:</strong> Imediata</p>
+          <button onclick="alert('Contato iniciado com João Silva!')">Contratar</button>
+        </div>
+        
+        <div class="card">
+          <img src="Arquivos.Css/Imagens/elis.png" alt="Foto de Mario Oliveira" />
+          <h2>Mario Oliveira</h2>
+          <p><strong>Profissão:</strong> Servente de Pedreiro</p>
+          <p><strong>Experiência:</strong> 2 anos</p>
+          <p><strong>Habilidades:</strong> Preparação de materiais, suporte em obras, limpeza de áreas</p>
+          <p><strong>Localização:</strong> Rio de Janeiro, RJ</p>
+          <p><strong>Disponibilidade:</strong> 1 semana</p>
+          <button onclick="alert('Contato iniciado com Mario Oliveira!')">Contratar</button>
+        </div>
+        
+        <div class="card">
+          <img src="Arquivos.Css/Imagens/lucas.png" alt="Foto de Pedro Santos" />
+          <h2>Pedro Santos</h2>
+          <p><strong>Profissão:</strong> Pedreiro Iniciante</p>
+          <p><strong>Experiência:</strong> 1 ano</p>
+          <p><strong>Habilidades:</strong> Aprendizagem rápida, disposição para trabalhar</p>
+          <p><strong>Localização:</strong> Belo Horizonte, MG</p>
+          <p><strong>Disponibilidade:</strong> 2 semanas</p>
+          <button onclick="alert('Contato iniciado com Pedro Santos!')">Contratar</button>
+        </div>
       </div>
-      <div class="card">
-        <img src="Arquivos.Css/Imagens/lucas.png" alt="Foto de Pedro Santos" />
-        <h2>Pedro Santos</h2>
-        <p><strong>Profissão:</strong> Pedreiro Iniciante</p>
-        <p><strong>Experiência:</strong> 5 meses</p>
-        <p>
-          <strong>Habilidades:</strong> Pequenos reparos, pintura, suporte em
-          construções
-        </p>
-        <p><strong>Localização:</strong> Belo Horizonte, MG</p>
-        <p><strong>Disponibilidade:</strong> Imediata</p>
-        <button>Contratar</button>
+    </main>
+
+    <footer class="rodape">
+      <div class="rodape-container">
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">FastWork</h3>
+          <a href="sobre.html">Sobre</a>
+          <a href="empregos.html">Empregos</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Comunidades</h3>
+          <a href="Dev.html">Desenvolvedores</a>
+          <a href="publicidade.html">Publicidade</a>
+          <a href="investidores.html">Investidores</a>
+          <a href="fornecedores.html">Fornecedores</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Links úteis</h3>
+          <a href="ajuda.html">Suporte</a>
+          <a href="legal.html">Legal</a>
+          <a href="seguranca.html">Segurança e privacidade</a>
+          <a href="politicas.html">Políticas de privacidade</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="acessibilidade.html">Acessibilidade</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Redes sociais</h3>
+          <div class="redes-sociais">
+            <a href="https://www.instagram.com/unifoa/" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-instagram-logo-500.png"
+                alt="Instagram"
+            /></a>
+            <a href="https://x.com/home?lang=pt-br" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-twitterx-500.png"
+                alt="Twitter"
+            /></a>
+            <a
+              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
+              target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-facebook-novo-500.png"
+                alt="Facebook"
+            /></a>
+          </div>
+        </div>
       </div>
-    </div>
+
+      <div class="rodape-creditos">
+        <p>Português (Brasil)</p>
+        <p>© 2025 FastWork. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Theme management
+      function getStoredTheme() {
+        return localStorage.getItem("theme") || "dark";
+      }
+
+      function setStoredTheme(theme) {
+        localStorage.setItem("theme", theme);
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        const themeIcon = document.querySelector(".theme-icon");
+
+        if (theme === "light") {
+          themeIcon.textContent = "☀️";
+          themeIcon.className = "theme-icon sun";
+        } else {
+          themeIcon.textContent = "🌙";
+          themeIcon.className = "theme-icon moon";
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme") || "dark";
+        const newTheme = currentTheme === "dark" ? "light" : "dark";
+
+        setTheme(newTheme);
+        setStoredTheme(newTheme);
+      }
+
+      // Initialize theme
+      document.addEventListener("DOMContentLoaded", function () {
+        const storedTheme = getStoredTheme();
+        setTheme(storedTheme);
+      });
+    </script>
   </body>
 </html>

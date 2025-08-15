@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Empresas - FastWork</title>
+    <title>Contratação - FastWork</title>
     <link
       rel="shortcut icon"
       href="https://img.icons8.com/?size=100&id=6703&format=png&color=000000"
@@ -24,7 +24,7 @@
       :root {
         --primary-color: #1976d2;
         --secondary-color: #000000;
-        --text-color: #ffffff;
+        --text-color: #1976d2;
         --bg-color: #000000;
         --border-color: #1976d2;
         --card-bg: rgba(0, 0, 0, 0.8);
@@ -125,14 +125,10 @@
       }
 
       .navegacao a {
-        color: var(--primary-color);
+        color: #ffffff !important;
         text-decoration: none;
         font-size: 0.9rem;
         transition: color 0.3s ease;
-      }
-
-      .navegacao a {
-        color: #ffffff !important;
       }
 
       [data-theme="light"] .navegacao a {
@@ -168,108 +164,102 @@
         max-width: 1200px;
         margin: 0 auto;
         width: 100%;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        min-height: 80vh;
       }
 
-      .container {
-        width: 100%;
-        max-width: 500px;
+      .hero-section {
+        text-align: center;
+        padding: 60px 0;
         background: var(--card-bg);
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        padding: 30px;
-        transform: scale(1);
-        transition: transform 0.3s ease-in-out;
-        color: var(--text-color);
+        border-radius: 20px;
+        margin-bottom: 40px;
         backdrop-filter: blur(10px);
         border: 2px solid var(--border-color);
       }
 
-      .container:hover {
-        transform: scale(1.02);
-      }
-
-      h1 {
-        text-align: center;
-        color: var(--primary-color);
-        font-size: 24px;
+      .hero-title {
+        font-size: 3rem;
         margin-bottom: 20px;
-        text-transform: uppercase;
-        letter-spacing: 2px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--text-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
       }
 
-      form {
-        display: grid;
-        grid-template-columns: 1fr;
-        gap: 15px;
-      }
-
-      label {
+      .hero-subtitle {
+        font-size: 1.2rem;
         color: var(--text-color);
-        font-weight: bold;
-        margin-bottom: 5px;
-      }
-
-      input,
-      select,
-      textarea {
-        padding: 12px;
-        border: 2px solid var(--border-color);
-        border-radius: 8px;
-        background: var(--card-bg);
-        color: #ffffff;
-        font-size: 16px;
-        transition: all 0.3s ease;
-      }
-
-      [data-theme="light"] input,
-      [data-theme="light"] select,
-      [data-theme="light"] textarea {
-        color: #000000;
-      }
-
-      input::placeholder,
-      textarea::placeholder {
-        color: #cccccc;
         opacity: 0.8;
       }
 
-      [data-theme="light"] input::placeholder,
-      [data-theme="light"] textarea::placeholder {
-        color: #666666;
+      .container {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+        gap: 30px;
+        margin-top: 40px;
       }
 
-      input:focus,
-      select:focus,
-      textarea:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        box-shadow: 0 0 10px rgba(25, 118, 210, 0.3);
+      .card {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 15px;
+        border: 2px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
       }
 
-      button {
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+      }
+
+      .card img {
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        margin-bottom: 20px;
+        border: 3px solid var(--primary-color);
+        object-fit: cover;
+      }
+
+      .card h2 {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .card p {
+        color: var(--text-color);
+        margin-bottom: 10px;
+        line-height: 1.5;
+        opacity: 0.9;
+      }
+
+      .card button {
         background: var(--primary-color);
         color: white;
-        padding: 15px;
+        padding: 12px 30px;
         border: none;
         border-radius: 8px;
         font-size: 16px;
         font-weight: bold;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 10px;
+        margin-top: 15px;
       }
 
-      button:hover {
+      .card button:hover {
         background: var(--border-color);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       }
 
-      /* Rodapé */
       .rodape {
         background-color: var(--secondary-color);
         padding: 30px 0 10px;
@@ -358,13 +348,12 @@
           gap: 15px;
         }
 
-        .container {
-          margin: 20px;
-          padding: 20px;
+        .hero-title {
+          font-size: 2rem;
         }
 
-        h1 {
-          font-size: 20px;
+        .container {
+          grid-template-columns: 1fr;
         }
 
         .theme-toggle {
@@ -407,72 +396,67 @@
     </header>
 
     <main class="conteudo-principal">
+      <section class="hero-section">
+        <h1 class="hero-title">Contratação</h1>
+        <p class="hero-subtitle">
+          Encontre os melhores profissionais para seu projeto
+        </p>
+      </section>
+
       <div class="container">
-        <h1>Cadastro de Empresas</h1>
-        <form action="/cadastrar_empresa" method="POST">
-          <label for="nome">Nome da Empresa:</label>
-          <input
-            type="text"
-            id="nome"
-            name="nome"
-            placeholder="Digite o nome da empresa"
-            required
-            pattern="^[A-Za-zÀ-ÿ0-9\s]{3,50}$"
-          />
-
-          <label for="cnpj">CNPJ:</label>
-          <input
-            type="text"
-            id="cnpj"
-            name="cnpj"
-            placeholder="XX.XXX.XXX/XXXX-XX"
-            required
-            pattern="^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$"
-          />
-
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Digite o email da empresa"
-            required
-            pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
-          />
-
-          <label for="telefone">Telefone:</label>
-          <input
-            type="tel"
-            id="telefone"
-            name="telefone"
-            placeholder="(XX) XXXXX-XXXX"
-            pattern="^\(\d{2}\)\s\d{4,5}-\d{4}$"
-            required
-          />
-
-          <label for="endereco">Endereço:</label>
-          <textarea
-            id="endereco"
-            name="endereco"
-            rows="3"
-            placeholder="Digite o endereço da empresa"
-            required
-          ></textarea>
-
-          <label for="setor">Setor de Atuação:</label>
-          <select id="setor" name="setor" required>
-            <option value="">Selecione o setor</option>
-            <option value="tecnologia">Tecnologia</option>
-            <option value="saude">Saúde</option>
-            <option value="educacao">Educação</option>
-            <option value="comercio">Comércio</option>
-            <option value="outros">Outros</option>
-          </select>
-          <!-- Botão de Envio -->
-          <button type="submit" onclick="validarFormulario(event)">
-            Enviar
+        <div class="card">
+          <img src="Arquivos.Css/Imagens/luis.png" alt="Foto de João Silva" />
+          <h2>João Silva</h2>
+          <p><strong>Profissão:</strong> Pedreiro</p>
+          <p><strong>Experiência:</strong> 5 anos</p>
+          <p>
+            <strong>Habilidades:</strong> Construção de alvenaria, leitura de
+            plantas, acabamento fino
+          </p>
+          <p><strong>Localização:</strong> São Paulo, SP</p>
+          <p><strong>Disponibilidade:</strong> Imediata</p>
+          <button onclick="alert('Contato iniciado com João Silva!')">
+            Contratar
           </button>
-        </form>
+        </div>
+
+        <div class="card">
+          <img
+            src="Arquivos.Css/Imagens/elis.png"
+            alt="Foto de Mario Oliveira"
+          />
+          <h2>Mario Oliveira</h2>
+          <p><strong>Profissão:</strong> Servente de Pedreiro</p>
+          <p><strong>Experiência:</strong> 2 anos</p>
+          <p>
+            <strong>Habilidades:</strong> Preparação de materiais, suporte em
+            obras, limpeza de áreas
+          </p>
+          <p><strong>Localização:</strong> Rio de Janeiro, RJ</p>
+          <p><strong>Disponibilidade:</strong> 1 semana</p>
+          <button onclick="alert('Contato iniciado com Mario Oliveira!')">
+            Contratar
+          </button>
+        </div>
+
+        <div class="card">
+          <img
+            src="Arquivos.Css/Imagens/lucas.png"
+            alt="Foto de Pedro Santos"
+          />
+          <h2>Pedro Santos</h2>
+          <p><strong>Profissão:</strong> Pedreiro Iniciante</p>
+          <p><strong>Experiência:</strong> 1 ano</p>
+          <p>
+            <strong>Habilidades:</strong> Aprendizagem rápida, disposição para
+            trabalhar
+          </p>
+          <p><strong>Localização:</strong> Belo Horizonte, MG</p>
+          <p><strong>Disponibilidade:</strong> 2 semanas</p>
+          <button onclick="alert('Contato iniciado com Pedro Santos!')">
+            Contratar
+          </button>
+        </div>
       </div>
     </main>
 
@@ -569,91 +553,6 @@
         const storedTheme = getStoredTheme();
         setTheme(storedTheme);
       });
-
-      function validarFormulario(event) {
-        event.preventDefault();
-
-        // Validar nome da empresa
-        const nome = document.getElementById("nome");
-        if (!nome.value.match(/^[A-Za-zÀ-ÿ0-9\s]{3,50}$/)) {
-          alert(
-            "Por favor, insira um nome de empresa válido (mínimo 3 caracteres)"
-          );
-          nome.focus();
-          return;
-        }
-
-        // Validar CNPJ
-        const cnpj = document.getElementById("cnpj");
-        if (!cnpj.value.match(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/)) {
-          alert(
-            "Por favor, insira um CNPJ válido no formato XX.XXX.XXX/XXXX-XX"
-          );
-          cnpj.focus();
-          return;
-        }
-
-        // Validar email
-        const email = document.getElementById("email");
-        if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-          alert("Por favor, insira um email válido");
-          email.focus();
-          return;
-        }
-
-        // Validar telefone
-        const telefone = document.getElementById("telefone");
-        if (!telefone.value.match(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)) {
-          alert(
-            "Por favor, insira um telefone válido no formato (XX) XXXXX-XXXX"
-          );
-          telefone.focus();
-          return;
-        }
-
-        // Validar endereço
-        const endereco = document.getElementById("endereco");
-        if (endereco.value.length < 10) {
-          alert("Por favor, insira um endereço com pelo menos 10 caracteres");
-          endereco.focus();
-          return;
-        }
-
-        // Validar setor
-        const setor = document.getElementById("setor");
-        if (!setor.value) {
-          alert("Por favor, selecione um setor de atuação");
-          setor.focus();
-          return;
-        }
-
-        // Se todas as validações passarem, redireciona para a página de validação
-        window.location.href = "validacao.html";
-      }
-
-      // Máscara para CNPJ
-      document.getElementById("cnpj").addEventListener("input", function (e) {
-        let value = e.target.value.replace(/\D/g, "");
-        if (value.length <= 14) {
-          value = value.replace(/^(\d{2})(\d)/, "$1.$2");
-          value = value.replace(/^(\d{2})\.(\d{3})(\d)/, "$1.$2.$3");
-          value = value.replace(/\.(\d{3})(\d)/, ".$1/$2");
-          value = value.replace(/(\d{4})(\d)/, "$1-$2");
-          e.target.value = value;
-        }
-      });
-
-      // Máscara para telefone
-      document
-        .getElementById("telefone")
-        .addEventListener("input", function (e) {
-          let value = e.target.value.replace(/\D/g, "");
-          if (value.length <= 11) {
-            value = value.replace(/^(\d{2})(\d)/g, "($1) $2");
-            value = value.replace(/(\d)(\d{4})$/, "$1-$2");
-            e.target.value = value;
-          }
-        });
     </script>
   </body>
 </html>

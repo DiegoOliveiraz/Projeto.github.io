@@ -1,0 +1,733 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Segurança e Privacidade - FastWork</title>
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=6703&format=png&color=000000"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", "Nunito Sans", sans-serif;
+      }
+
+      :root {
+        --primary-color: #1976d2;
+        --secondary-color: #000000;
+        --text-color: #1976d2;
+        --bg-color: #000000;
+        --border-color: #1976d2;
+        --card-bg: rgba(0, 0, 0, 0.8);
+        --bg-image: url("Arquivos.Css/Imagens/textured-black-background-vector.jpg");
+      }
+
+      [data-theme="light"] {
+        --primary-color: #ffc107;
+        --secondary-color: #ffffff;
+        --text-color: #000000;
+        --bg-color: #ffffff;
+        --border-color: #ffc107;
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --bg-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070");
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: var(--bg-color);
+        background-image: var(--bg-image);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+      }
+
+      .theme-toggle,
+      .cabecalho,
+      .conteudo-principal,
+      .hero-section,
+      .hero-title,
+      .hero-subtitle {
+        /* Mesmos estilos da página legal */
+      }
+
+      /* Copiando estilos principais da página legal para manter consistência */
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1);
+      }
+      .theme-icon {
+        font-size: 24px;
+        transition: transform 0.5s ease;
+      }
+      .moon {
+        color: white;
+      }
+      .sun {
+        color: #fff;
+        transform: rotate(180deg);
+      }
+
+      .cabecalho {
+        background-color: var(--secondary-color);
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .cabecalho-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .fastwork {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+      }
+      .cabecalho-direita {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+      .navegacao {
+        display: flex;
+        gap: 20px;
+      }
+      .navegacao a {
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
+
+      .navegacao a {
+        color: #ffffff !important;
+      }
+
+      [data-theme="light"] .navegacao a {
+        color: #000000 !important;
+      }
+
+      .navegacao a:hover {
+        color: var(--primary-color) !important;
+      }
+
+      .conteudo-principal {
+        flex: 1;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .hero-section {
+        text-align: center;
+        padding: 60px 0;
+        background: var(--card-bg);
+        border-radius: 20px;
+        margin-bottom: 40px;
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--border-color);
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--text-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      .security-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .security-card {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 15px;
+        border: 2px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        transition: transform 0.3s ease;
+      }
+
+      .security-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .security-card h3 {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .security-card p {
+        line-height: 1.6;
+        color: var(--text-color);
+        opacity: 0.9;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin: 60px 0 40px;
+      }
+
+      .privacy-section,
+      .security-measures,
+      .user-rights {
+        margin-bottom: 60px;
+        padding: 0 20px;
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+      }
+
+      .privacy-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .privacy-item {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 15px;
+        border: 2px solid var(--border-color);
+        backdrop-filter: blur(10px);
+      }
+
+      .privacy-item h3 {
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        margin-bottom: 15px;
+      }
+
+      .privacy-item p {
+        color: var(--text-color);
+        margin-bottom: 15px;
+        opacity: 0.9;
+      }
+
+      .privacy-item ul {
+        list-style: none;
+        padding: 0;
+      }
+
+      .privacy-item li {
+        color: var(--text-color);
+        padding: 8px 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        opacity: 0.8;
+      }
+
+      .privacy-item li:before {
+        content: "▶ ";
+        color: var(--primary-color);
+        margin-right: 8px;
+      }
+
+      .measures-grid,
+      .rights-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 25px;
+      }
+
+      .measure-card,
+      .right-card {
+        background: var(--card-bg);
+        padding: 25px;
+        border-radius: 15px;
+        border: 2px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        text-align: center;
+        transition: transform 0.3s ease;
+      }
+
+      .measure-card:hover,
+      .right-card:hover {
+        transform: translateY(-5px);
+      }
+
+      .measure-card h3,
+      .right-card h3 {
+        color: var(--primary-color);
+        font-size: 1.2rem;
+        margin-bottom: 15px;
+      }
+
+      .measure-card p,
+      .right-card p {
+        color: var(--text-color);
+        opacity: 0.9;
+        line-height: 1.5;
+      }
+
+      .back-button {
+        display: inline-block;
+        padding: 15px 30px;
+        background: var(--primary-color);
+        color: white;
+        text-decoration: none;
+        border-radius: 8px;
+        font-weight: bold;
+        transition: all 0.3s ease;
+        margin-top: 20px;
+      }
+
+      .back-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .rodape {
+        background-color: var(--secondary-color);
+        padding: 30px 0 10px;
+        border-top: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .rodape-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .rodape-coluna {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .rodape-titulo {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+      .rodape-coluna a {
+        color: var(--text-color);
+        text-decoration: none;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+      }
+      .rodape-coluna a:hover {
+        color: var(--primary-color);
+        opacity: 1;
+      }
+
+      .rodape-creditos {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-color);
+        opacity: 0.7;
+        font-size: 0.8rem;
+      }
+
+      /* Redes Sociais */
+      .redes-sociais {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .redes-sociais a {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .redes-sociais a:hover {
+        transform: scale(1.1);
+      }
+
+      .redes-sociais img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      [data-theme="light"] .redes-sociais img {
+        filter: brightness(0) invert(0);
+      }
+
+      @media (max-width: 768px) {
+        .cabecalho-container {
+          flex-direction: column;
+          gap: 15px;
+        }
+        .hero-title {
+          font-size: 2rem;
+        }
+        .security-grid {
+          grid-template-columns: 1fr;
+        }
+        .theme-toggle {
+          width: 50px;
+          height: 50px;
+          top: 15px;
+          right: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span class="theme-icon moon">🌙</span>
+    </button>
+
+    <header class="cabecalho">
+      <div class="cabecalho-container">
+        <h1 class="fastwork">
+          FastWork |
+          <small><small>Conexões Trabalhistas</small></small>
+        </h1>
+        <div class="cabecalho-direita">
+          <nav class="navegacao">
+            <a href="ts1.html">Home</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="ajuda.html">Ajuda</a>
+          </nav>
+        </div>
+      </div>
+    </header>
+
+    <main class="conteudo-principal">
+      <section class="hero-section">
+        <h1 class="hero-title">Segurança e Privacidade</h1>
+        <p class="hero-subtitle">
+          Protegemos seus dados com os mais altos padrões de segurança
+        </p>
+      </section>
+
+      <div class="security-grid">
+        <div class="security-card">
+          <h3>🔒 Criptografia SSL/TLS</h3>
+          <p>
+            Todos os dados transmitidos entre seu dispositivo e nossos
+            servidores são protegidos por criptografia SSL/TLS de 256 bits,
+            garantindo que suas informações estejam sempre seguras.
+          </p>
+        </div>
+
+        <div class="security-card">
+          <h3>🛡️ Proteção de Dados</h3>
+          <p>
+            Seguimos rigorosamente a LGPD (Lei Geral de Proteção de Dados) e
+            implementamos medidas técnicas e organizacionais para proteger suas
+            informações pessoais.
+          </p>
+        </div>
+
+        <div class="security-card">
+          <h3>🔐 Autenticação Segura</h3>
+          <p>
+            Sistema de autenticação de dois fatores (2FA) disponível para
+            adicionar uma camada extra de segurança à sua conta e prevenir
+            acessos não autorizados.
+          </p>
+        </div>
+
+        <div class="security-card">
+          <h3>💾 Backup e Recuperação</h3>
+          <p>
+            Realizamos backups automáticos e regulares de todos os dados,
+            mantendo cópias de segurança em múltiplos locais para garantir a
+            integridade e disponibilidade das informações.
+          </p>
+        </div>
+
+        <div class="security-card">
+          <h3>👁️ Monitoramento 24/7</h3>
+          <p>
+            Nossa equipe de segurança monitora continuamente a plataforma em
+            busca de atividades suspeitas e potenciais ameaças, respondendo
+            rapidamente a qualquer incidente.
+          </p>
+        </div>
+
+        <div class="security-card">
+          <h3>📋 Transparência Total</h3>
+          <p>
+            Você tem controle total sobre seus dados: pode visualizar, editar,
+            exportar ou excluir suas informações a qualquer momento através das
+            configurações de privacidade.
+          </p>
+        </div>
+      </div>
+
+      <section class="privacy-section">
+        <h2 class="section-title">Política de Privacidade</h2>
+        <div class="privacy-content">
+          <div class="privacy-item">
+            <h3>📊 Coleta de Dados</h3>
+            <p>
+              Coletamos apenas os dados necessários para fornecer nossos
+              serviços:
+            </p>
+            <ul>
+              <li>Informações de perfil (nome, email, telefone)</li>
+              <li>Dados profissionais (habilidades, experiência)</li>
+              <li>Informações de uso da plataforma</li>
+              <li>Dados de geolocalização (com seu consentimento)</li>
+            </ul>
+          </div>
+
+          <div class="privacy-item">
+            <h3>🎯 Uso dos Dados</h3>
+            <p>Utilizamos suas informações para:</p>
+            <ul>
+              <li>Conectar você com oportunidades relevantes</li>
+              <li>Melhorar nossa plataforma e serviços</li>
+              <li>Enviar notificações importantes</li>
+              <li>Prevenir fraudes e garantir segurança</li>
+            </ul>
+          </div>
+
+          <div class="privacy-item">
+            <h3>🤝 Compartilhamento</h3>
+            <p>Seus dados são compartilhados apenas quando:</p>
+            <ul>
+              <li>Você autoriza explicitamente</li>
+              <li>Necessário para fornecer serviços solicitados</li>
+              <li>Exigido por lei ou autoridades competentes</li>
+              <li>Para proteger direitos e segurança de usuários</li>
+            </ul>
+          </div>
+
+          <div class="privacy-item">
+            <h3>⏰ Retenção de Dados</h3>
+            <p>Mantemos seus dados pelo tempo necessário para:</p>
+            <ul>
+              <li>Fornecer os serviços contratados</li>
+              <li>Cumprir obrigações legais</li>
+              <li>Resolver disputas quando aplicável</li>
+              <li>Máximo de 5 anos após encerramento da conta</li>
+            </ul>
+          </div>
+        </div>
+      </section>
+
+      <section class="security-measures">
+        <h2 class="section-title">Medidas de Segurança</h2>
+        <div class="measures-grid">
+          <div class="measure-card">
+            <h3>🔐 Controle de Acesso</h3>
+            <p>
+              Sistema robusto de controle de acesso com autenticação multi-fator
+              e gerenciamento de permissões granular.
+            </p>
+          </div>
+
+          <div class="measure-card">
+            <h3>🛡️ Firewall e Proteção</h3>
+            <p>
+              Firewalls avançados e sistemas de detecção de intrusão protegem
+              nossa infraestrutura 24/7.
+            </p>
+          </div>
+
+          <div class="measure-card">
+            <h3>📱 Segurança Mobile</h3>
+            <p>
+              Aplicativos móveis com criptografia end-to-end e verificação de
+              integridade de dados.
+            </p>
+          </div>
+
+          <div class="measure-card">
+            <h3>🔍 Auditoria Regular</h3>
+            <p>
+              Auditorias de segurança regulares por empresas especializadas e
+              testes de penetração.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="user-rights">
+        <h2 class="section-title">Seus Direitos</h2>
+        <div class="rights-grid">
+          <div class="right-card">
+            <h3>📋 Acesso aos Dados</h3>
+            <p>
+              Solicite uma cópia completa de todos os dados que temos sobre
+              você.
+            </p>
+          </div>
+
+          <div class="right-card">
+            <h3>✏️ Correção</h3>
+            <p>
+              Corrija informações incorretas ou desatualizadas em sua conta.
+            </p>
+          </div>
+
+          <div class="right-card">
+            <h3>🗑️ Exclusão</h3>
+            <p>Solicite a remoção completa de seus dados de nossos sistemas.</p>
+          </div>
+
+          <div class="right-card">
+            <h3>📤 Portabilidade</h3>
+            <p>
+              Exporte seus dados em formato legível para usar em outros
+              serviços.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <div style="text-align: center">
+        <a href="ts1.html" class="back-button">Voltar à Home</a>
+      </div>
+    </main>
+
+    <footer class="rodape">
+      <div class="rodape-container">
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">FastWork</h3>
+          <a href="sobre.html">Sobre</a>
+          <a href="empregos.html">Empregos</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Comunidades</h3>
+          <a href="desenvolvedores.html">Desenvolvedores</a>
+          <a href="publicidade.html">Publicidade</a>
+          <a href="investidores.html">Investidores</a>
+          <a href="fornecedores.html">Fornecedores</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Links úteis</h3>
+          <a href="ajuda.html">Suporte</a>
+          <a href="legal.html">Legal</a>
+          <a href="seguranca.html">Segurança e privacidade</a>
+          <a href="politicas.html">Políticas de privacidade</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="acessibilidade.html">Acessibilidade</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Redes sociais</h3>
+          <div class="redes-sociais">
+            <a href="https://www.instagram.com/unifoa/" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-instagram-logo-500.png"
+                alt="Instagram"
+            /></a>
+            <a href="https://x.com/home?lang=pt-br" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-twitterx-500.png"
+                alt="Twitter"
+            /></a>
+            <a
+              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
+              target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-facebook-novo-500.png"
+                alt="Facebook"
+            /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="rodape-creditos">
+        <p>Português (Brasil)</p>
+        <p>© 2025 FastWork. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script>
+      function getStoredTheme() {
+        return localStorage.getItem("theme") || "dark";
+      }
+      function setStoredTheme(theme) {
+        localStorage.setItem("theme", theme);
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        const themeIcon = document.querySelector(".theme-icon");
+
+        if (theme === "light") {
+          themeIcon.textContent = "☀️";
+          themeIcon.className = "theme-icon sun";
+        } else {
+          themeIcon.textContent = "🌙";
+          themeIcon.className = "theme-icon moon";
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        setTheme(newTheme);
+        setStoredTheme(newTheme);
+      }
+
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedTheme = getStoredTheme();
+        setTheme(storedTheme);
+      });
+    </script>
+  </body>
+</html>

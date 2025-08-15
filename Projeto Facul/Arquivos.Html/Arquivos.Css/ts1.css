@@ -1,5 +1,72 @@
 @charset "UTF-8";
 
+/* CSS Variables for Theme System */
+:root {
+  --primary-color: #1976d2;
+  --secondary-color: #000000;
+  --text-color: #1976d2;
+  --bg-color: #000000;
+  --border-color: #1976d2;
+  --card-bg: rgba(0, 0, 0, 0.8);
+  --bg-image: url(Imagens/textured-black-background-vector.jpg);
+  --title-color: #ffffff;
+  --card-text-color: #ffffff;
+  --footer-text-color: #ffffff;
+  --content-text-color: #ffffff;
+}
+
+[data-theme="light"] {
+  --primary-color: #ffc107;
+  --secondary-color: #ffffff;
+  --text-color: #000000;
+  --bg-color: #ffffff;
+  --border-color: #ffc107;
+  --card-bg: rgba(255, 255, 255, 0.9);
+  --bg-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070");
+  --title-color: #000000;
+  --card-text-color: #000000;
+  --footer-text-color: #000000;
+  --content-text-color: #000000;
+}
+
+/* Theme Toggle Button */
+.theme-toggle {
+  position: fixed;
+  top: 20px;
+  right: 20px;
+  background: var(--primary-color);
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  cursor: move;
+  z-index: 1000;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  user-select: none;
+}
+
+.theme-toggle:hover {
+  transform: scale(1.1);
+}
+
+.theme-icon {
+  font-size: 24px;
+  transition: transform 0.5s ease;
+}
+
+.moon {
+  color: white;
+}
+
+.sun {
+  color: #fff;
+  transform: rotate(180deg);
+}
+
 /* Reset e Estilos Globais */
 * {
   box-sizing: border-box;
@@ -10,20 +77,23 @@
 
 body {
   min-height: 100vh;
-  background-image: url(Imagens/textured-black-background-vector.jpg);
+  background-image: var(--bg-image);
   background-size: cover;
   background-attachment: fixed;
   background-position: center;
-  color: #1976d2; /* alterado de #ffcc00 */
+  background-color: var(--bg-color);
+  color: var(--text-color);
   display: flex;
   flex-direction: column;
+  transition: all 0.3s ease;
 }
 
 /* Cabeçalho */
 .cabecalho {
-  background-color: #000000;
+  background-color: var(--secondary-color);
   padding: 15px 0;
-  border-bottom: 1px solid #1976d2; /* alterado de #ffcc00 */
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .cabecalho-container {
@@ -37,7 +107,7 @@ body {
 
 .fastwork {
   font-size: 1.5rem;
-  color: #1976d2; /* alterado de #ffcc00 */
+  color: var(--primary-color);
 }
 
 .cabecalho-direita {
@@ -52,9 +122,14 @@ body {
 }
 
 .navegacao a {
-  color: #1976d2; /* alterado de #ffcc00 */
+  color: #ffffff;
   text-decoration: none;
   font-size: 0.9rem;
+  transition: color 0.3s ease;
+}
+
+[data-theme="light"] .navegacao a {
+  color: #000000 !important;
 }
 
 .perfil {
@@ -71,7 +146,7 @@ body {
 }
 
 .registro {
-  color: #1976d2; /* alterado de #ffcc00 */
+  color: var(--primary-color);
   font-size: 0.9rem;
 }
 
@@ -86,17 +161,18 @@ body {
 
 /* Seção de Destaque */
 .destaque-servicos {
-  background-color: #1976d2;
+  background-color: var(--primary-color);
   padding: 15px;
   border-radius: 18px;
   margin: 15px 8.5px 30px 8.5px;
   margin-right: +20px;
   margin-left: +20px;
+  transition: all 0.3s ease;
 }
 
 /* Estilo do título */
 .titulo-servicos {
-  color: #ffffff;
+  color: var(--title-color);
   font-size: 2rem;
   text-align: center;
 }
@@ -122,7 +198,7 @@ body {
 .imagem-empresa {
   width: 450px;
   height: 435px;
-  border: 2px solid #1976d2; /* alterado de #ffcc00 */
+  border: 2px solid var(--primary-color);
   border-radius: 8px;
   overflow: hidden;
   filter: grayscale(100%);
@@ -137,8 +213,6 @@ body {
   width: 500px;
   height: 45px;
   margin-top: -10.7px;
-  
-
 }
 .imagem-empresa img {
   width: 100%;
@@ -159,7 +233,7 @@ body {
 }
 
 .servico {
-  background-color: #1976d2; /* alterado de #ffcc00 */
+  background-color: var(--primary-color);
   border-radius: 8px;
   overflow: hidden;
   transition: transform 0.3s;
@@ -167,7 +241,7 @@ body {
 
 .servico:hover {
   transform: translateY(-5px);
-  box-shadow: 0 5px 15px #1976d2; /* alterado de #ffcc00 */
+  box-shadow: 0 5px 15px var(--primary-color);
 }
 
 .servico img {
@@ -179,7 +253,7 @@ body {
 .servico p {
   padding: 10px;
   text-align: center;
-  color: #ffffff;
+  color: var(--card-text-color);
   font-size: 20px;
 }
 
@@ -191,7 +265,7 @@ body {
 
 .conteudo {
   text-align: justify;
-  color: whitesmoke;
+  color: var(--content-text-color);
   margin-top: 10px;
 }
 .box {
@@ -258,9 +332,10 @@ body {
 
 /* Rodapé */
 .rodape {
-  background-color: #000000;
+  background-color: var(--secondary-color);
   padding: 30px 0 10px;
-  border-top: 1px solid #1976d2; /* alterado de #ffcc00 */
+  border-top: 1px solid var(--border-color);
+  transition: all 0.3s ease;
 }
 
 .rodape-container {
@@ -280,19 +355,26 @@ body {
 }
 
 .rodape-titulo {
-  color: #1976d2; /* alterado de #ffcc00 */
+  color: var(--primary-color);
   margin-bottom: 10px;
   font-size: 1.1rem;
 }
 
 .rodape-coluna a {
-  color: #ccc;
+  color: #ffffff;
   text-decoration: none;
   font-size: 0.9rem;
+  opacity: 0.8;
+  transition: all 0.3s ease;
+}
+
+[data-theme="light"] .rodape-coluna a {
+  color: #000000 !important;
 }
 
 .rodape-coluna a:hover {
-  color: #1976d2; /* alterado de #ffcc00 */
+  color: var(--primary-color) !important;
+  opacity: 1;
 }
 
 .redes-sociais {
@@ -303,13 +385,24 @@ body {
 .redes-sociais img {
   width: 30px;
   height: 30px;
+  filter: brightness(0) invert(1);
+  transition: filter 0.3s ease;
+}
+
+[data-theme="light"] .redes-sociais img {
+  filter: brightness(0) invert(0);
+}
+
+.redes-sociais img:hover {
+  transform: scale(1.1);
 }
 
 .rodape-creditos {
   text-align: center;
   padding-top: 20px;
-  border-top: 1px solid #333;
-  color: #777;
+  border-top: 1px solid var(--border-color);
+  color: var(--footer-text-color);
+  opacity: 0.7;
   font-size: 0.8rem;
 }
 
@@ -331,6 +424,13 @@ body {
 
   .servicos-container {
     grid-template-columns: repeat(2, 1fr);
+  }
+
+  .theme-toggle {
+    width: 50px;
+    height: 50px;
+    top: 15px;
+    right: 15px;
   }
 }
 
@@ -555,7 +655,7 @@ body {
   padding: 12px 12px 10px 12px;
   font-size: 13px;
   outline: none;
-  caret-color: #1976d2; /* alterado de #ffcc00 */
+  caret-color: var(--primary-color);
 }
 
 .text-box .formatting {
@@ -580,13 +680,13 @@ body {
 }
 
 .text-box .formatting button:hover {
-  background-color: #1976d2; /* alterado de #ffcc00 */
+  background-color: var(--primary-color);
 }
 
 .text-box .formatting .send {
   width: 30px;
   height: 30px;
-  background-color: #1976d2; /* alterado de #ffcc00 */
+  background-color: var(--primary-color);
   margin: 0 0 0 auto;
 }
 
@@ -607,12 +707,49 @@ body {
 }
 
 #dicasnice {
-  background-color: #1976d2;
+  background-color: var(--primary-color);
   padding: 15px;
   border-radius: 18px;
   color: #ffffff;
   text-align: center;
   margin-bottom: 30px;
+}
+
+/* Texto branco para dicas de carreira em ambos os temas para legibilidade */
+[data-theme="light"] #dicasnice {
+  color: #000000;
+  background-color: var(--primary-color);
+}
+
+[data-theme="dark"] #dicasnice {
+  color: #ffffff;
+}
+
+/* Melhor contraste para texto no tema claro */
+[data-theme="light"] .dicas-carreiras h3,
+[data-theme="light"] .dicas-carreiras p,
+[data-theme="light"] .dicas-carreiras li {
+  color: #212529;
+}
+
+/* Melhor contraste para conteúdo de dicas de carreira */
+[data-theme="light"] .dicas-de-carreira .conteudo p {
+  color: #ffffff !important;
+  padding: 20px;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+[data-theme="dark"] .dicas-de-carreira .conteudo p {
+  color: #ffffff !important;
+  padding: 20px;
+  border-radius: 8px;
+  line-height: 1.6;
+}
+
+/* Melhor contraste para cards de serviços no tema claro */
+[data-theme="light"] .servico p {
+  color: #495057;
 }
 
 /* Estilos do botão Saiba Mais */
@@ -624,27 +761,38 @@ body {
 .saiba-mais-btn {
   padding: 15px 30px;
   font-size: 18px;
-  background-color: #1976d2;
+  background-color: var(--primary-color);
   color: white;
   border: none;
   border-radius: 5px;
   cursor: pointer;
-  transition: background-color 0.3s ease;
+  transition: all 0.3s ease;
 }
 
 .saiba-mais-btn:hover {
-  background-color: #0056b3;
+  background-color: var(--primary-color);
+  opacity: 0.8;
+  transform: translateY(-2px);
 }
 
+/* Estilo do botão Saiba Mais para o modo claro */
+[data-theme="light"] .saiba-mais-btn {
+  background-color: #ffc107;
+  color: #000000;
+}
 
-@media (max-width: 430px){
-  .apagar1{
+[data-theme="light"] .saiba-mais-btn:hover {
+  background-color: #ffb300;
+  opacity: 1;
+}
+
+@media (max-width: 430px) {
+  .apagar1 {
     display: none;
   }
 }
-@media (max-width: 768px){
-  .apagar2{
+@media (max-width: 768px) {
+  .apagar2 {
     display: none;
   }
 }
-

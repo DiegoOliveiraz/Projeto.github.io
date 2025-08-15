@@ -1,0 +1,700 @@
+<!doctype html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Sobre - FastWork</title>
+    <link
+      rel="shortcut icon"
+      href="https://img.icons8.com/?size=100&id=6703&format=png&color=000000"
+      type="image/x-icon"
+    />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        font-family: "Roboto", "Nunito Sans", sans-serif;
+      }
+
+      :root {
+        --primary-color: #1976d2;
+        --secondary-color: #000000;
+        --text-color: #1976d2;
+        --bg-color: #000000;
+        --border-color: #1976d2;
+        --card-bg: rgba(0, 0, 0, 0.8);
+        --bg-image: url("Arquivos.Css/Imagens/textured-black-background-vector.jpg");
+      }
+
+      [data-theme="light"] {
+        --primary-color: #ffc107;
+        --secondary-color: #ffffff;
+        --text-color: #000000;
+        --bg-color: #ffffff;
+        --border-color: #ffc107;
+        --card-bg: rgba(255, 255, 255, 0.9);
+        --bg-image: url("https://images.unsplash.com/photo-1506905925346-21bda4d32df4?q=80&w=2070");
+      }
+
+      body {
+        min-height: 100vh;
+        background-color: var(--bg-color);
+        background-image: var(--bg-image);
+        background-size: cover;
+        background-attachment: fixed;
+        background-position: center;
+        color: var(--text-color);
+        display: flex;
+        flex-direction: column;
+        transition: all 0.3s ease;
+      }
+
+      /* Theme Toggle Button */
+      .theme-toggle {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        background: var(--primary-color);
+        border: none;
+        border-radius: 50%;
+        width: 60px;
+        height: 60px;
+        cursor: pointer;
+        z-index: 1000;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .theme-toggle:hover {
+        transform: scale(1.1);
+      }
+
+      .theme-icon {
+        font-size: 24px;
+        transition: transform 0.5s ease;
+      }
+
+      .moon {
+        color: white;
+      }
+
+      .sun {
+        color: #fff;
+        transform: rotate(180deg);
+      }
+
+      /* Header */
+      .cabecalho {
+        background-color: var(--secondary-color);
+        padding: 15px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .cabecalho-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .fastwork {
+        font-size: 1.5rem;
+        color: var(--primary-color);
+      }
+
+      .cabecalho-direita {
+        display: flex;
+        align-items: center;
+        gap: 30px;
+      }
+
+      .navegacao {
+        display: flex;
+        gap: 20px;
+      }
+
+      .navegacao a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        transition: color 0.3s ease;
+      }
+
+      [data-theme="light"] .navegacao a {
+        color: #000000 !important;
+      }
+
+      .navegacao a:hover {
+        opacity: 0.8;
+      }
+
+      /* Main Content */
+      .conteudo-principal {
+        flex: 1;
+        padding: 40px 20px;
+        max-width: 1200px;
+        margin: 0 auto;
+        width: 100%;
+      }
+
+      .hero-section {
+        text-align: center;
+        padding: 60px 0;
+        background: var(--card-bg);
+        border-radius: 20px;
+        margin-bottom: 40px;
+        backdrop-filter: blur(10px);
+        border: 2px solid var(--border-color);
+      }
+
+      .hero-title {
+        font-size: 3rem;
+        margin-bottom: 20px;
+        background: linear-gradient(
+          45deg,
+          var(--primary-color),
+          var(--text-color)
+        );
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .hero-subtitle {
+        font-size: 1.2rem;
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      .content-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 30px;
+        margin-bottom: 40px;
+      }
+
+      .card {
+        background: var(--card-bg);
+        padding: 30px;
+        border-radius: 15px;
+        border: 2px solid var(--border-color);
+        backdrop-filter: blur(10px);
+        transition:
+          transform 0.3s ease,
+          box-shadow 0.3s ease;
+      }
+
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+      }
+
+      .card h3 {
+        color: var(--primary-color);
+        font-size: 1.5rem;
+        margin-bottom: 15px;
+      }
+
+      .card p {
+        line-height: 1.6;
+        color: var(--text-color);
+        opacity: 0.9;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        color: var(--primary-color);
+        margin-bottom: 30px;
+        margin-top: 60px;
+      }
+
+      .estatisticas-section,
+      .servicos-section,
+      .equipe-section,
+      .compromisso-section {
+        margin-bottom: 60px;
+      }
+
+      .stats-card {
+        text-align: center;
+      }
+
+      .stats-card h3 {
+        font-size: 3rem;
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-weight: bold;
+      }
+
+      .stats-card p {
+        font-size: 1.1rem;
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      .team-card {
+        text-align: center;
+      }
+
+      .team-card h3 {
+        color: var(--primary-color);
+        font-size: 1.3rem;
+        margin-bottom: 5px;
+      }
+
+      .team-card p:first-of-type {
+        color: var(--text-color);
+        font-weight: bold;
+        margin-bottom: 15px;
+        opacity: 0.9;
+      }
+
+      .team-card p:last-of-type {
+        color: var(--text-color);
+        opacity: 0.8;
+        font-style: italic;
+      }
+
+      /* Footer */
+      .rodape {
+        background-color: var(--secondary-color);
+        padding: 30px 0 10px;
+        border-top: 1px solid var(--border-color);
+        transition: all 0.3s ease;
+      }
+
+      .rodape-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 20px;
+      }
+
+      .rodape-coluna {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+
+      .rodape-titulo {
+        color: var(--primary-color);
+        margin-bottom: 10px;
+        font-size: 1.1rem;
+      }
+
+      .rodape-coluna a {
+        color: #ffffff;
+        text-decoration: none;
+        font-size: 0.9rem;
+        opacity: 0.8;
+        transition: all 0.3s ease;
+      }
+
+      [data-theme="light"] .rodape-coluna a {
+        color: #000000 !important;
+      }
+
+      .rodape-coluna a:hover {
+        color: var(--primary-color) !important;
+        opacity: 1;
+      }
+
+      .rodape-creditos {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-color);
+        opacity: 0.7;
+        font-size: 0.8rem;
+      }
+
+      /* Redes Sociais */
+      .redes-sociais {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .redes-sociais a {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .redes-sociais a:hover {
+        transform: scale(1.1);
+      }
+
+      .redes-sociais img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      [data-theme="light"] .redes-sociais img {
+        filter: brightness(0) invert(0);
+      }
+
+      /* Perfil */
+      .perfil {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+
+      .logo-perfil {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        border: 2px solid var(--primary-color);
+        transition: all 0.3s ease;
+      }
+
+      .logo-perfil:hover {
+        transform: scale(1.1);
+        border-color: var(--primary-color);
+      }
+
+      /* Responsive */
+      @media (max-width: 768px) {
+        .cabecalho-container {
+          flex-direction: column;
+          gap: 15px;
+        }
+
+        .hero-title {
+          font-size: 2rem;
+        }
+
+        .content-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .theme-toggle {
+          width: 50px;
+          height: 50px;
+          top: 15px;
+          right: 15px;
+        }
+      }
+    </style>
+  </head>
+
+  <body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span class="theme-icon moon">🌙</span>
+    </button>
+
+    <header class="cabecalho">
+      <div class="cabecalho-container">
+        <h1 class="fastwork">
+          FastWork |
+          <small><small>Conexões Trabalhistas</small></small>
+        </h1>
+        <div class="cabecalho-direita">
+          <nav class="navegacao">
+            <a href="ts1.html">Home</a>
+            <a href="ajuda.html">Ajuda</a>
+          </nav>
+          <div class="perfil">
+            <a href="formu.html" target="_blank">
+              <img
+                class="logo-perfil"
+                src="Arquivos.Css/Imagens/svg avatar rlx.webp"
+                alt="Foto de perfil"
+              />
+            </a>
+            <span class="registro"></span>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main class="conteudo-principal">
+      <section class="hero-section">
+        <h1 class="hero-title">Sobre o FastWork</h1>
+        <p class="hero-subtitle">
+          Conectando profissionais e oportunidades desde 2025
+        </p>
+      </section>
+
+      <div class="content-grid">
+        <div class="card">
+          <h3>Nossa Missão</h3>
+          <p>
+            Facilitar a conexão entre profissionais talentosos e empresas que
+            precisam de seus serviços, criando oportunidades de trabalho justas
+            e acessíveis para todos.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Nossa Visão</h3>
+          <p>
+            Ser a principal plataforma de conexões trabalhistas no Brasil,
+            revolucionando a forma como pessoas encontram trabalho e empresas
+            encontram talentos.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>Nossos Valores</h3>
+          <p>
+            Transparência, confiança, inovação e compromisso com a qualidade.
+            Acreditamos que todo trabalho merece reconhecimento e toda pessoa
+            merece uma oportunidade.
+          </p>
+        </div>
+
+        <div class="card">
+          <h3>História</h3>
+          <p>
+            Fundado em 2025, o FastWork nasceu da necessidade de criar uma ponte
+            mais eficiente entre profissionais autônomos e empresas,
+            democratizando o acesso ao mercado de trabalho.
+          </p>
+        </div>
+      </div>
+
+      <section class="estatisticas-section">
+        <h2 class="section-title">FastWork em Números</h2>
+        <div class="content-grid">
+          <div class="card stats-card">
+            <h3>50K+</h3>
+            <p>Profissionais Cadastrados</p>
+          </div>
+          <div class="card stats-card">
+            <h3>2.5K+</h3>
+            <p>Empresas Parceiras</p>
+          </div>
+          <div class="card stats-card">
+            <h3>15K+</h3>
+            <p>Projetos Concluídos</p>
+          </div>
+          <div class="card stats-card">
+            <h3>98%</h3>
+            <p>Taxa de Satisfação</p>
+          </div>
+        </div>
+      </section>
+
+      <section class="servicos-section">
+        <h2 class="section-title">Nossos Serviços</h2>
+        <div class="content-grid">
+          <div class="card">
+            <h3>🔍 Busca Inteligente</h3>
+            <p>
+              Sistema avançado de busca que conecta profissionais baseado em
+              habilidades, localização e disponibilidade, garantindo matches
+              perfeitos.
+            </p>
+          </div>
+          <div class="card">
+            <h3>📊 Gestão de Projetos</h3>
+            <p>
+              Ferramentas completas para gerenciar projetos do início ao fim,
+              incluindo cronogramas, pagamentos e comunicação.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🛡️ Segurança Garantida</h3>
+            <p>
+              Sistema de verificação rigoroso, pagamentos seguros e suporte 24/7
+              para garantir a confiança de todos os usuários.
+            </p>
+          </div>
+          <div class="card">
+            <h3>📈 Análise de Performance</h3>
+            <p>
+              Relatórios detalhados sobre performance, avaliações e crescimento
+              profissional para impulsionar sua carreira.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="equipe-section">
+        <h2 class="section-title">Nossa Equipe</h2>
+        <div class="content-grid">
+          <div class="card team-card">
+            <h3>Diego Silva</h3>
+            <p><strong>CEO & Fundador</strong></p>
+            <p>
+              Especialista em tecnologia e empreendedorismo, com mais de 10 anos
+              de experiência em desenvolvimento de plataformas digitais.
+            </p>
+          </div>
+          <div class="card team-card">
+            <h3>Ana Costa</h3>
+            <p><strong>CTO</strong></p>
+            <p>
+              Engenheira de software experiente, responsável pela arquitetura
+              tecnológica e inovação da plataforma.
+            </p>
+          </div>
+          <div class="card team-card">
+            <h3>Carlos Mendes</h3>
+            <p><strong>Head de Marketing</strong></p>
+            <p>
+              Especialista em marketing digital e crescimento, focado em
+              expandir nossa base de usuários e parcerias.
+            </p>
+          </div>
+          <div class="card team-card">
+            <h3>Maria Santos</h3>
+            <p><strong>Head de Atendimento</strong></p>
+            <p>
+              Líder em experiência do cliente, garantindo que todos tenham o
+              melhor suporte e experiência na plataforma.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <section class="compromisso-section">
+        <h2 class="section-title">Nosso Compromisso</h2>
+        <div class="content-grid">
+          <div class="card">
+            <h3>🌱 Sustentabilidade</h3>
+            <p>
+              Promovemos o trabalho remoto e práticas sustentáveis, contribuindo
+              para um futuro mais verde e consciente.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🤝 Diversidade & Inclusão</h3>
+            <p>
+              Acreditamos na força da diversidade e trabalhamos para criar
+              oportunidades iguais para todos, independente de origem ou
+              condição.
+            </p>
+          </div>
+          <div class="card">
+            <h3>📚 Educação Continuada</h3>
+            <p>
+              Oferecemos cursos, workshops e recursos educacionais para ajudar
+              profissionais a se desenvolverem constantemente.
+            </p>
+          </div>
+          <div class="card">
+            <h3>🔄 Inovação Constante</h3>
+            <p>
+              Investimos continuamente em novas tecnologias e funcionalidades
+              para melhorar a experiência de nossos usuários.
+            </p>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="rodape-container">
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">FastWork</h3>
+          <a href="sobre.html">Sobre</a>
+          <a href="empregos.html">Empregos</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Comunidades</h3>
+          <a href="Dev.html">Desenvolvedores</a>
+          <a href="publicidade.html">Publicidade</a>
+          <a href="investidores.html">Investidores</a>
+          <a href="fornecedores.html">Fornecedores</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Links úteis</h3>
+          <a href="ajuda.html">Suporte</a>
+          <a href="legal.html">Legal</a>
+          <a href="seguranca.html">Segurança e privacidade</a>
+          <a href="politicas.html">Políticas de privacidade</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="acessibilidade.html">Acessibilidade</a>
+        </div>
+
+        <div class="rodape-coluna">
+          <h3 class="rodape-titulo">Redes sociais</h3>
+          <div class="redes-sociais">
+            <a href="https://www.instagram.com/unifoa/" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-instagram-logo-500.png"
+                alt="Instagram"
+            /></a>
+            <a href="https://x.com/home?lang=pt-br" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-twitterx-500.png"
+                alt="Twitter"
+            /></a>
+            <a
+              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
+              target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-facebook-novo-500.png"
+                alt="Facebook"
+            /></a>
+          </div>
+        </div>
+      </div>
+
+      <div class="rodape-creditos">
+        <p>Português (Brasil)</p>
+        <p>© 2025 FastWork. Todos os direitos reservados.</p>
+      </div>
+    </footer>
+
+    <script>
+      // Theme management
+      function getStoredTheme() {
+        return localStorage.getItem("theme") || "dark";
+      }
+
+      function setStoredTheme(theme) {
+        localStorage.setItem("theme", theme);
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        const themeIcon = document.querySelector(".theme-icon");
+
+        if (theme === "light") {
+          themeIcon.textContent = "☀️";
+          themeIcon.className = "theme-icon sun";
+        } else {
+          themeIcon.textContent = "🌙";
+          themeIcon.className = "theme-icon moon";
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        setTheme(newTheme);
+        setStoredTheme(newTheme);
+      }
+
+      // Initialize theme on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedTheme = getStoredTheme();
+        setTheme(storedTheme);
+      });
+    </script>
+  </body>
+</html>

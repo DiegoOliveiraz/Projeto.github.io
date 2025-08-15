@@ -21,11 +21,11 @@ let listaServicos = [
   },
   {
     nome: "Limpador de Piscina",
-    img: "/Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/LDP.jpg",
+    img: "Arquivos.Css/Imagens/LDP.jpg",
   },
   {
     nome: "Entregador",
-    img: "/Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/entregadorcria.jpeg",
+    img: "Arquivos.Css/Imagens/entregadorcria.jpeg",
   },
   {
     nome: "Pintor",
@@ -44,6 +44,11 @@ let listaServicos = [
 // Função para criar a galeria de serviços
 function criarGaleriaServicos() {
   const servicosContainer = document.querySelector(".servicos-container");
+
+  if (!servicosContainer) {
+    console.warn("Container de serviços não encontrado");
+    return;
+  }
 
   // Limpa o container antes de adicionar os novos elementos
   servicosContainer.innerHTML = "";
@@ -92,7 +97,16 @@ function criarGaleriaServicos() {
 }
 
 // Executar a função quando o documento estiver carregado
-document.addEventListener("DOMContentLoaded", criarGaleriaServicos);
+document.addEventListener("DOMContentLoaded", function () {
+  criarGaleriaServicos();
+
+  // Garantir que os temas sejam aplicados após carregar os serviços
+  const currentTheme =
+    document.documentElement.getAttribute("data-theme") ||
+    localStorage.getItem("theme") ||
+    "dark";
+  document.documentElement.setAttribute("data-theme", currentTheme);
+});
 
 // Atualizar a galeria quando a janela for redimensionada
 window.addEventListener("resize", criarGaleriaServicos);

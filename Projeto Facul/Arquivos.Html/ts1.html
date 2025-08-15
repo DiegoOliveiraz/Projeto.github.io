@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -17,6 +17,10 @@
   </head>
 
   <body>
+    <button class="theme-toggle" onclick="toggleTheme()">
+      <span class="theme-icon moon">🌙</span>
+    </button>
+
     <header class="cabecalho">
       <div class="cabecalho-container">
         <h1 class="fastwork">
@@ -25,8 +29,8 @@
         </h1>
         <div class="cabecalho-direita">
           <nav class="navegacao">
-            <a href="PaginaSobre.html" target="_blank" rel="external">Sobre</a>
-            <a href="em-breve.html" target="_blank" rel="external">Ajuda</a>
+            <a href="sobre.html">Sobre</a>
+            <a href="ajuda.html">Ajuda</a>
           </nav>
           <div class="perfil">
             <a href="formu.html" target="_blank">
@@ -95,17 +99,19 @@
                 src="Arquivos.Css/Imagens/mulhertrabalho.jpeg"
                 alt="img corporativa"
               />
-              <div class="overlay" >Networking é essencial!</div>
+              <div class="overlay">Networking é essencial!</div>
             </div>
             <div class="img-overlay apagar1 apaga2">
-              <img class="none"
+              <img
+                class="none"
                 src="Arquivos.Css/Imagens/imagem corporativa.jpg"
                 alt="img corporativa"
               />
               <div class="overlay">Invista em aprendizado contínuo</div>
             </div>
             <div class="img-overlay apagar1 apagar2">
-              <img class="none"
+              <img
+                class="none"
                 src="Arquivos.Css/Imagens/imagem corporativa.png"
                 alt="img corporativa"
               />
@@ -115,9 +121,9 @@
         </div>
       </div>
       <div class="saiba-mais-container">
-        <a href="PaginaSobre.html" target="_blank" rel="external"
-          ><button class="saiba-mais-btn">Saiba Mais</button></a
-        >
+        <a href="sobre.html">
+          <button class="saiba-mais-btn">Saiba Mais</button>
+        </a>
       </div>
     </main>
 
@@ -125,36 +131,26 @@
       <div class="rodape-container">
         <div class="rodape-coluna">
           <h3 class="rodape-titulo">FastWork</h3>
-          <a href="PaginaSobre.html" target="_blank" rel="external">Sobre</a>
-          <a href="em-breve.html" target="_blank" rel="external">Empregos</a>
+          <a href="sobre.html">Sobre</a>
+          <a href="empregos.html">Empregos</a>
         </div>
 
         <div class="rodape-coluna">
           <h3 class="rodape-titulo">Comunidades</h3>
-          <a href="Dev.html" target="_blank" rel="external">Desenvolvedores</a>
-          <a href="em-breve.html" target="_blank" rel="external">Publicidade</a>
-          <a href="em-breve.html" target="_blank" rel="external"
-            >Investidores</a
-          >
-          <a href="em-breve.html" target="_blank" rel="external"
-            >Fornecedores</a
-          >
+          <a href="Dev.html">Desenvolvedores</a>
+          <a href="publicidade.html">Publicidade</a>
+          <a href="investidores.html">Investidores</a>
+          <a href="fornecedores.html">Fornecedores</a>
         </div>
 
         <div class="rodape-coluna">
           <h3 class="rodape-titulo">Links úteis</h3>
-          <a href="Dev.html">Suporte</a>
-          <a href="em-breve.html" target="_blank" rel="external">Legal</a>
-          <a href="em-breve.html" target="_blank" rel="external"
-            >Segurança e privacidade</a
-          >
-          <a href="em-breve.html" target="_blank" rel="external"
-            >Políticas de privacidade</a
-          >
-          <a href="em-breve.html" target="_blank" rel="external">Cookies</a>
-          <a href="em-breve.html" target="_blank" rel="external"
-            >Acessibilidade</a
-          >
+          <a href="ajuda.html">Suporte</a>
+          <a href="legal.html">Legal</a>
+          <a href="seguranca.html">Segurança e privacidade</a>
+          <a href="politicas.html">Políticas de privacidade</a>
+          <a href="cookies.html">Cookies</a>
+          <a href="acessibilidade.html">Acessibilidade</a>
         </div>
 
         <div class="rodape-coluna">
@@ -186,6 +182,118 @@
         <p>© 2025 FastWork. Todos os direitos reservados.</p>
       </div>
     </footer>
+
+    <script>
+      // Theme management
+      function getStoredTheme() {
+        return localStorage.getItem("theme") || "dark";
+      }
+
+      function setStoredTheme(theme) {
+        localStorage.setItem("theme", theme);
+      }
+
+      function setTheme(theme) {
+        document.documentElement.setAttribute("data-theme", theme);
+        const themeIcon = document.querySelector(".theme-icon");
+
+        if (theme === "light") {
+          themeIcon.textContent = "☀️";
+          themeIcon.className = "theme-icon sun";
+        } else {
+          themeIcon.textContent = "🌙";
+          themeIcon.className = "theme-icon moon";
+        }
+      }
+
+      function toggleTheme() {
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme");
+        const newTheme = currentTheme === "light" ? "dark" : "light";
+
+        setTheme(newTheme);
+        setStoredTheme(newTheme);
+      }
+
+      // Initialize theme on page load
+      document.addEventListener("DOMContentLoaded", () => {
+        const storedTheme = getStoredTheme();
+        setTheme(storedTheme);
+
+        // Tornar o botão de tema arrastável
+        makeDraggable();
+      });
+
+      // Função para tornar o botão arrastável
+      function makeDraggable() {
+        const themeButton = document.querySelector(".theme-toggle");
+        let isDragging = false;
+        let currentX;
+        let currentY;
+        let initialX;
+        let initialY;
+        let xOffset = 0;
+        let yOffset = 0;
+
+        themeButton.addEventListener("mousedown", dragStart);
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("mouseup", dragEnd);
+
+        // Touch events para dispositivos móveis
+        themeButton.addEventListener("touchstart", dragStart);
+        document.addEventListener("touchmove", drag);
+        document.addEventListener("touchend", dragEnd);
+
+        function dragStart(e) {
+          if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - xOffset;
+            initialY = e.touches[0].clientY - yOffset;
+          } else {
+            initialX = e.clientX - xOffset;
+            initialY = e.clientY - yOffset;
+          }
+
+          if (e.target === themeButton) {
+            isDragging = true;
+            e.preventDefault();
+          }
+        }
+
+        function drag(e) {
+          if (isDragging) {
+            e.preventDefault();
+
+            if (e.type === "touchmove") {
+              currentX = e.touches[0].clientX - initialX;
+              currentY = e.touches[0].clientY - initialY;
+            } else {
+              currentX = e.clientX - initialX;
+              currentY = e.clientY - initialY;
+            }
+
+            xOffset = currentX;
+            yOffset = currentY;
+
+            // Limitar movimento dentro da viewport
+            const rect = themeButton.getBoundingClientRect();
+            const maxX = window.innerWidth - rect.width;
+            const maxY = window.innerHeight - rect.height;
+
+            xOffset = Math.max(0, Math.min(xOffset, maxX));
+            yOffset = Math.max(0, Math.min(yOffset, maxY));
+
+            themeButton.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
+          }
+        }
+
+        function dragEnd(e) {
+          initialX = currentX;
+          initialY = currentY;
+          isDragging = false;
+        }
+      }
+    </script>
+
     <script src="Arquivos.Js/ts1.js"></script>
   </body>
 </html>

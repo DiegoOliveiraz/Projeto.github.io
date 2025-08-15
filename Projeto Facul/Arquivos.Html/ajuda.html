@@ -64,13 +64,14 @@
         border-radius: 50%;
         width: 60px;
         height: 60px;
-        cursor: pointer;
+        cursor: move;
         z-index: 1000;
         transition: all 0.3s ease;
         display: flex;
         align-items: center;
         justify-content: center;
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        user-select: none;
       }
 
       .theme-toggle:hover {
@@ -612,7 +613,70 @@
       document.addEventListener("DOMContentLoaded", () => {
         const storedTheme = getStoredTheme();
         setTheme(storedTheme);
+        makeDraggable();
       });
+
+      // Make theme button draggable
+      function makeDraggable() {
+        const themeButton = document.querySelector(".theme-toggle");
+        let isDragging = false;
+        let initialX, initialY;
+        let offsetX = 0,
+          offsetY = 0;
+
+        themeButton.addEventListener("mousedown", dragStart);
+        document.addEventListener("mousemove", drag);
+        document.addEventListener("mouseup", dragEnd);
+        themeButton.addEventListener("touchstart", dragStart);
+        document.addEventListener("touchmove", drag);
+        document.addEventListener("touchend", dragEnd);
+
+        function dragStart(e) {
+          e.preventDefault();
+          if (e.type === "touchstart") {
+            initialX = e.touches[0].clientX - offsetX;
+            initialY = e.touches[0].clientY - offsetY;
+          } else {
+            initialX = e.clientX - offsetX;
+            initialY = e.clientY - offsetY;
+          }
+          if (e.target === themeButton) {
+            isDragging = true;
+          }
+        }
+
+        function drag(e) {
+          if (isDragging) {
+            e.preventDefault();
+            let clientX, clientY;
+            if (e.type === "touchmove") {
+              clientX = e.touches[0].clientX;
+              clientY = e.touches[0].clientY;
+            } else {
+              clientX = e.clientX;
+              clientY = e.clientY;
+            }
+
+            offsetX = clientX - initialX;
+            offsetY = clientY - initialY;
+
+            const maxX = window.innerWidth - themeButton.offsetWidth;
+            const maxY = window.innerHeight - themeButton.offsetHeight;
+
+            offsetX = Math.max(0, Math.min(offsetX, maxX));
+            offsetY = Math.max(0, Math.min(offsetY, maxY));
+
+            themeButton.style.transform = `translate(${offsetX}px, ${offsetY}px)`;
+            themeButton.style.left = "0";
+            themeButton.style.top = "0";
+          }
+        }
+
+        function dragEnd(e) {
+          e.preventDefault();
+          isDragging = false;
+        }
+      }
     </script>
   </body>
 </html>

@@ -306,6 +306,32 @@
         font-size: 0.8rem;
       }
 
+      .redes-sociais {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .redes-sociais a {
+        display: inline-block;
+        transition: transform 0.3s ease;
+      }
+
+      .redes-sociais a:hover {
+        transform: scale(1.1);
+      }
+
+      .redes-sociais img {
+        width: 30px;
+        height: 30px;
+        filter: brightness(0) invert(1);
+        transition: filter 0.3s ease;
+      }
+
+      [data-theme="light"] .redes-sociais img {
+        filter: brightness(0) invert(0);
+      }
+
       /* Responsive */
       @media (max-width: 768px) {
         .cabecalho-container {
@@ -526,15 +552,25 @@
 
         <div class="rodape-coluna">
           <h3 class="rodape-titulo">Redes sociais</h3>
-          <a href="https://www.instagram.com/unifoa/" target="_blank"
-            >Instagram</a
-          >
-          <a href="https://x.com/home?lang=pt-br" target="_blank">Twitter</a>
-          <a
-            href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
-            target="_blank"
-            >Facebook</a
-          >
+          <div class="redes-sociais">
+            <a href="https://www.instagram.com/unifoa/" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-instagram-logo-500.png"
+                alt="Instagram"
+            /></a>
+            <a href="https://x.com/home?lang=pt-br" target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-twitterx-500.png"
+                alt="Twitter"
+            /></a>
+            <a
+              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
+              target="_blank"
+              ><img
+                src="Arquivos.Css/Imagens/icons8-facebook-novo-500.png"
+                alt="Facebook"
+            /></a>
+          </div>
         </div>
       </div>
 

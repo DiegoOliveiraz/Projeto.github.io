@@ -1,5 +1,11 @@
 @charset "UTF-8";
 
+.logo-fastwork img {
+  width: 75px;
+  height: 75px;
+  border-radius: 50%;
+}
+
 /* CSS Variables for Theme System */
 :root {
   --primary-color: #1976d2;

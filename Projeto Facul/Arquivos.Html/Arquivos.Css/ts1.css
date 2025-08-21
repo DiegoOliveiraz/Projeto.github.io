@@ -121,8 +121,12 @@ body {
 }
 
 .logo-fastwork img {
+  height: 55px;
+  transition: transform 0.3s ease;
+}
+
+.logo-fastwork img {
   height:55px;
-  width:55px;
 }
 
 .cabecalho-direita {

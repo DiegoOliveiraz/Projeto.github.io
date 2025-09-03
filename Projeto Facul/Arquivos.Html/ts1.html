@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -28,22 +28,29 @@
           <small><small>Conexões Trabalhistas</small></small>
         </h1>
         <div class="logo-fastwork">
-            <a href="PaginaSobre.html"><img src="Arquivos.Css/Imagens/Logo Sem Fundo.png" alt="Logo FastWork"></a>
+          <a href="PaginaSobre.html"
+            ><img
+              src="Arquivos.Css/Imagens/Logo Sem Fundo.png"
+              alt="Logo FastWork"
+          /></a>
         </div>
         <div class="cabecalho-direita">
           <nav class="navegacao">
             <a href="sobre.html">Sobre</a>
             <a href="ajuda.html">Ajuda</a>
           </nav>
-          <div class="perfil">
-            <a href="formu.html" target="_blank">
-              <img
-                class="logo-perfil"
-                src="Arquivos.Css/Imagens/svg avatar rlx.webp"
-                alt="Foto de perfil"
-              />
-            </a>
-            <span class="registro"></span>
+          <div class="menu-hamburger">
+            <button class="hamburger-btn" onclick="toggleMenu()">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+              <a href="formu.html" target="_blank">Perfil</a>
+              <a href="empregos.html">Empregos</a>
+              <a href="sobre.html">Sobre</a>
+              <a href="ajuda.html">Ajuda</a>
+            </div>
           </div>
         </div>
       </div>
@@ -217,6 +224,29 @@
         setTheme(newTheme);
         setStoredTheme(newTheme);
       }
+
+      // Menu hamburger functionality
+      function toggleMenu() {
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const hamburgerBtn = document.querySelector(".hamburger-btn");
+
+        dropdownMenu.classList.toggle("show");
+        hamburgerBtn.classList.toggle("active");
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        const hamburgerBtn = document.querySelector(".hamburger-btn");
+
+        if (
+          !hamburgerBtn.contains(event.target) &&
+          !dropdownMenu.contains(event.target)
+        ) {
+          dropdownMenu.classList.remove("show");
+          hamburgerBtn.classList.remove("active");
+        }
+      });
 
       // Initialize theme on page load
       document.addEventListener("DOMContentLoaded", () => {

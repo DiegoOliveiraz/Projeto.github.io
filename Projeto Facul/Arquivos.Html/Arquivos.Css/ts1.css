@@ -127,7 +127,7 @@ body {
 }
 
 .logo-fastwork img {
-  height:55px;
+  height: 55px;
 }
 
 .cabecalho-direita {
@@ -154,17 +154,89 @@ body {
   color: #000000 !important;
 }
 
-.perfil {
+.menu-hamburger {
+  position: relative;
   display: flex;
   align-items: center;
-  gap: 10px;
 }
 
-.logo-perfil {
-  width: 40px;
-  height: 40px;
-  border-radius: 50%;
-  object-fit: cover;
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  width: 30px;
+  height: 30px;
+  padding: 5px;
+  transition: all 0.3s ease;
+}
+
+.hamburger-btn:hover {
+  transform: scale(1.1);
+}
+
+.hamburger-line {
+  width: 100%;
+  height: 3px;
+  background-color: var(--primary-color);
+  transition: all 0.3s ease;
+  border-radius: 2px;
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(1) {
+  transform: rotate(45deg) translate(6px, 6px);
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(2) {
+  opacity: 0;
+}
+
+.hamburger-btn.active .hamburger-line:nth-child(3) {
+  transform: rotate(-45deg) translate(6px, -6px);
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 100%;
+  right: 0;
+  background: var(--card-bg);
+  border: 2px solid var(--border-color);
+  border-radius: 8px;
+  min-width: 160px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(-10px);
+  transition: all 0.3s ease;
+  z-index: 1000;
+  backdrop-filter: blur(10px);
+}
+
+.dropdown-menu.show {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.dropdown-menu a {
+  display: block;
+  padding: 12px 16px;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.dropdown-menu a:last-child {
+  border-bottom: none;
+}
+
+.dropdown-menu a:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  padding-left: 20px;
 }
 
 .registro {
@@ -479,13 +551,23 @@ body {
     font-size: 0.8rem;
   }
 
-  .perfil {
+  .menu-hamburger {
     gap: 5px;
   }
 
-  .logo-perfil {
-    width: 30px;
-    height: 30px;
+  .hamburger-btn {
+    width: 25px;
+    height: 25px;
+  }
+
+  .dropdown-menu {
+    min-width: 140px;
+    right: -10px;
+  }
+
+  .dropdown-menu a {
+    padding: 10px 12px;
+    font-size: 0.9rem;
   }
 
   .servicos-container {
@@ -841,5 +923,3 @@ body {
     display: none;
   }
 }
-
-

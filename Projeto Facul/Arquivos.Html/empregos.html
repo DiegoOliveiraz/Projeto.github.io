@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -38,7 +38,7 @@
         --bg-color: #ffffff;
         --border-color: #ffc107;
         --card-bg: rgba(255, 255, 255, 0.9);
-        --bg-image: url("Arquivos.Css/Imagens/backgroundclaro.png");
+        --bg-image: url("Arquivos.Css/Imagens/novo-backgroundclaro.png");
       }
 
       body {
@@ -52,43 +52,6 @@
         display: flex;
         flex-direction: column;
         transition: all 0.3s ease;
-      }
-
-      /* Theme Toggle Button */
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-color);
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        cursor: pointer;
-        z-index: 1000;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      }
-
-      .theme-toggle:hover {
-        transform: scale(1.1);
-      }
-
-      .theme-icon {
-        font-size: 24px;
-        transition: transform 0.5s ease;
-      }
-
-      .moon {
-        color: white;
-      }
-
-      .sun {
-        color: #fff;
-        transform: rotate(180deg);
       }
 
       /* Header */
@@ -138,6 +101,103 @@
 
       .navegacao a:hover {
         opacity: 0.8;
+      }
+
+      .menu-hamburger {
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        padding: 8px;
+        gap: 4px;
+        transition: transform 0.3s ease;
+      }
+
+      .menu-hamburger:hover {
+        transform: scale(1.1);
+      }
+
+      .menu-hamburger span {
+        width: 25px;
+        height: 3px;
+        background-color: var(--primary-color);
+        transition: all 0.3s ease;
+        border-radius: 2px;
+      }
+
+      .menu-hamburger.active span:nth-child(1) {
+        transform: rotate(45deg) translate(6px, 6px);
+      }
+
+      .menu-hamburger.active span:nth-child(2) {
+        opacity: 0;
+      }
+
+      .menu-hamburger.active span:nth-child(3) {
+        transform: rotate(-45deg) translate(6px, -6px);
+      }
+
+      .menu-dropdown {
+        position: absolute;
+        top: 100%;
+        right: 0;
+        background: var(--card-bg);
+        border: 2px solid var(--border-color);
+        border-radius: 10px;
+        padding: 15px;
+        min-width: 200px;
+        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+      }
+
+      .menu-dropdown.active {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .menu-dropdown a {
+        display: block;
+        color: var(--text-color);
+        text-decoration: none;
+        padding: 8px 0;
+        border-bottom: 1px solid var(--border-color);
+        transition: color 0.3s ease;
+      }
+
+      .menu-dropdown a:last-child {
+        border-bottom: none;
+      }
+
+      .menu-dropdown a:hover {
+        color: var(--primary-color);
+      }
+
+      .theme-toggle-menu {
+        display: block;
+        width: 100%;
+        background: var(--primary-color);
+        color: white;
+        border: none;
+        padding: 10px;
+        border-radius: 5px;
+        cursor: pointer;
+        margin-top: 10px;
+        font-family: "Roboto", sans-serif;
+        transition: all 0.3s ease;
+      }
+
+      .theme-toggle-menu:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .menu-container {
+        position: relative;
       }
 
       /* Main Content */
@@ -311,22 +371,11 @@
         .hero-title {
           font-size: 2rem;
         }
-
-        .theme-toggle {
-          width: 50px;
-          height: 50px;
-          top: 15px;
-          right: 15px;
-        }
       }
     </style>
   </head>
 
   <body>
-    <button class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-icon moon">🌙</span>
-    </button>
-
     <header class="cabecalho">
       <div class="cabecalho-container">
         <h1 class="fastwork">
@@ -334,11 +383,26 @@
           <small><small>Conexões Trabalhistas</small></small>
         </h1>
         <div class="cabecalho-direita">
-          <nav class="navegacao">
-            <a href="ts1.html">Home</a>
-            <a href="sobre.html">Sobre</a>
-            <a href="ajuda.html">Ajuda</a>
-          </nav>
+          <div class="menu-container">
+            <div class="menu-hamburger" onclick="toggleMenu()">
+              <span></span>
+              <span></span>
+              <span></span>
+            </div>
+            <div class="menu-dropdown" id="menuDropdown">
+              <a href="ts1.html">Home</a>
+              <a href="sobre.html">Sobre</a>
+              <a href="ajuda.html">Ajuda</a>
+              <a href="formu.html">Cadastrar</a>
+              <button
+                class="theme-toggle-menu"
+                onclick="toggleTheme()"
+                id="themeToggleMenu"
+              >
+                Modo Claro
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -450,12 +514,43 @@
 
         setTheme(newTheme);
         setStoredTheme(newTheme);
+        updateThemeToggleText(newTheme);
       }
+
+      function updateThemeToggleText(theme) {
+        const themeToggleMenu = document.getElementById("themeToggleMenu");
+        if (themeToggleMenu) {
+          themeToggleMenu.textContent =
+            theme === "light" ? "Modo Escuro" : "Modo Claro";
+        }
+      }
+
+      // Menu hamburger management
+      function toggleMenu() {
+        const menuHamburger = document.querySelector(".menu-hamburger");
+        const menuDropdown = document.getElementById("menuDropdown");
+
+        menuHamburger.classList.toggle("active");
+        menuDropdown.classList.toggle("active");
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener("click", function (event) {
+        const menuContainer = document.querySelector(".menu-container");
+        const menuDropdown = document.getElementById("menuDropdown");
+        const menuHamburger = document.querySelector(".menu-hamburger");
+
+        if (menuContainer && !menuContainer.contains(event.target)) {
+          menuDropdown.classList.remove("active");
+          menuHamburger.classList.remove("active");
+        }
+      });
 
       // Initialize theme on page load
       document.addEventListener("DOMContentLoaded", () => {
         const storedTheme = getStoredTheme();
         setTheme(storedTheme);
+        updateThemeToggleText(storedTheme);
       });
     </script>
   </body>

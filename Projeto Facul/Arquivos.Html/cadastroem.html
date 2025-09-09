@@ -1,4 +1,4 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -38,7 +38,7 @@
         --bg-color: #ffffff;
         --border-color: #ffc107;
         --card-bg: rgba(255, 255, 255, 0.9);
-        --bg-image: url("Arquivos.Css/Imagens/backgroundclaro.png");
+        --bg-image: url("Arquivos.Css/Imagens/novo-backgroundclaro.png");
       }
 
       body {
@@ -91,79 +91,6 @@
         transform: rotate(180deg);
       }
 
-      .cabecalho {
-        background-color: var(--secondary-color);
-        padding: 15px 0;
-        border-bottom: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-
-      .cabecalho-container {
-        height: 50px;
-        max-width: 2000px;
-        margin: 0 auto;
-        padding: 0 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .fastwork {
-        color: var(--primary-color);
-        font-size: 1.8rem;
-        font-weight: bold;
-        margin: 0;
-      }
-
-      .cabecalho-direita {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-      }
-
-      .navegacao {
-        display: flex;
-        gap: 20px;
-      }
-
-      .navegacao a {
-        color: var(--primary-color);
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-      }
-
-      .navegacao a {
-        color: #ffffff !important;
-      }
-
-      [data-theme="light"] .navegacao a {
-        color: #000000 !important;
-      }
-
-      .navegacao a:hover {
-        color: var(--primary-color) !important;
-      }
-
-      .perfil {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-      }
-
-      .logo-perfil {
-        width: 40px;
-        height: 40px;
-        border-radius: 50%;
-        border: 2px solid var(--primary-color);
-        transition: all 0.3s ease;
-      }
-
-      .logo-perfil:hover {
-        transform: scale(1.1);
-        border-color: var(--primary-color);
-      }
-
       .conteudo-principal {
         flex: 1;
         padding: 40px 20px;
@@ -173,7 +100,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        min-height: 80vh;
+        min-height: 100vh;
       }
 
       .container {
@@ -271,95 +198,7 @@
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
       }
 
-      /* Rodapé */
-      .rodape {
-        background-color: var(--secondary-color);
-        padding: 30px 0 10px;
-        border-top: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-        margin-top: auto;
-      }
-
-      .rodape-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        margin-bottom: 20px;
-      }
-
-      .rodape-coluna {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .rodape-titulo {
-        color: var(--primary-color);
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-      }
-
-      .rodape-coluna a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 0.9rem;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-      }
-
-      [data-theme="light"] .rodape-coluna a {
-        color: #000000 !important;
-      }
-
-      .rodape-coluna a:hover {
-        color: var(--primary-color) !important;
-        opacity: 1;
-      }
-
-      .rodape-creditos {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid var(--border-color);
-        color: var(--text-color);
-        opacity: 0.7;
-        font-size: 0.8rem;
-      }
-
-      .redes-sociais {
-        display: flex;
-        gap: 15px;
-        margin-top: 10px;
-      }
-
-      .redes-sociais a {
-        display: inline-block;
-        transition: transform 0.3s ease;
-      }
-
-      .redes-sociais a:hover {
-        transform: scale(1.1);
-      }
-
-      .redes-sociais img {
-        width: 30px;
-        height: 30px;
-        filter: brightness(0) invert(1);
-        transition: filter 0.3s ease;
-      }
-
-      [data-theme="light"] .redes-sociais img {
-        filter: brightness(0) invert(0);
-      }
-
       @media (max-width: 768px) {
-        .cabecalho-container {
-          flex-direction: column;
-          gap: 15px;
-        }
-
         .container {
           margin: 20px;
           padding: 20px;
@@ -383,33 +222,20 @@
       <span class="theme-icon moon">🌙</span>
     </button>
 
-    <header class="cabecalho">
-      <div class="cabecalho-container">
-        <h1 class="fastwork">
-          FastWork |
-          <small><small>Conexões Trabalhistas</small></small>
-        </h1>
-        <div class="cabecalho-direita">
-          <nav class="navegacao">
-            <a href="ts1.html">Home</a>
-            <a href="sobre.html">Sobre</a>
-            <a href="ajuda.html">Ajuda</a>
-          </nav>
-          <div class="perfil">
-            <a href="formu.html" target="_blank">
-              <img
-                class="logo-perfil"
-                src="Arquivos.Css/Imagens/svg avatar rlx.webp"
-                alt="Perfil"
-              />
-            </a>
-          </div>
-        </div>
-      </div>
-    </header>
-
     <main class="conteudo-principal">
       <div class="container">
+        <div style="text-align: left; margin-bottom: 20px">
+          <a
+            href="ts1.html"
+            style="
+              color: var(--primary-color);
+              text-decoration: none;
+              font-size: 14px;
+            "
+          >
+            ← Voltar ao FastWork
+          </a>
+        </div>
         <h1>Cadastro de Empresas</h1>
         <form action="/cadastrar_empresa" method="POST">
           <label for="nome">Nome da Empresa:</label>
@@ -477,62 +303,6 @@
         </form>
       </div>
     </main>
-
-    <footer class="rodape">
-      <div class="rodape-container">
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">FastWork</h3>
-          <a href="sobre.html">Sobre</a>
-          <a href="empregos.html">Empregos</a>
-        </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Comunidades</h3>
-          <a href="Dev.html">Desenvolvedores</a>
-          <a href="publicidade.html">Publicidade</a>
-          <a href="investidores.html">Investidores</a>
-          <a href="fornecedores.html">Fornecedores</a>
-        </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Links úteis</h3>
-          <a href="ajuda.html">Suporte</a>
-          <a href="legal.html">Legal</a>
-          <a href="seguranca.html">Segurança e privacidade</a>
-          <a href="politicas.html">Políticas de privacidade</a>
-          <a href="cookies.html">Cookies</a>
-          <a href="acessibilidade.html">Acessibilidade</a>
-        </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Redes sociais</h3>
-          <div class="redes-sociais">
-            <a href="https://www.instagram.com/unifoa/" target="_blank"
-              ><img
-                src="Arquivos.Css/Imagens/icons8-instagram-logo-500.png"
-                alt="Instagram"
-            /></a>
-            <a href="https://x.com/home?lang=pt-br" target="_blank"
-              ><img
-                src="Arquivos.Css/Imagens/icons8-twitterx-500.png"
-                alt="Twitter"
-            /></a>
-            <a
-              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
-              target="_blank"
-              ><img
-                src="Arquivos.Css/Imagens/icons8-facebook-novo-500.png"
-                alt="Facebook"
-            /></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="rodape-creditos">
-        <p>Português (Brasil)</p>
-        <p>© 2025 FastWork. Todos os direitos reservados.</p>
-      </div>
-    </footer>
 
     <script>
       // Theme management

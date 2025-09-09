@@ -38,7 +38,7 @@
         --bg-color: #ffffff;
         --border-color: #ffc107;
         --card-bg: rgba(255, 255, 255, 0.9);
-        --bg-image: url("Arquivos.Css/Imagens/backgroundclaro.png");
+        --bg-image: url("Arquivos.Css/Imagens/novo-backgroundclaro.png");
       }
 
       body {
@@ -55,40 +55,90 @@
       }
 
       /* Theme Toggle Button */
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-color);
+
+      /* Menu Hamburger */
+      .menu-hamburger {
+        position: relative;
+        display: inline-block;
+      }
+
+      .hamburger-btn {
+        background: none;
         border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
         cursor: pointer;
-        z-index: 1000;
+        padding: 10px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+      }
+
+      .hamburger-line {
+        width: 25px;
+        height: 3px;
+        background-color: var(--primary-color);
         transition: all 0.3s ease;
+      }
+
+      .dropdown-menu {
+        display: none;
+        position: absolute;
+        right: 0;
+        top: 100%;
+        background: var(--card-bg);
+        border: 2px solid var(--border-color);
+        border-radius: 10px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+        min-width: 200px;
+        z-index: 1000;
+      }
+
+      .dropdown-menu.show {
+        display: block;
+      }
+
+      .dropdown-menu a {
+        display: block;
+        padding: 12px 20px;
+        color: var(--text-color);
+        text-decoration: none;
+        border-bottom: 1px solid var(--border-color);
+        transition: background-color 0.3s ease;
+      }
+
+      .dropdown-menu a:hover {
+        background-color: rgba(25, 118, 210, 0.1);
+      }
+
+      .dropdown-menu a:last-child {
+        border-bottom: none;
+      }
+
+      .theme-toggle-menu {
         display: flex;
         align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        gap: 0.5rem;
+        padding: 12px 16px;
+        background: none;
+        border: none;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.3s ease;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        cursor: pointer;
+        width: 100%;
+        text-align: left;
+        font-family: inherit;
       }
 
-      .theme-toggle:hover {
-        transform: scale(1.1);
+      .theme-toggle-menu:hover {
+        background: var(--primary-color);
+        color: var(--secondary-color);
+        padding-left: 20px;
       }
 
-      .theme-icon {
-        font-size: 24px;
-        transition: transform 0.5s ease;
-      }
-
-      .moon {
-        color: white;
-      }
-
-      .sun {
-        color: #fff;
-        transform: rotate(180deg);
+      .theme-text {
+        font-size: 1rem;
       }
 
       /* Header */
@@ -118,26 +168,6 @@
         display: flex;
         align-items: center;
         gap: 30px;
-      }
-
-      .navegacao {
-        display: flex;
-        gap: 20px;
-      }
-
-      .navegacao a {
-        color: #ffffff !important;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-      }
-
-      [data-theme="light"] .navegacao a {
-        color: #000000 !important;
-      }
-
-      .navegacao a:hover {
-        color: var(--primary-color) !important;
       }
 
       /* Main Content */
@@ -421,10 +451,6 @@
   </head>
 
   <body>
-    <button class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-icon moon">🌙</span>
-    </button>
-
     <header class="cabecalho">
       <div class="cabecalho-container">
         <h1 class="fastwork">
@@ -432,11 +458,24 @@
           <small><small>Conexões Trabalhistas</small></small>
         </h1>
         <div class="cabecalho-direita">
-          <nav class="navegacao">
-            <a href="ts1.html">Home</a>
-            <a href="sobre.html">Sobre</a>
-            <a href="ajuda.html">Ajuda</a>
-          </nav>
+          <div class="menu-hamburger">
+            <button class="hamburger-btn" onclick="toggleMenu()">
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+              <span class="hamburger-line"></span>
+            </button>
+            <div class="dropdown-menu" id="dropdownMenu">
+              <a href="formu.html" target="_blank">Perfil</a>
+              <a href="empregos.html">Empregos</a>
+              <a href="ts1.html">Home</a>
+              <a href="sobre.html">Sobre</a>
+              <a href="ajuda.html">Ajuda</a>
+              <button class="theme-toggle-menu" onclick="toggleTheme()">
+                <span class="theme-icon moon">🌙</span>
+                <span class="theme-text">Modo Claro</span>
+              </button>
+            </div>
+          </div>
         </div>
       </div>
     </header>
@@ -655,6 +694,12 @@
     </footer>
 
     <script>
+      // Menu management
+      function toggleMenu() {
+        const dropdownMenu = document.getElementById("dropdownMenu");
+        dropdownMenu.classList.toggle("show");
+      }
+
       // Theme management
       function getStoredTheme() {
         return localStorage.getItem("theme") || "dark";

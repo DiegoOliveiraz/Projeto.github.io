@@ -17,28 +17,13 @@
   </head>
 
   <body>
-    <button class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-icon moon">🌙</span>
-    </button>
-
     <header class="cabecalho">
       <div class="cabecalho-container">
         <h1 class="fastwork">
           FastWork |
           <small><small>Conexões Trabalhistas</small></small>
         </h1>
-        <div class="logo-fastwork">
-          <a href="PaginaSobre.html"
-            ><img
-              src="Arquivos.Css/Imagens/Logo Sem Fundo.png"
-              alt="Logo FastWork"
-          /></a>
-        </div>
         <div class="cabecalho-direita">
-          <nav class="navegacao">
-            <a href="sobre.html">Sobre</a>
-            <a href="ajuda.html">Ajuda</a>
-          </nav>
           <div class="menu-hamburger">
             <button class="hamburger-btn" onclick="toggleMenu()">
               <span class="hamburger-line"></span>
@@ -50,6 +35,10 @@
               <a href="empregos.html">Empregos</a>
               <a href="sobre.html">Sobre</a>
               <a href="ajuda.html">Ajuda</a>
+              <button class="theme-toggle-menu" onclick="toggleTheme()">
+                <span class="theme-icon moon">🌙</span>
+                <span class="theme-text">Modo Claro</span>
+              </button>
             </div>
           </div>
         </div>
@@ -225,13 +214,16 @@
       function setTheme(theme) {
         document.documentElement.setAttribute("data-theme", theme);
         const themeIcon = document.querySelector(".theme-icon");
+        const themeText = document.querySelector(".theme-text");
 
         if (theme === "light") {
           themeIcon.textContent = "☀️";
           themeIcon.className = "theme-icon sun";
+          if (themeText) themeText.textContent = "Modo Escuro";
         } else {
           themeIcon.textContent = "🌙";
           themeIcon.className = "theme-icon moon";
+          if (themeText) themeText.textContent = "Modo Claro";
         }
       }
 
@@ -271,79 +263,7 @@
       document.addEventListener("DOMContentLoaded", () => {
         const storedTheme = getStoredTheme();
         setTheme(storedTheme);
-
-        // Tornar o botão de tema arrastável
-        makeDraggable();
       });
-
-      // Função para tornar o botão arrastável
-      function makeDraggable() {
-        const themeButton = document.querySelector(".theme-toggle");
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
-
-        themeButton.addEventListener("mousedown", dragStart);
-        document.addEventListener("mousemove", drag);
-        document.addEventListener("mouseup", dragEnd);
-
-        // Touch events para dispositivos móveis
-        themeButton.addEventListener("touchstart", dragStart);
-        document.addEventListener("touchmove", drag);
-        document.addEventListener("touchend", dragEnd);
-
-        function dragStart(e) {
-          if (e.type === "touchstart") {
-            initialX = e.touches[0].clientX - xOffset;
-            initialY = e.touches[0].clientY - yOffset;
-          } else {
-            initialX = e.clientX - xOffset;
-            initialY = e.clientY - yOffset;
-          }
-
-          if (e.target === themeButton) {
-            isDragging = true;
-            e.preventDefault();
-          }
-        }
-
-        function drag(e) {
-          if (isDragging) {
-            e.preventDefault();
-
-            if (e.type === "touchmove") {
-              currentX = e.touches[0].clientX - initialX;
-              currentY = e.touches[0].clientY - initialY;
-            } else {
-              currentX = e.clientX - initialX;
-              currentY = e.clientY - initialY;
-            }
-
-            xOffset = currentX;
-            yOffset = currentY;
-
-            // Limitar movimento dentro da viewport
-            const rect = themeButton.getBoundingClientRect();
-            const maxX = window.innerWidth - rect.width;
-            const maxY = window.innerHeight - rect.height;
-
-            xOffset = Math.max(0, Math.min(xOffset, maxX));
-            yOffset = Math.max(0, Math.min(yOffset, maxY));
-
-            themeButton.style.transform = `translate(${xOffset}px, ${yOffset}px)`;
-          }
-        }
-
-        function dragEnd(e) {
-          initialX = currentX;
-          initialY = currentY;
-          isDragging = false;
-        }
-      }
     </script>
 
     <script src="Arquivos.Js/ts1.js"></script>

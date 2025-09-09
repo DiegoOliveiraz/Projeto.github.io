@@ -22,31 +22,39 @@
   --bg-color: #ffffff;
   --border-color: #ffc107;
   --card-bg: rgba(255, 255, 255, 0.9);
-  --bg-image: url(Imagens/backgroundclaro.png);
+  --bg-image: url(Imagens/novo-backgroundclaro.png);
   --title-color: #000000;
   --card-text-color: #000000;
   --footer-text-color: #000000;
   --content-text-color: #000000;
 }
 
-/* Theme Toggle Button */
-.theme-toggle {
-  position: fixed;
-  top: 20px;
-  right: 20px;
-  background: var(--primary-color);
-  border: none;
-  border-radius: 50%;
-  width: 60px;
-  height: 60px;
-  cursor: move;
-  z-index: 1000;
-  transition: all 0.3s ease;
+/* Theme Toggle Button in Menu */
+.theme-toggle-menu {
   display: flex;
   align-items: center;
-  justify-content: center;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-  user-select: none;
+  gap: 0.5rem;
+  padding: 12px 16px;
+  background: none;
+  border: none;
+  color: var(--text-color);
+  text-decoration: none;
+  transition: all 0.3s ease;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+  font-family: inherit;
+}
+
+.theme-toggle-menu:hover {
+  background: var(--primary-color);
+  color: var(--secondary-color);
+  padding-left: 20px;
+}
+
+.theme-text {
+  font-size: 1rem;
 }
 
 .theme-toggle:hover {
@@ -112,22 +120,6 @@ body {
   color: var(--primary-color);
   margin: 0;
   flex: 1;
-}
-
-.logo-fastwork {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 auto;
-}
-
-.logo-fastwork img {
-  height: 55px;
-  transition: transform 0.3s ease;
-}
-
-.logo-fastwork img {
-  height: 55px;
 }
 
 .cabecalho-direita {
@@ -602,11 +594,6 @@ body {
 
   .fastwork {
     font-size: 1rem;
-  }
-
-  .logo-fastwork img {
-    height: 30px;
-    max-width: 60px;
   }
 
   .cabecalho-direita {

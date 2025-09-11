@@ -202,7 +202,9 @@
     </footer>
 
     <script>
-      // Theme management
+      // Theme management - Consolidated logic to prevent conflicts
+      let isThemeInitialized = false;
+
       function getStoredTheme() {
         return localStorage.getItem("theme") || "dark";
       }
@@ -212,24 +214,34 @@
       }
 
       function setTheme(theme) {
+        // Prevent multiple theme applications during initialization
+        if (document.documentElement.getAttribute("data-theme") === theme && isThemeInitialized) {
+          return;
+        }
+
         document.documentElement.setAttribute("data-theme", theme);
+        
+        // Update theme toggle elements safely
         const themeIcon = document.querySelector(".theme-icon");
         const themeText = document.querySelector(".theme-text");
 
-        if (theme === "light") {
-          themeIcon.textContent = "☀️";
-          themeIcon.className = "theme-icon sun";
-          if (themeText) themeText.textContent = "Modo Escuro";
-        } else {
-          themeIcon.textContent = "🌙";
-          themeIcon.className = "theme-icon moon";
-          if (themeText) themeText.textContent = "Modo Claro";
+        if (themeIcon && themeText) {
+          if (theme === "light") {
+            themeIcon.textContent = "☀️";
+            themeIcon.className = "theme-icon sun";
+            themeText.textContent = "Modo Escuro";
+          } else {
+            themeIcon.textContent = "🌙";
+            themeIcon.className = "theme-icon moon";
+            themeText.textContent = "Modo Claro";
+          }
         }
+        
+        isThemeInitialized = true;
       }
 
       function toggleTheme() {
-        const currentTheme =
-          document.documentElement.getAttribute("data-theme");
+        const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
         const newTheme = currentTheme === "light" ? "dark" : "light";
 
         setTheme(newTheme);
@@ -259,7 +271,13 @@
         }
       });
 
-      // Initialize theme on page load
+      // Initialize theme immediately to prevent flashing
+      (function initializeTheme() {
+        const storedTheme = getStoredTheme();
+        setTheme(storedTheme);
+      })();
+
+      // Re-apply theme after DOM content is loaded to ensure all elements are updated
       document.addEventListener("DOMContentLoaded", () => {
         const storedTheme = getStoredTheme();
         setTheme(storedTheme);

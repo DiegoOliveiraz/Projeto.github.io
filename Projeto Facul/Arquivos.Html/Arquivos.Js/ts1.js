@@ -99,13 +99,6 @@ function criarGaleriaServicos() {
 // Executar a função quando o documento estiver carregado
 document.addEventListener("DOMContentLoaded", function () {
   criarGaleriaServicos();
-
-  // Garantir que os temas sejam aplicados após carregar os serviços
-  const currentTheme =
-    document.documentElement.getAttribute("data-theme") ||
-    localStorage.getItem("theme") ||
-    "dark";
-  document.documentElement.setAttribute("data-theme", currentTheme);
 });
 
 // Atualizar a galeria quando a janela for redimensionada

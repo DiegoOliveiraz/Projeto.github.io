@@ -238,13 +238,19 @@
       .form-group.success input,
       .form-group.success select,
       .form-group.success textarea {
-        border-color: #4CAF50;
+        border-color: #4caf50;
         box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
       }
 
       @keyframes fadeIn {
-        from { opacity: 0; transform: translateY(-10px); }
-        to { opacity: 1; transform: translateY(0); }
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       @media (max-width: 768px) {
@@ -493,9 +499,10 @@
 
       // Validation functions
       function showError(element, message) {
-        const formGroup = element.closest(".form-group") || element.closest(".checkbox-group");
+        const formGroup =
+          element.closest(".form-group") || element.closest(".checkbox-group");
         const errorElement = formGroup.querySelector(".error-message");
-        
+
         formGroup.classList.add("error");
         formGroup.classList.remove("success");
         errorElement.textContent = message;
@@ -503,9 +510,10 @@
       }
 
       function showSuccess(element) {
-        const formGroup = element.closest(".form-group") || element.closest(".checkbox-group");
+        const formGroup =
+          element.closest(".form-group") || element.closest(".checkbox-group");
         const errorElement = formGroup.querySelector(".error-message");
-        
+
         formGroup.classList.add("success");
         formGroup.classList.remove("error");
         if (errorElement) {
@@ -581,12 +589,12 @@
       }
 
       // Real-time validation
-      inputs.forEach(input => {
-        input.addEventListener("blur", function() {
+      inputs.forEach((input) => {
+        input.addEventListener("blur", function () {
           validateField(this);
         });
 
-        input.addEventListener("input", function() {
+        input.addEventListener("input", function () {
           if (this.closest(".form-group").classList.contains("error")) {
             validateField(this);
           }
@@ -597,7 +605,7 @@
         let error = null;
         const value = field.value;
 
-        switch(field.id) {
+        switch (field.id) {
           case "nome":
             error = validateName(value);
             break;
@@ -646,11 +654,11 @@
 
       form.addEventListener("submit", function (e) {
         e.preventDefault();
-        
+
         let isValid = true;
-        
+
         // Validate all fields
-        inputs.forEach(input => {
+        inputs.forEach((input) => {
           if (!validateField(input)) {
             isValid = false;
           }
@@ -658,8 +666,10 @@
 
         if (isValid) {
           // Show success message
-          alert("Cadastro realizado com sucesso! Em breve entraremos em contato.");
-          
+          alert(
+            "Cadastro realizado com sucesso! Em breve entraremos em contato."
+          );
+
           // Optional: Reset form
           // form.reset();
           // inputs.forEach(input => {
@@ -670,7 +680,9 @@
           // });
         } else {
           // Scroll to first error
-          const firstError = document.querySelector(".form-group.error, .checkbox-group.error");
+          const firstError = document.querySelector(
+            ".form-group.error, .checkbox-group.error"
+          );
           if (firstError) {
             firstError.scrollIntoView({ behavior: "smooth", block: "center" });
           }

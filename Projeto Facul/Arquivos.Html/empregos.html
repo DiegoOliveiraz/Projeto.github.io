@@ -380,7 +380,11 @@
       <div class="cabecalho-container">
         <h1 class="fastwork">
           FastWork |
-          <small><small>Conexões Trabalhistas</small></small>
+          <img
+            src="Arquivos.Css/Imagens/fastworklogo.jpeg"
+            alt="FastWork Logo"
+            style="height: 20px; vertical-align: middle; margin-left: 5px"
+          />
         </h1>
         <div class="cabecalho-direita">
           <div class="menu-container">
@@ -496,14 +500,12 @@
 
       function setTheme(theme) {
         document.documentElement.setAttribute("data-theme", theme);
-        const themeIcon = document.querySelector(".theme-icon");
+        const themeToggle = document.getElementById("themeToggleMenu");
 
         if (theme === "light") {
-          themeIcon.textContent = "☀️";
-          themeIcon.className = "theme-icon sun";
+          if (themeToggle) themeToggle.textContent = "Modo Escuro";
         } else {
-          themeIcon.textContent = "🌙";
-          themeIcon.className = "theme-icon moon";
+          if (themeToggle) themeToggle.textContent = "Modo Claro";
         }
       }
 

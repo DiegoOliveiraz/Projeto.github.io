@@ -21,7 +21,11 @@
       <div class="cabecalho-container">
         <h1 class="fastwork">
           FastWork |
-          <small><small>Conexões Trabalhistas</small></small>
+          <img
+            src="Arquivos.Css/Imagens/fastworklogo.jpeg"
+            alt="FastWork Logo"
+            style="height: 20px; vertical-align: middle; margin-left: 5px"
+          />
         </h1>
         <div class="cabecalho-direita">
           <div class="menu-hamburger">
@@ -36,7 +40,6 @@
               <a href="sobre.html">Sobre</a>
               <a href="ajuda.html">Ajuda</a>
               <button class="theme-toggle-menu" onclick="toggleTheme()">
-                <span class="theme-icon moon">🌙</span>
                 <span class="theme-text">Modo Claro</span>
               </button>
             </div>
@@ -215,33 +218,32 @@
 
       function setTheme(theme) {
         // Prevent multiple theme applications during initialization
-        if (document.documentElement.getAttribute("data-theme") === theme && isThemeInitialized) {
+        if (
+          document.documentElement.getAttribute("data-theme") === theme &&
+          isThemeInitialized
+        ) {
           return;
         }
 
         document.documentElement.setAttribute("data-theme", theme);
-        
+
         // Update theme toggle elements safely
-        const themeIcon = document.querySelector(".theme-icon");
         const themeText = document.querySelector(".theme-text");
 
-        if (themeIcon && themeText) {
+        if (themeText) {
           if (theme === "light") {
-            themeIcon.textContent = "☀️";
-            themeIcon.className = "theme-icon sun";
             themeText.textContent = "Modo Escuro";
           } else {
-            themeIcon.textContent = "🌙";
-            themeIcon.className = "theme-icon moon";
             themeText.textContent = "Modo Claro";
           }
         }
-        
+
         isThemeInitialized = true;
       }
 
       function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
+        const currentTheme =
+          document.documentElement.getAttribute("data-theme") || "dark";
         const newTheme = currentTheme === "light" ? "dark" : "light";
 
         setTheme(newTheme);

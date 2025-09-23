@@ -220,6 +220,33 @@
         box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
       }
 
+      .error-message {
+        color: #ff4444;
+        font-size: 12px;
+        margin-top: 5px;
+        display: none;
+        animation: fadeIn 0.3s ease-in-out;
+      }
+
+      .form-group.error input,
+      .form-group.error select,
+      .form-group.error textarea {
+        border-color: #ff4444;
+        box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
+      }
+
+      .form-group.success input,
+      .form-group.success select,
+      .form-group.success textarea {
+        border-color: #4CAF50;
+        box-shadow: 0 0 5px rgba(76, 175, 80, 0.3);
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; transform: translateY(-10px); }
+        to { opacity: 1; transform: translateY(0); }
+      }
+
       @media (max-width: 768px) {
         .hero-title {
           font-size: 2rem;
@@ -277,6 +304,7 @@
               placeholder="Digite seu nome completo"
               pattern="^[A-Za-zÀ-ÿ\s]{3,50}$"
             />
+            <div class="error-message" id="nome-error"></div>
           </div>
 
           <div class="form-row">
@@ -290,6 +318,7 @@
                 placeholder="Digite seu e-mail"
                 pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
               />
+              <div class="error-message" id="email-error"></div>
             </div>
 
             <div class="form-group">
@@ -302,6 +331,7 @@
                 placeholder="(XX) XXXXX-XXXX"
                 required
               />
+              <div class="error-message" id="telefone-error"></div>
             </div>
           </div>
 
@@ -314,6 +344,7 @@
               placeholder="Digite seu endereço completo"
               required
             />
+            <div class="error-message" id="endereco-error"></div>
           </div>
 
           <div class="form-row">
@@ -326,6 +357,7 @@
                 placeholder="Digite sua cidade"
                 required
               />
+              <div class="error-message" id="cidade-error"></div>
             </div>
 
             <div class="form-group">
@@ -338,6 +370,7 @@
                 placeholder="XXXXX-XXX"
                 required
               />
+              <div class="error-message" id="cep-error"></div>
             </div>
           </div>
 
@@ -355,6 +388,7 @@
               <option value="mecanico">Mecânico</option>
               <option value="outro">Outro</option>
             </select>
+            <div class="error-message" id="profissao-error"></div>
           </div>
 
           <div class="form-group">
@@ -367,6 +401,7 @@
               <option value="5-10">5-10 anos</option>
               <option value="10+">Mais de 10 anos</option>
             </select>
+            <div class="error-message" id="experiencia-error"></div>
           </div>
 
           <div class="form-group">
@@ -377,7 +412,10 @@
               rows="4"
               placeholder="Descreva suas principais habilidades e especializações"
               required
+              minlength="10"
+              maxlength="500"
             ></textarea>
+            <div class="error-message" id="habilidades-error"></div>
           </div>
 
           <div class="form-group">
@@ -390,11 +428,13 @@
               <option value="1-mes">1 mês</option>
               <option value="negociavel">Negociável</option>
             </select>
+            <div class="error-message" id="disponibilidade-error"></div>
           </div>
 
           <div class="checkbox-group">
             <input type="checkbox" id="termos" name="termos" required />
             <label for="termos">Aceito os termos e condições de uso</label>
+            <div class="error-message" id="termos-error"></div>
           </div>
 
           <div class="checkbox-group">
@@ -448,11 +488,193 @@
       });
 
       // Form validation and interaction
-      document.querySelector("form").addEventListener("submit", function (e) {
+      const form = document.querySelector("form");
+      const inputs = form.querySelectorAll("input, select, textarea");
+
+      // Validation functions
+      function showError(element, message) {
+        const formGroup = element.closest(".form-group") || element.closest(".checkbox-group");
+        const errorElement = formGroup.querySelector(".error-message");
+        
+        formGroup.classList.add("error");
+        formGroup.classList.remove("success");
+        errorElement.textContent = message;
+        errorElement.style.display = "block";
+      }
+
+      function showSuccess(element) {
+        const formGroup = element.closest(".form-group") || element.closest(".checkbox-group");
+        const errorElement = formGroup.querySelector(".error-message");
+        
+        formGroup.classList.add("success");
+        formGroup.classList.remove("error");
+        if (errorElement) {
+          errorElement.style.display = "none";
+        }
+      }
+
+      function validateName(name) {
+        const namePattern = /^[A-Za-zÀ-ÿ\s]{3,50}$/;
+        if (!name.trim()) {
+          return "Nome é obrigatório";
+        }
+        if (name.trim().length < 3) {
+          return "Nome deve ter pelo menos 3 caracteres";
+        }
+        if (!namePattern.test(name.trim())) {
+          return "Nome deve conter apenas letras e espaços";
+        }
+        return null;
+      }
+
+      function validateEmail(email) {
+        const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!email.trim()) {
+          return "E-mail é obrigatório";
+        }
+        if (!emailPattern.test(email.trim())) {
+          return "E-mail inválido";
+        }
+        return null;
+      }
+
+      function validatePhone(phone) {
+        const phonePattern = /^\(\d{2}\)\s\d{4,5}-\d{4}$/;
+        if (!phone.trim()) {
+          return "Telefone é obrigatório";
+        }
+        if (!phonePattern.test(phone.trim())) {
+          return "Telefone deve estar no formato (XX) XXXXX-XXXX";
+        }
+        return null;
+      }
+
+      function validateCEP(cep) {
+        const cepPattern = /^\d{5}-?\d{3}$/;
+        if (!cep.trim()) {
+          return "CEP é obrigatório";
+        }
+        if (!cepPattern.test(cep.trim())) {
+          return "CEP deve estar no formato XXXXX-XXX";
+        }
+        return null;
+      }
+
+      function validateRequired(value, fieldName) {
+        if (!value.trim()) {
+          return `${fieldName} é obrigatório`;
+        }
+        return null;
+      }
+
+      function validateHabilidades(text) {
+        if (!text.trim()) {
+          return "Habilidades são obrigatórias";
+        }
+        if (text.trim().length < 10) {
+          return "Descreva suas habilidades com pelo menos 10 caracteres";
+        }
+        if (text.trim().length > 500) {
+          return "Descrição deve ter no máximo 500 caracteres";
+        }
+        return null;
+      }
+
+      // Real-time validation
+      inputs.forEach(input => {
+        input.addEventListener("blur", function() {
+          validateField(this);
+        });
+
+        input.addEventListener("input", function() {
+          if (this.closest(".form-group").classList.contains("error")) {
+            validateField(this);
+          }
+        });
+      });
+
+      function validateField(field) {
+        let error = null;
+        const value = field.value;
+
+        switch(field.id) {
+          case "nome":
+            error = validateName(value);
+            break;
+          case "email":
+            error = validateEmail(value);
+            break;
+          case "telefone":
+            error = validatePhone(value);
+            break;
+          case "endereco":
+            error = validateRequired(value, "Endereço");
+            break;
+          case "cidade":
+            error = validateRequired(value, "Cidade");
+            break;
+          case "cep":
+            error = validateCEP(value);
+            break;
+          case "profissao":
+            error = validateRequired(value, "Profissão");
+            break;
+          case "experiencia":
+            error = validateRequired(value, "Experiência");
+            break;
+          case "habilidades":
+            error = validateHabilidades(value);
+            break;
+          case "disponibilidade":
+            error = validateRequired(value, "Disponibilidade");
+            break;
+          case "termos":
+            if (!field.checked) {
+              error = "Você deve aceitar os termos e condições";
+            }
+            break;
+        }
+
+        if (error) {
+          showError(field, error);
+          return false;
+        } else {
+          showSuccess(field);
+          return true;
+        }
+      }
+
+      form.addEventListener("submit", function (e) {
         e.preventDefault();
-        alert(
-          "Cadastro realizado com sucesso! Em breve entraremos em contato."
-        );
+        
+        let isValid = true;
+        
+        // Validate all fields
+        inputs.forEach(input => {
+          if (!validateField(input)) {
+            isValid = false;
+          }
+        });
+
+        if (isValid) {
+          // Show success message
+          alert("Cadastro realizado com sucesso! Em breve entraremos em contato.");
+          
+          // Optional: Reset form
+          // form.reset();
+          // inputs.forEach(input => {
+          //   const formGroup = input.closest(".form-group") || input.closest(".checkbox-group");
+          //   formGroup.classList.remove("success", "error");
+          //   const errorElement = formGroup.querySelector(".error-message");
+          //   if (errorElement) errorElement.style.display = "none";
+          // });
+        } else {
+          // Scroll to first error
+          const firstError = document.querySelector(".form-group.error, .checkbox-group.error");
+          if (firstError) {
+            firstError.scrollIntoView({ behavior: "smooth", block: "center" });
+          }
+        }
       });
 
       // CEP formatting

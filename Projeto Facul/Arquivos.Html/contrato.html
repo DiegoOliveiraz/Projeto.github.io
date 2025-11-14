@@ -38,23 +38,25 @@
         --secondary-color: #000000;
         --text-color: #ffffff;
         --bg-color: #000000;
-        --border-color: #ffc107;
-        --card-bg: rgba(0, 0, 0, 0.8);
+        --border-color: #1976d2;
+        --card-bg: rgba(0, 0, 0, 0.85);
         --bg-image: url("Arquivos.Css/Imagens/textured-black-background-vector.jpg");
+        --accent-color: #42a5f5;
       }
 
       [data-theme="light"] {
-        --primary-color: #1976d2;
+        --primary-color: #ffc107;
         --secondary-color: #ffffff;
         --text-color: #000000;
         --bg-color: #ffffff;
         --border-color: #ffc107;
-        --card-bg: rgba(255, 255, 255, 0.9);
+        --card-bg: rgba(255, 255, 255, 0.95);
         --bg-image: url("Arquivos.Css/Imagens/novo-backgroundclaro.png");
         --title-color: #000000;
         --card-text-color: #000000;
         --footer-text-color: #000000;
         --content-text-color: #000000;
+        --accent-color: #ffb300;
       }
 
       body {
@@ -121,11 +123,18 @@
       }
 
       .menu-hamburger {
+        position: fixed;
+        right: 20px;
+        top: 20px;
+        width: 40px;
+        height: 40px;
         display: flex;
         flex-direction: column;
+        justify-content: center;
+        align-items: center;
         cursor: pointer;
-        padding: 8px;
-        gap: 5px;
+        gap: 6px;
+        z-index: 1001;
         transition: transform 0.3s ease;
       }
 
@@ -134,7 +143,8 @@
       }
 
       .menu-hamburger span {
-        width: 32px;`n        height: 4px;
+        width: 30px;
+        height: 3px;
         background-color: var(--primary-color);
         transition: all 0.3s ease;
         border-radius: 3px;
@@ -226,31 +236,74 @@
 
       .hero-section {
         text-align: center;
-        padding: 60px 0;
-        background: var(--card-bg);
-        border-radius: 20px;
-        margin-bottom: 40px;
-        backdrop-filter: blur(10px);
-        border: 2px solid var(--border-color);
+        padding: 80px 40px;
+        background: linear-gradient(
+          135deg,
+          var(--card-bg) 0%,
+          rgba(25, 118, 210, 0.1) 100%
+        );
+        border-radius: 25px;
+        margin-bottom: 50px;
+        backdrop-filter: blur(15px);
+        border: 3px solid var(--primary-color);
+        box-shadow: 0 10px 40px rgba(0, 0, 0, 0.3);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero-section::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -50%;
+        width: 200%;
+        height: 200%;
+        background: radial-gradient(
+          circle,
+          rgba(25, 118, 210, 0.1) 0%,
+          transparent 70%
+        );
+        animation: pulse 4s ease-in-out infinite;
+      }
+
+      @keyframes pulse {
+        0%,
+        100% {
+          transform: scale(1);
+          opacity: 0.5;
+        }
+        50% {
+          transform: scale(1.1);
+          opacity: 0.8;
+        }
       }
 
       .hero-title {
-        font-size: 3rem;
+        font-size: 3.5rem;
         margin-bottom: 20px;
         background: linear-gradient(
-          45deg,
-          var(--primary-color),
-          var(--text-color)
+          135deg,
+          var(--primary-color) 0%,
+          var(--accent-color) 50%,
+          var(--primary-color) 100%
         );
         -webkit-background-clip: text;
         -webkit-text-fill-color: transparent;
         background-clip: text;
+        font-weight: 800;
+        letter-spacing: -1px;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 4px 20px rgba(25, 118, 210, 0.3);
       }
 
       .hero-subtitle {
-        font-size: 1.2rem;
+        font-size: 1.3rem;
         color: var(--text-color);
-        opacity: 0.8;
+        opacity: 0.9;
+        position: relative;
+        z-index: 1;
+        font-weight: 500;
       }
 
       .container {
@@ -261,59 +314,125 @@
       }
 
       .card {
-        background: var(--card-bg);
-        padding: 30px;
-        border-radius: 15px;
-        border: 2px solid var(--border-color);
-        backdrop-filter: blur(10px);
+        background: linear-gradient(
+          145deg,
+          var(--card-bg) 0%,
+          rgba(25, 118, 210, 0.05) 100%
+        );
+        padding: 35px;
+        border-radius: 20px;
+        border: 2px solid var(--primary-color);
+        backdrop-filter: blur(15px);
         text-align: center;
-        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(
+          135deg,
+          transparent 0%,
+          rgba(25, 118, 210, 0.1) 100%
+        );
+        opacity: 0;
+        transition: opacity 0.4s ease;
       }
 
       .card:hover {
-        transform: translateY(-5px);
-        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        transform: translateY(-10px) scale(1.02);
+        box-shadow: 0 20px 50px rgba(25, 118, 210, 0.4);
+        border-color: var(--accent-color);
+      }
+
+      .card:hover::before {
+        opacity: 1;
       }
 
       .card img {
-        width: 120px;
-        height: 120px;
+        width: 140px;
+        height: 140px;
         border-radius: 50%;
-        margin-bottom: 20px;
-        border: 3px solid var(--primary-color);
+        margin-bottom: 25px;
+        border: 4px solid var(--primary-color);
         object-fit: cover;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+        transition: all 0.3s ease;
+        position: relative;
+        z-index: 1;
+      }
+
+      .card:hover img {
+        transform: scale(1.1);
+        border-color: var(--accent-color);
+        box-shadow: 0 12px 35px rgba(25, 118, 210, 0.5);
       }
 
       .card h2 {
         color: var(--primary-color);
-        font-size: 1.5rem;
-        margin-bottom: 15px;
+        font-size: 1.8rem;
+        margin-bottom: 20px;
+        font-weight: 700;
+        position: relative;
+        z-index: 1;
+        text-shadow: 0 2px 10px rgba(25, 118, 210, 0.2);
       }
 
       .card p {
         color: var(--text-color);
-        margin-bottom: 10px;
-        line-height: 1.5;
-        opacity: 0.9;
+        margin-bottom: 12px;
+        line-height: 1.7;
+        opacity: 0.95;
+        position: relative;
+        z-index: 1;
+        font-size: 0.95rem;
+      }
+
+      .card p strong {
+        color: var(--primary-color);
+        font-weight: 600;
       }
 
       .card button {
-        background: var(--primary-color);
+        background: linear-gradient(
+          135deg,
+          var(--primary-color) 0%,
+          var(--accent-color) 100%
+        );
         color: white;
-        padding: 12px 30px;
+        padding: 14px 40px;
         border: none;
-        border-radius: 8px;
-        font-size: 16px;
-        font-weight: bold;
+        border-radius: 12px;
+        font-size: 17px;
+        font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 15px;
+        margin-top: 20px;
+        box-shadow: 0 4px 15px rgba(25, 118, 210, 0.3);
+        position: relative;
+        z-index: 1;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
       }
 
       .card button:hover {
-        background: var(--border-color);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        background: linear-gradient(
+          135deg,
+          var(--accent-color) 0%,
+          var(--primary-color) 100%
+        );
+        transform: translateY(-3px);
+        box-shadow: 0 8px 25px rgba(25, 118, 210, 0.5);
+      }
+
+      .card button:active {
+        transform: translateY(-1px);
       }
 
       .rodape {

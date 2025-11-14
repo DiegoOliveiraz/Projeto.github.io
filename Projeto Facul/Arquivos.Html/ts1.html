@@ -64,23 +64,43 @@
         position: fixed !important;
         top: 20px !important;
         right: 20px !important;
+        width: 40px !important;
+        height: 40px !important;
+        display: flex !important;
+        flex-direction: column !important;
+        justify-content: center !important;
+        align-items: center !important;
+        gap: 6px !important;
         z-index: 1001 !important;
-        padding: 10px !important;
+        padding: 0 !important;
+      }
+
+      .hamburger-btn span {
+        width: 30px !important;
+        height: 3px !important;
+        background-color: var(--primary-color, #1976d2) !important;
+        transition: all 0.3s ease !important;
+        border-radius: 3px !important;
       }
 
       /* Melhorar botões de cadastro/login */
       .botoes-cadastro {
         display: flex !important;
         flex-direction: column !important;
-        gap: 15px !important;
-        margin-top: 20px !important;
+        gap: 20px !important;
+        margin-top: 30px !important;
+        width: 100% !important;
+        max-width: 400px !important;
+        margin-left: auto !important;
+        margin-right: auto !important;
+        padding: 0 20px !important;
       }
 
       .btn-cadastro {
-        padding: 15px 30px !important;
-        font-size: 1.1rem !important;
-        font-weight: 600 !important;
-        border-radius: 10px !important;
+        padding: 18px 40px !important;
+        font-size: 1.2rem !important;
+        font-weight: 700 !important;
+        border-radius: 12px !important;
         border: 2px solid var(--border-color, #1976d2) !important;
         background: linear-gradient(
           135deg,
@@ -93,6 +113,16 @@
         box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
         text-transform: uppercase !important;
         letter-spacing: 1px !important;
+        min-height: 60px !important;
+        display: flex !important;
+        align-items: center !important;
+        justify-content: center !important;
+        gap: 10px !important;
+        width: 100% !important;
+      }
+
+      .btn-cadastro i {
+        font-size: 1.3rem !important;
       }
 
       [data-theme="light"] .btn-cadastro {
@@ -126,9 +156,21 @@
           height: 28px !important;
         }
 
+        .botoes-cadastro {
+          max-width: 100% !important;
+          gap: 15px !important;
+          padding: 0 15px !important;
+          margin-top: 20px !important;
+        }
+
         .btn-cadastro {
           font-size: 1rem !important;
-          padding: 12px 20px !important;
+          padding: 14px 25px !important;
+          min-height: 50px !important;
+        }
+
+        .btn-cadastro i {
+          font-size: 1.1rem !important;
         }
 
         .cabecalho-container {

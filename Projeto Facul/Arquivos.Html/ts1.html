@@ -4,24 +4,163 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>FastWork - Conectando Profissionais</title>
+
+    <!-- Bootstrap CSS -->
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
     <link rel="stylesheet" href="Arquivos.Css/ts1.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
     />
-    <link rel="shortcut icon" href="Arquivos.Css/Imagens/Logo_FAVICON.png" type="image/x-icon">
+    <link
+      rel="shortcut icon"
+      href="Arquivos.Css/Imagens/Logo_FAVICON.png"
+      type="image/x-icon"
+    />
+
+    <style>
+      /* Override para melhorar o cabeçalho */
+      .cabecalho {
+        position: sticky !important;
+        top: 0 !important;
+        z-index: 1000 !important;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+      }
+
+      .cabecalho-container {
+        display: flex !important;
+        justify-content: space-between !important;
+        align-items: center !important;
+        padding: 1rem 2rem !important;
+      }
+
+      .fastwork {
+        font-size: 1.8rem !important;
+        font-weight: bold !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 10px !important;
+        margin: 0 !important;
+      }
+
+      .fastwork img {
+        height: 35px !important;
+        width: auto !important;
+      }
+
+      .menu-hamburger {
+        position: relative !important;
+      }
+
+      .hamburger-btn {
+        position: fixed !important;
+        top: 20px !important;
+        right: 20px !important;
+        z-index: 1001 !important;
+        padding: 10px !important;
+      }
+
+      /* Melhorar botões de cadastro/login */
+      .botoes-cadastro {
+        display: flex !important;
+        flex-direction: column !important;
+        gap: 15px !important;
+        margin-top: 20px !important;
+      }
+
+      .btn-cadastro {
+        padding: 15px 30px !important;
+        font-size: 1.1rem !important;
+        font-weight: 600 !important;
+        border-radius: 10px !important;
+        border: 2px solid var(--border-color, #1976d2) !important;
+        background: linear-gradient(
+          135deg,
+          var(--primary-color, #1976d2),
+          var(--secondary-color, #000000)
+        ) !important;
+        color: white !important;
+        cursor: pointer !important;
+        transition: all 0.3s ease !important;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2) !important;
+        text-transform: uppercase !important;
+        letter-spacing: 1px !important;
+      }
+
+      [data-theme="light"] .btn-cadastro {
+        color: #000000 !important;
+        background: linear-gradient(135deg, #ffc107, #ffb300) !important;
+        border-color: #ffc107 !important;
+        box-shadow: 0 4px 15px rgba(255, 193, 7, 0.3) !important;
+      }
+
+      [data-theme="light"] .btn-cadastro:hover {
+        background: linear-gradient(135deg, #ffb300, #ffc107) !important;
+        color: #000000 !important;
+        box-shadow: 0 6px 20px rgba(255, 193, 7, 0.4) !important;
+      }
+
+      .btn-cadastro:hover {
+        transform: translateY(-3px) !important;
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3) !important;
+      }
+
+      .btn-cadastro i {
+        margin-right: 8px !important;
+      }
+
+      @media (max-width: 768px) {
+        .fastwork {
+          font-size: 1.3rem !important;
+        }
+
+        .fastwork img {
+          height: 28px !important;
+        }
+
+        .btn-cadastro {
+          font-size: 1rem !important;
+          padding: 12px 20px !important;
+        }
+
+        .cabecalho-container {
+          padding: 0.8rem 1rem !important;
+        }
+      }
+
+      @media (min-width: 768px) {
+        .botoes-cadastro {
+          flex-direction: row !important;
+          justify-content: center !important;
+          flex-wrap: wrap !important;
+        }
+
+        .btn-cadastro {
+          flex: 1 !important;
+          min-width: 200px !important;
+          max-width: 300px !important;
+        }
+      }
+    </style>
   </head>
 
   <body>
     <header class="cabecalho">
       <div class="cabecalho-container">
         <h1 class="fastwork">
-          FastWork |
           <img
             src="Arquivos.Css/Imagens/Logo_FAVICON.png"
             alt="FastWork Logo"
-            style="height: 20px; vertical-align: middle; margin-left: 5px"
           />
+          FastWork
         </h1>
         <div class="cabecalho-direita">
           <div class="menu-hamburger">
@@ -31,11 +170,18 @@
               <span class="hamburger-line"></span>
             </button>
             <div class="dropdown-menu" id="dropdownMenu">
-              <a href="formu.html" target="_blank">Perfil</a>
-              <a href="empregos.html">Empregos</a>
-              <a href="sobre.html">Sobre</a>
-              <a href="ajuda.html">Ajuda</a>
+              <a href="formu.html" target="_blank"
+                ><i class="bi bi-person-circle"></i> Perfil</a
+              >
+              <a href="empregos.html"
+                ><i class="bi bi-briefcase"></i> Empregos</a
+              >
+              <a href="sobre.html"><i class="bi bi-info-circle"></i> Sobre</a>
+              <a href="ajuda.html"
+                ><i class="bi bi-question-circle"></i> Ajuda</a
+              >
               <button class="theme-toggle-menu" onclick="toggleTheme()">
+                <i class="bi bi-moon-stars"></i>
                 <span class="theme-text">Modo Claro</span>
               </button>
             </div>
@@ -60,19 +206,19 @@
               class="btn-cadastro"
               onclick="window.open('cadastroem.html', '_blank')"
             >
-              Cadastrar Empresa
+              <i class="bi bi-building"></i> Cadastrar Empresa
             </button>
             <button
               class="btn-cadastro"
               onclick="window.open('formu.html', '_blank')"
             >
-              Cadastrar Usuário
+              <i class="bi bi-person-plus"></i> Cadastrar Profissional
             </button>
             <button
               class="btn-cadastro"
               onclick="window.open('login.html', '_blank')"
             >
-              Login
+              <i class="bi bi-box-arrow-in-right"></i> Fazer Login
             </button>
           </div>
         </div>
@@ -281,6 +427,9 @@
         setTheme(storedTheme);
       });
     </script>
+
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
     <script src="Arquivos.Js/ts1.js"></script>
   </body>

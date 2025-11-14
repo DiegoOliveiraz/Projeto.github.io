@@ -5,6 +5,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro de Empresas - FastWork</title>
     <link rel="shortcut icon" href="Arquivos.Css/Imagens/Logo_FAVICON.png" type="image/x-icon">
+    
+    <!-- Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
@@ -35,6 +40,10 @@
         --border-color: #ffc107;
         --card-bg: rgba(255, 255, 255, 0.9);
         --bg-image: url("Arquivos.Css/Imagens/novo-backgroundclaro.png");
+        --title-color: #000000;
+        --card-text-color: #000000;
+        --footer-text-color: #000000;
+        --content-text-color: #000000;
       }
 
       body {
@@ -55,7 +64,7 @@
         top: 20px;
         right: 20px;
         background: var(--primary-color);
-        border: none;
+        border: 2px solid var(--primary-color);
         border-radius: 50%;
         width: 60px;
         height: 60px;
@@ -65,26 +74,30 @@
         display: flex;
         align-items: center;
         justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
         user-select: none;
       }
 
       .theme-toggle:hover {
-        transform: scale(1.1);
+        transform: scale(1.1) rotate(15deg);
+        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.4);
       }
 
-      .theme-icon {
-        font-size: 24px;
-        transition: transform 0.5s ease;
-      }
-
-      .moon {
+      .theme-toggle .theme-text {
+        font-size: 12px;
+        font-weight: 600;
         color: white;
+        text-align: center;
+        line-height: 1.2;
       }
 
-      .sun {
-        color: #fff;
-        transform: rotate(180deg);
+      [data-theme="light"] .theme-toggle {
+        background: var(--primary-color);
+        border-color: var(--primary-color);
+      }
+
+      [data-theme="light"] .theme-toggle .theme-text {
+        color: #000000;
       }
 
       .conteudo-principal {
@@ -101,70 +114,122 @@
 
       .container {
         width: 100%;
-        max-width: 500px;
+        max-width: 600px;
         background: var(--card-bg);
-        border-radius: 15px;
-        box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-        padding: 30px;
+        border-radius: 20px;
+        box-shadow: 0 15px 35px rgba(0, 0, 0, 0.3);
+        padding: 40px;
         transform: scale(1);
-        transition: transform 0.3s ease-in-out;
+        transition: all 0.3s ease;
         color: var(--text-color);
-        backdrop-filter: blur(10px);
+        backdrop-filter: blur(15px);
         border: 2px solid var(--border-color);
+        animation: slideUp 0.5s ease;
+      }
+
+      @keyframes slideUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
       .container:hover {
-        transform: scale(1.02);
+        box-shadow: 0 20px 45px rgba(0, 0, 0, 0.4);
+      }
+
+      .header-cadastro {
+        text-align: center;
+        margin-bottom: 35px;
+      }
+
+      .header-cadastro i {
+        font-size: 48px;
+        color: var(--primary-color);
+        margin-bottom: 15px;
+        display: block;
       }
 
       h1 {
         text-align: center;
         color: var(--primary-color);
-        font-size: 24px;
-        margin-bottom: 20px;
+        font-size: 28px;
+        margin-bottom: 10px;
+        font-weight: 700;
         text-transform: uppercase;
         letter-spacing: 2px;
+      }
+
+      .subtitle {
+        text-align: center;
+        color: var(--text-color);
+        font-size: 14px;
+        opacity: 0.8;
+        margin-bottom: 30px;
       }
 
       form {
         display: grid;
         grid-template-columns: 1fr;
-        gap: 15px;
+        gap: 20px;
+      }
+
+      .form-group {
+        position: relative;
       }
 
       label {
         color: var(--text-color);
-        font-weight: bold;
-        margin-bottom: 5px;
+        font-weight: 600;
+        margin-bottom: 8px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        font-size: 14px;
+        text-transform: uppercase;
+        letter-spacing: 0.5px;
+      }
+
+      label i {
+        color: var(--primary-color);
+        font-size: 18px;
       }
 
       input,
       select,
       textarea {
-        padding: 12px;
-        border: 2px solid var(--border-color);
-        border-radius: 8px;
-        background: var(--card-bg);
+        width: 100%;
+        padding: 14px 16px;
+        border: 2px solid rgba(128, 128, 128, 0.3);
+        border-radius: 10px;
+        background: rgba(255, 255, 255, 0.05);
         color: #ffffff;
-        font-size: 16px;
+        font-size: 15px;
         transition: all 0.3s ease;
+        font-family: "Nunito Sans", sans-serif;
       }
 
       [data-theme="light"] input,
       [data-theme="light"] select,
       [data-theme="light"] textarea {
         color: #000000;
+        background: rgba(0, 0, 0, 0.03);
+        border-color: rgba(128, 128, 128, 0.2);
       }
 
       input::placeholder,
       textarea::placeholder {
-        color: #cccccc;
-        opacity: 0.8;
+        color: rgba(255, 255, 255, 0.5);
+        font-style: italic;
       }
 
       [data-theme="light"] input::placeholder,
       [data-theme="light"] textarea::placeholder {
-        color: #666666;
+        color: rgba(0, 0, 0, 0.4);
       }
 
       input:focus,
@@ -172,36 +237,172 @@
       textarea:focus {
         outline: none;
         border-color: var(--primary-color);
-        box-shadow: 0 0 10px rgba(25, 118, 210, 0.3);
+        box-shadow: 0 0 0 3px rgba(25, 118, 210, 0.1);
+        background: rgba(25, 118, 210, 0.05);
+        transform: translateY(-2px);
       }
 
-      button {
-        background: var(--primary-color);
+      [data-theme="light"] input:focus,
+      [data-theme="light"] select:focus,
+      [data-theme="light"] textarea:focus {
+        box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.2);
+        background: rgba(255, 193, 7, 0.05);
+      }
+
+      button[type="submit"] {
+        background: linear-gradient(135deg, var(--primary-color), #1565c0);
         color: white;
-        padding: 15px;
+        padding: 16px;
         border: none;
-        border-radius: 8px;
+        border-radius: 10px;
         font-size: 16px;
-        font-weight: bold;
+        font-weight: 700;
         cursor: pointer;
         transition: all 0.3s ease;
-        margin-top: 10px;
+        margin-top: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+        position: relative;
+        overflow: hidden;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        gap: 10px;
       }
 
-      button:hover {
-        background: var(--border-color);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      button[type="submit"] i {
+        font-size: 20px;
+      }
+
+      button[type="submit"]::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: -100%;
+        width: 100%;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        transition: left 0.5s ease;
+      }
+
+      button[type="submit"]:hover::before {
+        left: 100%;
+      }
+
+      button[type="submit"]:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 8px 20px rgba(25, 118, 210, 0.4);
+      }
+
+      [data-theme="light"] button[type="submit"] {
+        background: linear-gradient(135deg, #ffc107, #ffb300);
+        color: #000000;
+      }
+
+      [data-theme="light"] button[type="submit"]:hover {
+        box-shadow: 0 8px 20px rgba(255, 193, 7, 0.4);
+      }
+
+      button[type="submit"]:active {
+        transform: translateY(-1px);
+      }
+
+      .error-message {
+        color: #ff4444;
+        font-size: 12px;
+        margin-top: 6px;
+        display: none;
+        animation: fadeIn 0.3s ease-in-out;
+        padding-left: 4px;
+        font-weight: 500;
+      }
+
+      .form-group.error input,
+      .form-group.error select,
+      .form-group.error textarea {
+        border-color: #ff4444 !important;
+        box-shadow: 0 0 0 3px rgba(255, 68, 68, 0.1) !important;
+        background-color: rgba(255, 68, 68, 0.05) !important;
+        animation: shake 0.5s ease;
+      }
+
+      @keyframes shake {
+        0%, 100% { transform: translateX(0); }
+        25% { transform: translateX(-5px); }
+        75% { transform: translateX(5px); }
+      }
+
+      .form-group.error .error-message {
+        display: block;
+      }
+
+      .form-group.error label {
+        color: #ff4444;
+      }
+
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(-10px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      .back-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 8px;
+        color: var(--primary-color);
+        text-decoration: none;
+        font-size: 14px;
+        font-weight: 600;
+        margin-bottom: 20px;
+        padding: 8px 12px;
+        border-radius: 8px;
+        transition: all 0.3s ease;
+      }
+
+      .back-link:hover {
+        background: rgba(25, 118, 210, 0.1);
+        transform: translateX(-5px);
+      }
+
+      [data-theme="light"] .back-link:hover {
+        background: rgba(255, 193, 7, 0.1);
+      }
+
+      .form-row {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 20px;
+      }
+
+      select {
+        cursor: pointer;
+        appearance: none;
+        background-image: url("data:image/svg+xml;charset=UTF-8,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='none' stroke='currentColor' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'%3e%3cpolyline points='6 9 12 15 18 9'%3e%3c/polyline%3e%3c/svg%3e");
+        background-repeat: no-repeat;
+        background-position: right 12px center;
+        background-size: 20px;
+        padding-right: 40px;
       }
 
       @media (max-width: 768px) {
         .container {
           margin: 20px;
-          padding: 20px;
+          padding: 25px;
+          max-width: 100%;
         }
 
         h1 {
-          font-size: 20px;
+          font-size: 22px;
+        }
+
+        .header-cadastro i {
+          font-size: 36px;
         }
 
         .theme-toggle {
@@ -210,8 +411,264 @@
           top: 15px;
           right: 15px;
         }
+
+        .form-row {
+          grid-template-columns: 1fr;
+        }
+
+        input,
+        select,
+        textarea {
+          font-size: 16px; /* Evita zoom no iOS */
+        }
       }
-    </style>
+
+      @media (max-width: 480px) {
+        .container {
+          padding: 20px;
+          border-radius: 15px;
+        }
+
+        h1 {
+          font-size: 20px;
+        }
+
+        label {
+          font-size: 13px;
+        }
+      }
+          /* Menu Hamburger */
+      .menu-hamburger {
+        position: relative;
+      }
+
+      .hamburger-btn {
+        position: fixed;
+        top: 20px;
+        right: 20px;
+        z-index: 1001;
+        background: var(--primary-color);
+        border: 2px solid var(--primary-color);
+        border-radius: 10px;
+        width: 40px;
+        height: 40px;
+        cursor: pointer;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 6px;
+        padding: 8px;
+        transition: all 0.3s ease;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      }
+
+      .hamburger-btn:hover {
+        transform: scale(1.1);
+        box-shadow: 0 6px 16px rgba(0, 0, 0, 0.4);
+      }
+
+      .hamburger-line {
+        width: 100%;
+        height: 4px;
+        background: white;
+        border-radius: 2px;
+        transition: all 0.3s ease;
+      }
+
+      [data-theme="light"] .hamburger-line {
+        background: #000000;
+      }
+
+      .hamburger-btn.active .hamburger-line:nth-child(1) {
+        transform: translateY(10px) rotate(45deg);
+      }
+
+      .hamburger-btn.active .hamburger-line:nth-child(2) {
+        opacity: 0;
+      }
+
+      .hamburger-btn.active .hamburger-line:nth-child(3) {
+        transform: translateY(-10px) rotate(-45deg);
+      }
+
+      .dropdown-menu {
+        position: fixed;
+        top: 70px;
+        right: 20px;
+        background: var(--card-bg);
+        border: 2px solid var(--primary-color);
+        border-radius: 12px;
+        padding: 10px 0;
+        min-width: 220px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px);
+        transition: all 0.3s ease;
+        z-index: 1000;
+        backdrop-filter: blur(10px);
+      }
+
+      .dropdown-menu.show {
+        opacity: 1;
+        visibility: visible;
+        transform: translateY(0);
+      }
+
+      .dropdown-menu a,
+      .dropdown-menu button {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 12px 20px;
+        color: var(--text-color);
+        text-decoration: none;
+        transition: all 0.2s ease;
+        border: none;
+        background: none;
+        width: 100%;
+        text-align: left;
+        font-size: 15px;
+        cursor: pointer;
+        font-family: "Nunito Sans", sans-serif;
+      }
+
+      .dropdown-menu a:hover,
+      .dropdown-menu button:hover {
+        background: rgba(25, 118, 210, 0.1);
+        padding-left: 25px;
+      }
+
+      [data-theme="light"] .dropdown-menu a:hover,
+      [data-theme="light"] .dropdown-menu button:hover {
+        background: rgba(255, 193, 7, 0.1);
+      }
+
+      .dropdown-menu a i,
+      .dropdown-menu button i {
+        font-size: 18px;
+        color: var(--primary-color);
+      }
+
+      .theme-toggle-menu {
+        border-top: 1px solid var(--border-color);
+        margin-top: 8px;
+        padding-top: 12px !important;
+      }
+
+      @media (max-width: 768px) {
+        .dropdown-menu {
+          left: 10px;
+          right: 10px;
+          min-width: auto;
+          max-width: calc(100vw - 20px);
+        }
+
+        .hamburger-btn {
+          left: 15px;
+          top: 15px;
+        }
+      }
+
+      /* Footer */
+      footer {
+        background: var(--card-bg);
+        border-top: 2px solid var(--primary-color);
+        padding: 40px 20px 20px;
+        margin-top: auto;
+        backdrop-filter: blur(10px);
+      }
+
+      .footer-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 30px;
+        margin-bottom: 30px;
+      }
+
+      .footer-column h3 {
+        color: var(--primary-color);
+        font-size: 16px;
+        font-weight: 700;
+        margin-bottom: 15px;
+        text-transform: uppercase;
+        letter-spacing: 1px;
+      }
+
+      .footer-column a {
+        display: block;
+        color: #ffffff;
+        text-decoration: none;
+        padding: 8px 0;
+        transition: all 0.3s ease;
+        font-size: 14px;
+      }
+
+      [data-theme="light"] .footer-column a {
+        color: #000000;
+      }
+
+      .footer-column a:hover {
+        color: var(--primary-color);
+        padding-left: 10px;
+      }
+
+      .social-links {
+        display: flex;
+        gap: 15px;
+        margin-top: 10px;
+      }
+
+      .social-links a {
+        width: 40px;
+        height: 40px;
+        background: var(--primary-color);
+        border-radius: 50%;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        transition: all 0.3s ease;
+        padding: 0;
+      }
+
+      .social-links a:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+        padding-left: 0;
+      }
+
+      .social-links i {
+        color: white;
+        font-size: 20px;
+      }
+
+      [data-theme="light"] .social-links i {
+        color: #000000;
+      }
+
+      .footer-credits {
+        text-align: center;
+        padding-top: 20px;
+        border-top: 1px solid var(--border-color);
+        color: var(--text-color);
+        font-size: 14px;
+        opacity: 0.8;
+      }
+
+      @media (max-width: 768px) {
+        .footer-container {
+          grid-template-columns: 1fr;
+          gap: 25px;
+        }
+
+        footer {
+          padding: 30px 15px 15px;
+        }
+      }
+</style>
   </head>
   <body>
     <button class="theme-toggle" onclick="toggleTheme()">
@@ -220,81 +677,121 @@
 
     <main class="conteudo-principal">
       <div class="container">
-        <div style="text-align: left; margin-bottom: 20px">
-          <a
-            href="ts1.html"
-            style="
-              color: var(--primary-color);
-              text-decoration: none;
-              font-size: 14px;
-            "
-          >
-            ← Voltar ao FastWork
-          </a>
+        <a href="ts1.html" class="back-link">
+          <i class="bi bi-arrow-left"></i>
+          Voltar ao FastWork
+        </a>
+        
+        <div class="header-cadastro">
+          <i class="bi bi-building"></i>
+          <h1>Cadastro de Empresas</h1>
+          <p class="subtitle">Preencha os dados da sua empresa para começar</p>
         </div>
-        <h1>Cadastro de Empresas</h1>
-        <form action="/cadastrar_empresa" method="POST">
-          <label for="nome">Nome da Empresa:</label>
-          <input
-            type="text"
-            id="nome"
-            name="nome"
-            placeholder="Digite o nome da empresa"
-            required
-            pattern="^[A-Za-zÀ-ÿ0-9\s]{3,50}$"
-          />
 
-          <label for="cnpj">CNPJ:</label>
-          <input
-            type="text"
-            id="cnpj"
-            name="cnpj"
-            placeholder="XX.XXX.XXX/XXXX-XX"
-            required
-            pattern="^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$"
-          />
+        <form action="/cadastrar_empresa" method="POST" id="cadastroForm">
+          <div class="form-group">
+            <label for="nome">
+              <i class="bi bi-building-fill"></i>
+              Nome da Empresa
+            </label>
+            <input
+              type="text"
+              id="nome"
+              name="nome"
+              placeholder="Ex: Tech Solutions LTDA"
+              required
+              pattern="^[A-Za-zÀ-ÿ0-9\s]{3,50}$"
+            />
+            <div class="error-message" id="nome-error"></div>
+          </div>
 
-          <label for="email">Email:</label>
-          <input
-            type="email"
-            id="email"
-            name="email"
-            placeholder="Digite o email da empresa"
-            required
-            pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
-          />
+          <div class="form-group">
+            <label for="cnpj">
+              <i class="bi bi-card-text"></i>
+              CNPJ
+            </label>
+            <input
+              type="text"
+              id="cnpj"
+              name="cnpj"
+              placeholder="00.000.000/0000-00"
+              required
+              pattern="^\d{2}\.\d{3}\.\d{3}\/\d{4}\-\d{2}$"
+            />
+            <div class="error-message" id="cnpj-error"></div>
+          </div>
 
-          <label for="telefone">Telefone:</label>
-          <input
-            type="tel"
-            id="telefone"
-            name="telefone"
-            placeholder="(XX) XXXXX-XXXX"
-            pattern="^\(\d{2}\)\s\d{4,5}-\d{4}$"
-            required
-          />
+          <div class="form-row">
+            <div class="form-group">
+              <label for="email">
+                <i class="bi bi-envelope-fill"></i>
+                Email
+              </label>
+              <input
+                type="email"
+                id="email"
+                name="email"
+                placeholder="contato@empresa.com"
+                required
+                pattern="[^@ \t\r\n]+@[^@ \t\r\n]+\.[^@ \t\r\n]+"
+              />
+              <div class="error-message" id="email-error"></div>
+            </div>
 
-          <label for="endereco">Endereço:</label>
-          <textarea
-            id="endereco"
-            name="endereco"
-            rows="3"
-            placeholder="Digite o endereço da empresa"
-            required
-          ></textarea>
+            <div class="form-group">
+              <label for="telefone">
+                <i class="bi bi-telephone-fill"></i>
+                Telefone
+              </label>
+              <input
+                type="tel"
+                id="telefone"
+                name="telefone"
+                placeholder="(00) 00000-0000"
+                pattern="^\(\d{2}\)\s\d{4,5}-\d{4}$"
+                required
+              />
+              <div class="error-message" id="telefone-error"></div>
+            </div>
+          </div>
 
-          <label for="setor">Setor de Atuação:</label>
-          <select id="setor" name="setor" required>
-            <option value="">Selecione o setor</option>
-            <option value="tecnologia">Tecnologia</option>
-            <option value="saude">Saúde</option>
-            <option value="educacao">Educação</option>
-            <option value="comercio">Comércio</option>
-            <option value="outros">Outros</option>
-          </select>
+          <div class="form-group">
+            <label for="endereco">
+              <i class="bi bi-geo-alt-fill"></i>
+              Endereço
+            </label>
+            <textarea
+              id="endereco"
+              name="endereco"
+              rows="3"
+              placeholder="Rua, número, bairro, cidade - UF"
+              required
+            ></textarea>
+            <div class="error-message" id="endereco-error"></div>
+          </div>
+
+          <div class="form-group">
+            <label for="setor">
+              <i class="bi bi-briefcase-fill"></i>
+              Setor de Atuação
+            </label>
+            <select id="setor" name="setor" required>
+              <option value="">Selecione o setor</option>
+              <option value="tecnologia">🖥️ Tecnologia</option>
+              <option value="saude">🏥 Saúde</option>
+              <option value="educacao">📚 Educação</option>
+              <option value="comercio">🛒 Comércio</option>
+              <option value="industria">🏭 Indústria</option>
+              <option value="servicos">⚙️ Serviços</option>
+              <option value="outros">📋 Outros</option>
+            </select>
+            <div class="error-message" id="setor-error"></div>
+          </div>
+          
           <!-- Botão de Envio -->
           <button type="submit" onclick="validarFormulario(event)">
-            Enviar
+            <i class="bi bi-check-circle-fill"></i>
+            Cadastrar Empresa
           </button>
         </form>
       </div>
@@ -329,6 +826,28 @@
         setTheme(newTheme);
         setStoredTheme(newTheme);
       }
+
+      // Menu hamburger functionality
+      function toggleMenu() {
+        const menu = document.getElementById("dropdownMenu");
+        const hamburgerBtn = document.querySelector(".hamburger-btn");
+        menu.classList.toggle("show");
+        hamburgerBtn.classList.toggle("active");
+      }
+
+      // Close menu when clicking outside
+      document.addEventListener('click', function(event) {
+        const menu = document.getElementById("dropdownMenu");
+        const hamburgerBtn = document.querySelector(".hamburger-btn");
+        
+        if (menu && hamburgerBtn && 
+            !menu.contains(event.target) &&
+            !hamburgerBtn.contains(event.target) &&
+            menu.classList.contains('show')) {
+          menu.classList.remove('show');
+          hamburgerBtn.classList.remove('active');
+        }
+      });
 
       // Initialize theme
       document.addEventListener("DOMContentLoaded", function () {
@@ -401,63 +920,216 @@
 
       function validarFormulario(event) {
         event.preventDefault();
+        
+        let isValid = true;
+        let firstErrorField = null;
+
+        // Limpar erros anteriores
+        document.querySelectorAll('.form-group').forEach(group => {
+          group.classList.remove('error');
+        });
+        document.querySelectorAll('.error-message').forEach(msg => {
+          msg.style.display = 'none';
+          msg.textContent = '';
+        });
 
         // Validar nome da empresa
         const nome = document.getElementById("nome");
-        if (!nome.value.match(/^[A-Za-zÀ-ÿ0-9\s]{3,50}$/)) {
-          alert(
-            "Por favor, insira um nome de empresa válido (mínimo 3 caracteres)"
-          );
-          nome.focus();
-          return;
+        if (!nome.value.trim()) {
+          showError('nome', 'Por favor, insira o nome da empresa');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = nome;
+        } else if (!nome.value.match(/^[A-Za-zÀ-ÿ0-9\s]{3,50}$/)) {
+          showError('nome', 'Nome deve ter entre 3 e 50 caracteres');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = nome;
         }
 
         // Validar CNPJ
         const cnpj = document.getElementById("cnpj");
-        if (!cnpj.value.match(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/)) {
-          alert(
-            "Por favor, insira um CNPJ válido no formato XX.XXX.XXX/XXXX-XX"
-          );
-          cnpj.focus();
-          return;
+        if (!cnpj.value.trim()) {
+          showError('cnpj', 'Por favor, insira o CNPJ');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = cnpj;
+        } else if (!cnpj.value.match(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/)) {
+          showError('cnpj', 'CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = cnpj;
         }
 
         // Validar email
         const email = document.getElementById("email");
-        if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-          alert("Por favor, insira um email válido");
-          email.focus();
-          return;
+        if (!email.value.trim()) {
+          showError('email', 'Por favor, insira o email');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = email;
+        } else if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+          showError('email', 'Email inválido');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = email;
         }
 
         // Validar telefone
         const telefone = document.getElementById("telefone");
-        if (!telefone.value.match(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)) {
-          alert(
-            "Por favor, insira um telefone válido no formato (XX) XXXXX-XXXX"
-          );
-          telefone.focus();
-          return;
+        if (!telefone.value.trim()) {
+          showError('telefone', 'Por favor, insira o telefone');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = telefone;
+        } else if (!telefone.value.match(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)) {
+          showError('telefone', 'Telefone inválido. Use o formato (XX) XXXXX-XXXX');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = telefone;
         }
 
         // Validar endereço
         const endereco = document.getElementById("endereco");
-        if (endereco.value.length < 10) {
-          alert("Por favor, insira um endereço com pelo menos 10 caracteres");
-          endereco.focus();
-          return;
+        if (!endereco.value.trim()) {
+          showError('endereco', 'Por favor, insira o endereço');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = endereco;
+        } else if (endereco.value.length < 10) {
+          showError('endereco', 'Endereço deve ter pelo menos 10 caracteres');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = endereco;
         }
 
         // Validar setor
         const setor = document.getElementById("setor");
         if (!setor.value) {
-          alert("Por favor, selecione um setor de atuação");
-          setor.focus();
-          return;
+          showError('setor', 'Por favor, selecione um setor de atuação');
+          isValid = false;
+          if (!firstErrorField) firstErrorField = setor;
+        }
+
+        // Se houver erros, focar no primeiro campo com erro
+        if (!isValid && firstErrorField) {
+          firstErrorField.focus();
+          firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          return false;
         }
 
         // Se todas as validações passarem, redireciona para a página de validação
         window.location.href = "validacao.html";
+        return false;
+      }
+
+      // Função para mostrar erro
+      function showError(fieldId, message) {
+        const field = document.getElementById(fieldId);
+        const errorDiv = document.getElementById(fieldId + '-error');
+        const formGroup = field.closest('.form-group');
+        
+        if (formGroup) {
+          formGroup.classList.add('error');
+        }
+        if (errorDiv) {
+          errorDiv.textContent = message;
+          errorDiv.style.display = 'block';
+        }
+      }
+
+      // Função para limpar erro
+      function clearError(fieldId) {
+        const field = document.getElementById(fieldId);
+        const errorDiv = document.getElementById(fieldId + '-error');
+        const formGroup = field.closest('.form-group');
+        
+        if (formGroup) {
+          formGroup.classList.remove('error');
+        }
+        if (errorDiv) {
+          errorDiv.style.display = 'none';
+          errorDiv.textContent = '';
+        }
+      }
+
+      // Adicionar validação em tempo real
+      document.addEventListener('DOMContentLoaded', function() {
+        const fields = ['nome', 'cnpj', 'email', 'telefone', 'endereco', 'setor'];
+        
+        fields.forEach(fieldId => {
+          const field = document.getElementById(fieldId);
+          if (field) {
+            field.addEventListener('blur', function() {
+              validateField(fieldId);
+            });
+            field.addEventListener('input', function() {
+              // Limpar erro ao digitar
+              const formGroup = field.closest('.form-group');
+              if (formGroup && formGroup.classList.contains('error')) {
+                clearError(fieldId);
+              }
+            });
+          }
+        });
+      });
+
+      // Validar campo individual
+      function validateField(fieldId) {
+        const field = document.getElementById(fieldId);
+        if (!field) return;
+
+        const value = field.value.trim();
+
+        switch(fieldId) {
+          case 'nome':
+            if (!value) {
+              showError('nome', 'Por favor, insira o nome da empresa');
+            } else if (!value.match(/^[A-Za-zÀ-ÿ0-9\s]{3,50}$/)) {
+              showError('nome', 'Nome deve ter entre 3 e 50 caracteres');
+            } else {
+              clearError('nome');
+            }
+            break;
+
+          case 'cnpj':
+            if (!value) {
+              showError('cnpj', 'Por favor, insira o CNPJ');
+            } else if (!value.match(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/)) {
+              showError('cnpj', 'CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX');
+            } else {
+              clearError('cnpj');
+            }
+            break;
+
+          case 'email':
+            if (!value) {
+              showError('email', 'Por favor, insira o email');
+            } else if (!value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
+              showError('email', 'Email inválido');
+            } else {
+              clearError('email');
+            }
+            break;
+
+          case 'telefone':
+            if (!value) {
+              showError('telefone', 'Por favor, insira o telefone');
+            } else if (!value.match(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)) {
+              showError('telefone', 'Telefone inválido. Use o formato (XX) XXXXX-XXXX');
+            } else {
+              clearError('telefone');
+            }
+            break;
+
+          case 'endereco':
+            if (!value) {
+              showError('endereco', 'Por favor, insira o endereço');
+            } else if (value.length < 10) {
+              showError('endereco', 'Endereço deve ter pelo menos 10 caracteres');
+            } else {
+              clearError('endereco');
+            }
+            break;
+
+          case 'setor':
+            if (!field.value) {
+              showError('setor', 'Por favor, selecione um setor de atuação');
+            } else {
+              clearError('setor');
+            }
+            break;
+        }
       }
 
       // Máscara para CNPJ
@@ -484,5 +1156,8 @@
           }
         });
     </script>
+    
+    <!-- Bootstrap JS -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

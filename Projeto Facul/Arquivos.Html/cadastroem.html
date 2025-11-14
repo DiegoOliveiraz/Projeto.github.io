@@ -4,12 +4,22 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cadastro de Empresas - FastWork</title>
-    <link rel="shortcut icon" href="Arquivos.Css/Imagens/Logo_FAVICON.png" type="image/x-icon">
-    
+    <link
+      rel="shortcut icon"
+      href="Arquivos.Css/Imagens/Logo_FAVICON.png"
+      type="image/x-icon"
+    />
+
     <!-- Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
-    
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+    />
+
     <link
       href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
       rel="stylesheet"
@@ -275,13 +285,18 @@
       }
 
       button[type="submit"]::before {
-        content: '';
+        content: "";
         position: absolute;
         top: 0;
         left: -100%;
         width: 100%;
         height: 100%;
-        background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+        background: linear-gradient(
+          90deg,
+          transparent,
+          rgba(255, 255, 255, 0.2),
+          transparent
+        );
         transition: left 0.5s ease;
       }
 
@@ -327,9 +342,16 @@
       }
 
       @keyframes shake {
-        0%, 100% { transform: translateX(0); }
-        25% { transform: translateX(-5px); }
-        75% { transform: translateX(5px); }
+        0%,
+        100% {
+          transform: translateX(0);
+        }
+        25% {
+          transform: translateX(-5px);
+        }
+        75% {
+          transform: translateX(5px);
+        }
       }
 
       .form-group.error .error-message {
@@ -437,7 +459,7 @@
           font-size: 13px;
         }
       }
-          /* Menu Hamburger */
+      /* Menu Hamburger */
       .menu-hamburger {
         position: relative;
       }
@@ -668,7 +690,7 @@
           padding: 30px 15px 15px;
         }
       }
-</style>
+    </style>
   </head>
   <body>
     <button class="theme-toggle" onclick="toggleTheme()">
@@ -681,7 +703,7 @@
           <i class="bi bi-arrow-left"></i>
           Voltar ao FastWork
         </a>
-        
+
         <div class="header-cadastro">
           <i class="bi bi-building"></i>
           <h1>Cadastro de Empresas</h1>
@@ -787,7 +809,7 @@
             </select>
             <div class="error-message" id="setor-error"></div>
           </div>
-          
+
           <!-- Botão de Envio -->
           <button type="submit" onclick="validarFormulario(event)">
             <i class="bi bi-check-circle-fill"></i>
@@ -836,16 +858,19 @@
       }
 
       // Close menu when clicking outside
-      document.addEventListener('click', function(event) {
+      document.addEventListener("click", function (event) {
         const menu = document.getElementById("dropdownMenu");
         const hamburgerBtn = document.querySelector(".hamburger-btn");
-        
-        if (menu && hamburgerBtn && 
-            !menu.contains(event.target) &&
-            !hamburgerBtn.contains(event.target) &&
-            menu.classList.contains('show')) {
-          menu.classList.remove('show');
-          hamburgerBtn.classList.remove('active');
+
+        if (
+          menu &&
+          hamburgerBtn &&
+          !menu.contains(event.target) &&
+          !hamburgerBtn.contains(event.target) &&
+          menu.classList.contains("show")
+        ) {
+          menu.classList.remove("show");
+          hamburgerBtn.classList.remove("active");
         }
       });
 
@@ -920,27 +945,27 @@
 
       function validarFormulario(event) {
         event.preventDefault();
-        
+
         let isValid = true;
         let firstErrorField = null;
 
         // Limpar erros anteriores
-        document.querySelectorAll('.form-group').forEach(group => {
-          group.classList.remove('error');
+        document.querySelectorAll(".form-group").forEach((group) => {
+          group.classList.remove("error");
         });
-        document.querySelectorAll('.error-message').forEach(msg => {
-          msg.style.display = 'none';
-          msg.textContent = '';
+        document.querySelectorAll(".error-message").forEach((msg) => {
+          msg.style.display = "none";
+          msg.textContent = "";
         });
 
         // Validar nome da empresa
         const nome = document.getElementById("nome");
         if (!nome.value.trim()) {
-          showError('nome', 'Por favor, insira o nome da empresa');
+          showError("nome", "Por favor, insira o nome da empresa");
           isValid = false;
           if (!firstErrorField) firstErrorField = nome;
         } else if (!nome.value.match(/^[A-Za-zÀ-ÿ0-9\s]{3,50}$/)) {
-          showError('nome', 'Nome deve ter entre 3 e 50 caracteres');
+          showError("nome", "Nome deve ter entre 3 e 50 caracteres");
           isValid = false;
           if (!firstErrorField) firstErrorField = nome;
         }
@@ -948,11 +973,11 @@
         // Validar CNPJ
         const cnpj = document.getElementById("cnpj");
         if (!cnpj.value.trim()) {
-          showError('cnpj', 'Por favor, insira o CNPJ');
+          showError("cnpj", "Por favor, insira o CNPJ");
           isValid = false;
           if (!firstErrorField) firstErrorField = cnpj;
         } else if (!cnpj.value.match(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/)) {
-          showError('cnpj', 'CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX');
+          showError("cnpj", "CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX");
           isValid = false;
           if (!firstErrorField) firstErrorField = cnpj;
         }
@@ -960,11 +985,11 @@
         // Validar email
         const email = document.getElementById("email");
         if (!email.value.trim()) {
-          showError('email', 'Por favor, insira o email');
+          showError("email", "Por favor, insira o email");
           isValid = false;
           if (!firstErrorField) firstErrorField = email;
         } else if (!email.value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-          showError('email', 'Email inválido');
+          showError("email", "Email inválido");
           isValid = false;
           if (!firstErrorField) firstErrorField = email;
         }
@@ -972,11 +997,14 @@
         // Validar telefone
         const telefone = document.getElementById("telefone");
         if (!telefone.value.trim()) {
-          showError('telefone', 'Por favor, insira o telefone');
+          showError("telefone", "Por favor, insira o telefone");
           isValid = false;
           if (!firstErrorField) firstErrorField = telefone;
         } else if (!telefone.value.match(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)) {
-          showError('telefone', 'Telefone inválido. Use o formato (XX) XXXXX-XXXX');
+          showError(
+            "telefone",
+            "Telefone inválido. Use o formato (XX) XXXXX-XXXX"
+          );
           isValid = false;
           if (!firstErrorField) firstErrorField = telefone;
         }
@@ -984,11 +1012,11 @@
         // Validar endereço
         const endereco = document.getElementById("endereco");
         if (!endereco.value.trim()) {
-          showError('endereco', 'Por favor, insira o endereço');
+          showError("endereco", "Por favor, insira o endereço");
           isValid = false;
           if (!firstErrorField) firstErrorField = endereco;
         } else if (endereco.value.length < 10) {
-          showError('endereco', 'Endereço deve ter pelo menos 10 caracteres');
+          showError("endereco", "Endereço deve ter pelo menos 10 caracteres");
           isValid = false;
           if (!firstErrorField) firstErrorField = endereco;
         }
@@ -996,7 +1024,7 @@
         // Validar setor
         const setor = document.getElementById("setor");
         if (!setor.value) {
-          showError('setor', 'Por favor, selecione um setor de atuação');
+          showError("setor", "Por favor, selecione um setor de atuação");
           isValid = false;
           if (!firstErrorField) firstErrorField = setor;
         }
@@ -1004,7 +1032,10 @@
         // Se houver erros, focar no primeiro campo com erro
         if (!isValid && firstErrorField) {
           firstErrorField.focus();
-          firstErrorField.scrollIntoView({ behavior: 'smooth', block: 'center' });
+          firstErrorField.scrollIntoView({
+            behavior: "smooth",
+            block: "center",
+          });
           return false;
         }
 
@@ -1016,47 +1047,54 @@
       // Função para mostrar erro
       function showError(fieldId, message) {
         const field = document.getElementById(fieldId);
-        const errorDiv = document.getElementById(fieldId + '-error');
-        const formGroup = field.closest('.form-group');
-        
+        const errorDiv = document.getElementById(fieldId + "-error");
+        const formGroup = field.closest(".form-group");
+
         if (formGroup) {
-          formGroup.classList.add('error');
+          formGroup.classList.add("error");
         }
         if (errorDiv) {
           errorDiv.textContent = message;
-          errorDiv.style.display = 'block';
+          errorDiv.style.display = "block";
         }
       }
 
       // Função para limpar erro
       function clearError(fieldId) {
         const field = document.getElementById(fieldId);
-        const errorDiv = document.getElementById(fieldId + '-error');
-        const formGroup = field.closest('.form-group');
-        
+        const errorDiv = document.getElementById(fieldId + "-error");
+        const formGroup = field.closest(".form-group");
+
         if (formGroup) {
-          formGroup.classList.remove('error');
+          formGroup.classList.remove("error");
         }
         if (errorDiv) {
-          errorDiv.style.display = 'none';
-          errorDiv.textContent = '';
+          errorDiv.style.display = "none";
+          errorDiv.textContent = "";
         }
       }
 
       // Adicionar validação em tempo real
-      document.addEventListener('DOMContentLoaded', function() {
-        const fields = ['nome', 'cnpj', 'email', 'telefone', 'endereco', 'setor'];
-        
-        fields.forEach(fieldId => {
+      document.addEventListener("DOMContentLoaded", function () {
+        const fields = [
+          "nome",
+          "cnpj",
+          "email",
+          "telefone",
+          "endereco",
+          "setor",
+        ];
+
+        fields.forEach((fieldId) => {
           const field = document.getElementById(fieldId);
           if (field) {
-            field.addEventListener('blur', function() {
+            field.addEventListener("blur", function () {
               validateField(fieldId);
             });
-            field.addEventListener('input', function() {
+            field.addEventListener("input", function () {
               // Limpar erro ao digitar
-              const formGroup = field.closest('.form-group');
-              if (formGroup && formGroup.classList.contains('error')) {
+              const formGroup = field.closest(".form-group");
+              if (formGroup && formGroup.classList.contains("error")) {
                 clearError(fieldId);
               }
             });
@@ -1071,62 +1109,71 @@
 
         const value = field.value.trim();
 
-        switch(fieldId) {
-          case 'nome':
+        switch (fieldId) {
+          case "nome":
             if (!value) {
-              showError('nome', 'Por favor, insira o nome da empresa');
+              showError("nome", "Por favor, insira o nome da empresa");
             } else if (!value.match(/^[A-Za-zÀ-ÿ0-9\s]{3,50}$/)) {
-              showError('nome', 'Nome deve ter entre 3 e 50 caracteres');
+              showError("nome", "Nome deve ter entre 3 e 50 caracteres");
             } else {
-              clearError('nome');
+              clearError("nome");
             }
             break;
 
-          case 'cnpj':
+          case "cnpj":
             if (!value) {
-              showError('cnpj', 'Por favor, insira o CNPJ');
+              showError("cnpj", "Por favor, insira o CNPJ");
             } else if (!value.match(/^\d{2}\.\d{3}\.\d{3}\/\d{4}-\d{2}$/)) {
-              showError('cnpj', 'CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX');
+              showError(
+                "cnpj",
+                "CNPJ inválido. Use o formato XX.XXX.XXX/XXXX-XX"
+              );
             } else {
-              clearError('cnpj');
+              clearError("cnpj");
             }
             break;
 
-          case 'email':
+          case "email":
             if (!value) {
-              showError('email', 'Por favor, insira o email');
+              showError("email", "Por favor, insira o email");
             } else if (!value.match(/^[^\s@]+@[^\s@]+\.[^\s@]+$/)) {
-              showError('email', 'Email inválido');
+              showError("email", "Email inválido");
             } else {
-              clearError('email');
+              clearError("email");
             }
             break;
 
-          case 'telefone':
+          case "telefone":
             if (!value) {
-              showError('telefone', 'Por favor, insira o telefone');
+              showError("telefone", "Por favor, insira o telefone");
             } else if (!value.match(/^\(\d{2}\)\s\d{4,5}-\d{4}$/)) {
-              showError('telefone', 'Telefone inválido. Use o formato (XX) XXXXX-XXXX');
+              showError(
+                "telefone",
+                "Telefone inválido. Use o formato (XX) XXXXX-XXXX"
+              );
             } else {
-              clearError('telefone');
+              clearError("telefone");
             }
             break;
 
-          case 'endereco':
+          case "endereco":
             if (!value) {
-              showError('endereco', 'Por favor, insira o endereço');
+              showError("endereco", "Por favor, insira o endereço");
             } else if (value.length < 10) {
-              showError('endereco', 'Endereço deve ter pelo menos 10 caracteres');
+              showError(
+                "endereco",
+                "Endereço deve ter pelo menos 10 caracteres"
+              );
             } else {
-              clearError('endereco');
+              clearError("endereco");
             }
             break;
 
-          case 'setor':
+          case "setor":
             if (!field.value) {
-              showError('setor', 'Por favor, selecione um setor de atuação');
+              showError("setor", "Por favor, selecione um setor de atuação");
             } else {
-              clearError('setor');
+              clearError("setor");
             }
             break;
         }
@@ -1156,7 +1203,7 @@
           }
         });
     </script>
-    
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   </body>

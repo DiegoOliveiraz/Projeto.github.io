@@ -205,6 +205,12 @@
           FastWork
         </h1>
         <div class="cabecalho-direita">
+          <!-- Nome do usuário logado -->
+          <div id="userNameDisplay" style="display: none; margin-right: 20px; color: #1976d2; font-weight: 600; font-size: 16px;">
+            <i class="bi bi-person-circle" style="margin-right: 5px;"></i>
+            <span id="userName"></span>
+          </div>
+          
           <div class="menu-hamburger">
             <button class="hamburger-btn" onclick="toggleMenu()">
               <span class="hamburger-line"></span>
@@ -225,6 +231,10 @@
               <button class="theme-toggle-menu" onclick="toggleTheme()">
                 <i class="bi bi-moon-stars"></i>
                 <span class="theme-text">Modo Claro</span>
+              </button>
+              <!-- Botão de logout se estiver logado -->
+              <button id="logoutBtn" style="display: none; background: #d32f2f; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 10px; width: 100%;" onclick="logout()">
+                <i class="bi bi-box-arrow-right"></i> Sair
               </button>
             </div>
           </div>
@@ -481,6 +491,9 @@
     <script>
       // Integração com sistema de autenticação
       document.addEventListener('DOMContentLoaded', function() {
+        // VERIFICAR SESSÃO DO USUÁRIO LOGADO
+        checkUserSession();
+        
         // Aguardar carregamento do sistema de APIs
         setTimeout(() => {
           if (typeof authSystem !== 'undefined') {
@@ -509,6 +522,75 @@
           }
         }, 1000);
       });
+
+      // FUNÇÃO PARA VERIFICAR SESSÃO E MOSTRAR NOME DO USUÁRIO
+      function checkUserSession() {
+        try {
+          // Tentar ler sessão do localStorage
+          const sessionData = localStorage.getItem('fastwork_session');
+          
+          if (sessionData) {
+            const session = JSON.parse(sessionData);
+            console.log('Sessão completa encontrada:', session);
+            
+            // A sessão tem estrutura: {user: {...}, timestamp: ...}
+            const userData = session.user || session;
+            console.log('Dados do usuário:', userData);
+            
+            // Determinar o nome a exibir
+            let displayName = '';
+            if (userData.nome) {
+              displayName = userData.nome; // Profissionais
+            } else if (userData.nomeFantasia) {
+              displayName = userData.nomeFantasia; // Empresas
+            } else if (userData.name) {
+              displayName = userData.name; // Fallback
+            } else if (userData.email) {
+              displayName = userData.email.split('@')[0]; // Usar parte do email como fallback
+            } else {
+              displayName = 'Usuário'; // Fallback final
+            }
+            
+            // Mostrar nome no header
+            const userNameDisplay = document.getElementById('userNameDisplay');
+            const userName = document.getElementById('userName');
+            const logoutBtn = document.getElementById('logoutBtn');
+            
+            if (userNameDisplay && userName) {
+              userName.textContent = displayName;
+              userNameDisplay.style.display = 'flex';
+              userNameDisplay.style.alignItems = 'center';
+              console.log('✅ Nome exibido com sucesso:', displayName);
+            } else {
+              console.error('❌ Elementos não encontrados:', {
+                userNameDisplay: !!userNameDisplay,
+                userName: !!userName
+              });
+            }
+            
+            // Mostrar botão de logout
+            if (logoutBtn) {
+              logoutBtn.style.display = 'block';
+            }
+          } else {
+            console.log('ℹ️ Nenhuma sessão encontrada');
+          }
+        } catch (error) {
+          console.error('❌ Erro ao verificar sessão:', error);
+        }
+      }
+
+      // FUNÇÃO DE LOGOUT
+      function logout() {
+        if (confirm('Deseja realmente sair?')) {
+          // Limpar sessão
+          localStorage.removeItem('fastwork_session');
+          
+          // Redirecionar para login
+          alert('Você foi desconectado com sucesso!');
+          window.location.href = 'login.html';
+        }
+      }
 
       // Adicionar perfil do usuário no header
       function adicionarPerfilUsuario(user) {

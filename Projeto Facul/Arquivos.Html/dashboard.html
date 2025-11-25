@@ -273,6 +273,25 @@
                 </div>
             </div>
         </div>
+
+        <!-- Gerenciamento de Sessões Remotas -->
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title"><i class="bi bi-devices"></i> Sessões Ativas em Outros Dispositivos</h5>
+                <p class="text-muted">Gerencie suas sessões ativas em diferentes dispositivos</p>
+                
+                <div id="activeSessionsList"></div>
+                
+                <div class="mt-3">
+                    <button class="btn btn-outline-warning" onclick="atualizarSessoesAtivas()">
+                        <i class="bi bi-arrow-clockwise"></i> Atualizar Sessões
+                    </button>
+                    <button class="btn btn-outline-danger" onclick="encerrarTodasSessoes()">
+                        <i class="bi bi-power"></i> Encerrar Todas as Outras Sessões
+                    </button>
+                </div>
+            </div>
+        </div>
     </div>
 
     <!-- Bootstrap JS -->
@@ -304,6 +323,7 @@
                 console.log('Usuário autenticado, carregando dashboard...');
                 carregarDadosUsuario();
                 atualizarDashboard();
+                atualizarSessoesAtivas();
             }, 1000);
         });
 
@@ -485,6 +505,79 @@
         function fazerLogout() {
             if (confirm('Deseja fazer logout?')) {
                 authSystem.logout();
+            }
+        }
+
+        // Gerenciar sessões ativas
+        function atualizarSessoesAtivas() {
+            const sessoesList = document.getElementById('activeSessionsList');
+            if (!authSystem.isAuthenticated()) {
+                sessoesList.innerHTML = '<p class="text-muted">Faça login para ver suas sessões ativas</p>';
+                return;
+            }
+
+            const sessoes = authSystem.getActiveSessions();
+            
+            if (sessoes.length === 0) {
+                sessoesList.innerHTML = '<p class="text-muted">Nenhuma sessão ativa encontrada</p>';
+                return;
+            }
+
+            let html = '<div class="row">';
+            sessoes.forEach((sessao, index) => {
+                const badgeClass = sessao.isCurrent ? 'bg-success' : 'bg-secondary';
+                const badgeText = sessao.isCurrent ? 'Sessão Atual' : 'Remoto';
+                
+                html += `
+                    <div class="col-md-6 mb-3">
+                        <div class="card h-100 ${sessao.isCurrent ? 'border-success' : ''}">
+                            <div class="card-body">
+                                <div class="d-flex justify-content-between align-items-start mb-2">
+                                    <h6 class="card-title">
+                                        <i class="bi bi-${sessao.device.os === 'Windows' ? 'windows' : 
+                                            sessao.device.os === 'Android' ? 'phone' : 
+                                            sessao.device.os === 'iOS' ? 'phone' : 'laptop'}"></i>
+                                        ${sessao.device.os}
+                                    </h6>
+                                    <span class="badge ${badgeClass}">${badgeText}</span>
+                                </div>
+                                <p class="card-text">
+                                    <small class="text-muted">
+                                        <strong>Navegador:</strong> ${sessao.device.browser}<br>
+                                        <strong>Resolução:</strong> ${sessao.device.screen}<br>
+                                        <strong>Login:</strong> ${sessao.createdAt}<br>
+                                        <strong>Última Atividade:</strong> ${sessao.lastActivity}
+                                        ${sessao.rememberDevice ? '<br><i class="bi bi-check-circle text-success"></i> Dispositivo Lembrado' : ''}
+                                    </small>
+                                </p>
+                                ${!sessao.isCurrent ? `
+                                    <button class="btn btn-sm btn-outline-danger" onclick="encerrarSessao('${sessao.token}')">
+                                        <i class="bi bi-power"></i> Encerrar
+                                    </button>
+                                ` : ''}
+                            </div>
+                        </div>
+                    </div>
+                `;
+            });
+            html += '</div>';
+            
+            sessoesList.innerHTML = html;
+        }
+
+        function encerrarSessao(sessionToken) {
+            if (confirm('Tem certeza que deseja encerrar esta sessão?')) {
+                authSystem.terminateSession(sessionToken);
+                atualizarSessoesAtivas();
+                alert('Sessão encerrada com sucesso!');
+            }
+        }
+
+        function encerrarTodasSessoes() {
+            if (confirm('Tem certeza que deseja encerrar todas as outras sessões? Isso desconectará este usuário de todos os outros dispositivos.')) {
+                authSystem.terminateAllOtherSessions();
+                atualizarSessoesAtivas();
+                alert('Todas as outras sessões foram encerradas com sucesso!');
             }
         }
     </script>

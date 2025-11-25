@@ -613,8 +613,8 @@
 
           <div class="remember-forgot">
             <div class="remember-me">
-              <input type="checkbox" id="remember" name="remember" />
-              <label for="remember">Lembrar-me</label>
+              <input type="checkbox" id="rememberDevice" name="rememberDevice" checked />
+              <label for="rememberDevice">Lembrar este dispositivo (30 dias)</label>
             </div>
             <a href="#" class="forgot-password">Esqueceu a senha?</a>
           </div>
@@ -1232,7 +1232,8 @@
             console.log('Tentando login com sistema integrado...');
             showAlert('info', 'Fazendo login...');
             try {
-              const result = await fazerLogin(email, senha);
+              const rememberDevice = document.getElementById('rememberDevice')?.checked ?? true;
+              const result = await fazerLogin(email, senha, rememberDevice);
               console.log('Resultado do login:', result);
               // O resultado já é tratado na função fazerLogin
             } catch (error) {

@@ -2,10 +2,67 @@
 // SISTEMA DE AUTENTICAÇÃO E GESTÃO DE USUÁRIOS
 // ========================================
 
-// Simulação de Banco de Dados com Local Storage
+// Simulação de Banco de Dados com Local Storage e Sincronização
 class DatabaseSimulator {
     constructor() {
+        this.serverURL = 'https://api.jsonbin.io/v3/b'; // Simulação de servidor remoto
+        this.apiKey = '$2b$10$dummy.key.for.demo'; // Chave fictícia para demonstração
         this.initializeDefaultUsers();
+        this.setupCrossDeviceSync();
+    }
+
+    // Configurar sincronização entre dispositivos
+    setupCrossDeviceSync() {
+        // Listener para mudanças no localStorage de outras abas/dispositivos
+        window.addEventListener('storage', (e) => {
+            if (e.key === 'fastwork_users' || e.key === 'fastwork_sessions') {
+                console.log('Dados sincronizados de outro dispositivo/aba');
+                this.onDataSync();
+            }
+        });
+
+        // Verificar sincronização a cada 30 segundos
+        setInterval(() => {
+            this.checkRemoteSync();
+        }, 30000);
+    }
+
+    // Callback quando dados são sincronizados
+    onDataSync() {
+        if (typeof authSystem !== 'undefined') {
+            const sessionToken = localStorage.getItem('fastwork_session_token');
+            if (sessionToken) {
+                authSystem.validateSession(sessionToken);
+            }
+        }
+    }
+
+    // Simular verificação de sincronização remota
+    async checkRemoteSync() {
+        try {
+            // Em um ambiente real, isso faria uma requisição para o servidor
+            // Por enquanto, apenas simula a verificação
+            const lastSync = localStorage.getItem('fastwork_last_sync');
+            const now = Date.now();
+            
+            if (!lastSync || (now - parseInt(lastSync)) > 60000) { // 1 minuto
+                await this.simulateRemoteSync();
+                localStorage.setItem('fastwork_last_sync', now.toString());
+            }
+        } catch (error) {
+            console.log('Sincronização offline - dados locais mantidos');
+        }
+    }
+
+    // Simular sincronização com servidor remoto
+    async simulateRemoteSync() {
+        // Simula uma requisição ao servidor
+        return new Promise((resolve) => {
+            setTimeout(() => {
+                console.log('✅ Dados sincronizados com servidor remoto (simulação)');
+                resolve(true);
+            }, 100);
+        });
     }
 
     // Inicializar usuários padrão se não existirem
@@ -21,7 +78,10 @@ class DatabaseSimulator {
                     avatar: 'https://ui-avatars.com/api/?name=Admin&background=1976d2&color=fff',
                     createdAt: new Date().toISOString(),
                     lastLogin: null,
-                    permissions: ['read', 'write', 'delete', 'manage_users']
+                    lastDevice: null,
+                    loginHistory: [],
+                    permissions: ['read', 'write', 'delete', 'manage_users'],
+                    allowRemoteLogin: true
                 },
                 {
                     id: 2,
@@ -33,7 +93,10 @@ class DatabaseSimulator {
                     avatar: 'https://ui-avatars.com/api/?name=TechCorp&background=28a745&color=fff',
                     createdAt: new Date().toISOString(),
                     lastLogin: null,
-                    permissions: ['read', 'write', 'post_jobs']
+                    lastDevice: null,
+                    loginHistory: [],
+                    permissions: ['read', 'write', 'post_jobs'],
+                    allowRemoteLogin: true
                 },
                 {
                     id: 3,
@@ -46,7 +109,10 @@ class DatabaseSimulator {
                     avatar: 'https://ui-avatars.com/api/?name=João+Silva&background=dc3545&color=fff',
                     createdAt: new Date().toISOString(),
                     lastLogin: null,
-                    permissions: ['read', 'apply_jobs']
+                    lastDevice: null,
+                    loginHistory: [],
+                    permissions: ['read', 'apply_jobs'],
+                    allowRemoteLogin: true
                 },
                 {
                     id: 4,
@@ -107,14 +173,63 @@ class DatabaseSimulator {
         return newUser;
     }
 
-    // Atualizar último login
+    // Atualizar último login com informações de dispositivo
     updateLastLogin(userId) {
         const users = this.getAllUsers();
         const userIndex = users.findIndex(user => user.id === parseInt(userId));
         if (userIndex !== -1) {
-            users[userIndex].lastLogin = new Date().toISOString();
+            const now = new Date().toISOString();
+            const deviceInfo = this.getDeviceInfo();
+            
+            users[userIndex].lastLogin = now;
+            users[userIndex].lastDevice = deviceInfo;
+            
+            // Adicionar ao histórico de logins
+            if (!users[userIndex].loginHistory) {
+                users[userIndex].loginHistory = [];
+            }
+            
+            users[userIndex].loginHistory.unshift({
+                timestamp: now,
+                device: deviceInfo,
+                ip: '192.168.1.1' // Simulado
+            });
+            
+            // Manter apenas os últimos 10 logins no histórico
+            if (users[userIndex].loginHistory.length > 10) {
+                users[userIndex].loginHistory = users[userIndex].loginHistory.slice(0, 10);
+            }
+            
             this.saveUsers(users);
+            console.log(`✅ Login registrado para ${users[userIndex].name} em ${deviceInfo.os} - ${deviceInfo.browser}`);
         }
+    }
+
+    // Obter informações do dispositivo
+    getDeviceInfo() {
+        const userAgent = navigator.userAgent;
+        let os = 'Unknown';
+        let browser = 'Unknown';
+        
+        // Detectar sistema operacional
+        if (userAgent.includes('Windows')) os = 'Windows';
+        else if (userAgent.includes('Mac')) os = 'macOS';
+        else if (userAgent.includes('Linux')) os = 'Linux';
+        else if (userAgent.includes('Android')) os = 'Android';
+        else if (userAgent.includes('iPhone') || userAgent.includes('iPad')) os = 'iOS';
+        
+        // Detectar navegador
+        if (userAgent.includes('Chrome')) browser = 'Chrome';
+        else if (userAgent.includes('Firefox')) browser = 'Firefox';
+        else if (userAgent.includes('Safari') && !userAgent.includes('Chrome')) browser = 'Safari';
+        else if (userAgent.includes('Edge')) browser = 'Edge';
+        
+        return {
+            os,
+            browser,
+            screen: `${screen.width}x${screen.height}`,
+            timestamp: new Date().toISOString()
+        };
     }
 }
 
@@ -137,28 +252,80 @@ class AuthenticationSystem {
         }
     }
 
-    // Gerar token de sessão
+    // Gerar token de sessão mais robusto
     generateSessionToken() {
-        return btoa(Date.now() + Math.random().toString(36)).replace(/[^a-zA-Z0-9]/g, '');
+        const timestamp = Date.now();
+        const randomBytes = new Uint8Array(16);
+        crypto.getRandomValues(randomBytes);
+        const randomString = Array.from(randomBytes, byte => byte.toString(16).padStart(2, '0')).join('');
+        const deviceId = this.getDeviceFingerprint();
+        
+        return btoa(`${timestamp}-${randomString}-${deviceId}`).replace(/[^a-zA-Z0-9]/g, '');
     }
 
-    // Validar sessão
+    // Gerar fingerprint do dispositivo
+    getDeviceFingerprint() {
+        const canvas = document.createElement('canvas');
+        const ctx = canvas.getContext('2d');
+        ctx.textBaseline = 'top';
+        ctx.font = '14px Arial';
+        ctx.fillText('FastWork Device ID', 2, 2);
+        
+        const canvasData = canvas.toDataURL();
+        const deviceData = {
+            userAgent: navigator.userAgent,
+            language: navigator.language,
+            platform: navigator.platform,
+            screen: `${screen.width}x${screen.height}x${screen.colorDepth}`,
+            timezone: Intl.DateTimeFormat().resolvedOptions().timeZone,
+            canvas: canvasData.slice(-50) // Últimos 50 caracteres
+        };
+        
+        // Simulação de hash
+        let hash = 0;
+        const str = JSON.stringify(deviceData);
+        for (let i = 0; i < str.length; i++) {
+            const char = str.charCodeAt(i);
+            hash = ((hash << 5) - hash) + char;
+            hash = hash & hash; // Converter para 32 bits
+        }
+        
+        return Math.abs(hash).toString(16);
+    }
+
+    // Validar sessão com verificação de dispositivo
     validateSession(token) {
         const sessions = JSON.parse(localStorage.getItem('fastwork_sessions') || '[]');
         const session = sessions.find(s => s.token === token && s.expiresAt > Date.now());
         
         if (session) {
+            const currentDeviceFingerprint = this.getDeviceFingerprint();
+            
+            // Verificar se é o mesmo dispositivo (para sessões com "lembrar dispositivo")
+            if (session.rememberDevice && session.deviceFingerprint !== currentDeviceFingerprint) {
+                console.warn('⚠️ Dispositivo diferente detectado - sessão invalidada por segurança');
+                this.logout();
+                return false;
+            }
+            
+            // Atualizar última atividade
+            session.lastActivity = Date.now();
+            localStorage.setItem('fastwork_sessions', JSON.stringify(sessions));
+            
             this.currentUser = this.db.getUserById(session.userId);
             this.updateUserInterface();
+            
+            console.log(`✅ Sessão válida para ${this.currentUser.name}`);
             return true;
         } else {
+            console.log('❌ Sessão inválida ou expirada');
             this.logout();
             return false;
         }
     }
 
-    // Fazer login
-    async login(email, password) {
+    // Fazer login com suporte a múltiplos dispositivos
+    async login(email, password, rememberDevice = true) {
         try {
             const user = this.db.getUserByEmail(email);
             
@@ -170,29 +337,61 @@ class AuthenticationSystem {
                 throw new Error('Senha incorreta');
             }
 
+            if (!user.allowRemoteLogin) {
+                throw new Error('Login remoto não permitido para este usuário');
+            }
+
             // Criar sessão
             const token = this.generateSessionToken();
+            const deviceInfo = this.db.getDeviceInfo();
             const sessions = JSON.parse(localStorage.getItem('fastwork_sessions') || '[]');
             
             // Remover sessões expiradas
             const validSessions = sessions.filter(s => s.expiresAt > Date.now());
             
-            // Adicionar nova sessão (24 horas)
-            validSessions.push({
+            // Verificar limite de sessões ativas (máximo 5 dispositivos)
+            const userSessions = validSessions.filter(s => s.userId === user.id);
+            if (userSessions.length >= 5) {
+                // Remover sessão mais antiga
+                const oldestSession = userSessions.reduce((oldest, current) => 
+                    current.createdAt < oldest.createdAt ? current : oldest
+                );
+                const index = validSessions.findIndex(s => s.token === oldestSession.token);
+                if (index > -1) {
+                    validSessions.splice(index, 1);
+                    console.log('⚠️ Sessão mais antiga removida devido ao limite de dispositivos');
+                }
+            }
+            
+            // Criar nova sessão
+            const sessionDuration = rememberDevice ? (30 * 24 * 60 * 60 * 1000) : (24 * 60 * 60 * 1000); // 30 dias ou 24 horas
+            const newSession = {
                 token: token,
                 userId: user.id,
+                deviceInfo: deviceInfo,
+                deviceFingerprint: this.getDeviceFingerprint(),
                 createdAt: Date.now(),
-                expiresAt: Date.now() + (24 * 60 * 60 * 1000) // 24 horas
-            });
-
+                expiresAt: Date.now() + sessionDuration,
+                rememberDevice: rememberDevice,
+                lastActivity: Date.now()
+            };
+            
+            validSessions.push(newSession);
             localStorage.setItem('fastwork_sessions', JSON.stringify(validSessions));
             localStorage.setItem('fastwork_session_token', token);
+            
+            if (rememberDevice) {
+                localStorage.setItem('fastwork_remember_device', 'true');
+            }
 
             // Atualizar último login
             this.db.updateLastLogin(user.id);
             
             this.currentUser = user;
             this.updateUserInterface();
+            
+            console.log(`✅ Login realizado em ${deviceInfo.os} - ${deviceInfo.browser}`);
+            console.log(`📱 Sessões ativas: ${validSessions.filter(s => s.userId === user.id).length}`);
 
             return {
                 success: true,
@@ -203,10 +402,16 @@ class AuthenticationSystem {
                     type: user.type,
                     avatar: user.avatar
                 },
-                message: `Bem-vindo(a), ${user.name}!`
+                session: {
+                    device: deviceInfo,
+                    expiresAt: new Date(newSession.expiresAt).toLocaleString('pt-BR'),
+                    rememberDevice: rememberDevice
+                },
+                message: `Bem-vindo(a), ${user.name}! Login realizado em ${deviceInfo.os} - ${deviceInfo.browser}`
             };
 
         } catch (error) {
+            console.error('❌ Erro no login:', error.message);
             return {
                 success: false,
                 message: error.message
@@ -244,8 +449,48 @@ class AuthenticationSystem {
         return this.currentUser;
     }
 
-    // Verificar permissões
-    hasPermission(permission) {
+    // Obter sessões ativas do usuário
+    getActiveSessions() {
+        if (!this.currentUser) return [];
+        
+        const sessions = JSON.parse(localStorage.getItem('fastwork_sessions') || '[]');
+        const validSessions = sessions.filter(s => 
+            s.userId === this.currentUser.id && 
+            s.expiresAt > Date.now()
+        );
+        
+        return validSessions.map(session => ({
+            token: session.token.substring(0, 8) + '...',
+            device: session.deviceInfo,
+            createdAt: new Date(session.createdAt).toLocaleString('pt-BR'),
+            lastActivity: new Date(session.lastActivity).toLocaleString('pt-BR'),
+            isCurrent: session.token === localStorage.getItem('fastwork_session_token'),
+            rememberDevice: session.rememberDevice
+        }));
+    }
+
+    // Encerrar sessão remota
+    terminateSession(sessionToken) {
+        const sessions = JSON.parse(localStorage.getItem('fastwork_sessions') || '[]');
+        const filteredSessions = sessions.filter(s => s.token !== sessionToken);
+        localStorage.setItem('fastwork_sessions', JSON.stringify(filteredSessions));
+        
+        console.log('✅ Sessão remota encerrada com sucesso');
+        return true;
+    }
+
+    // Encerrar todas as sessões exceto a atual
+    terminateAllOtherSessions() {
+        const currentToken = localStorage.getItem('fastwork_session_token');
+        if (!currentToken || !this.currentUser) return false;
+        
+        const sessions = JSON.parse(localStorage.getItem('fastwork_sessions') || '[]');
+        const currentSession = sessions.filter(s => s.token === currentToken);
+        localStorage.setItem('fastwork_sessions', JSON.stringify(currentSession));
+        
+        console.log('✅ Todas as outras sessões foram encerradas');
+        return true;
+    }n) {
         if (!this.currentUser) return false;
         return this.currentUser.permissions && this.currentUser.permissions.includes(permission);
     }
@@ -784,16 +1029,26 @@ function addAuthStyles() {
 // ========================================
 
 // Função para fazer login (usar em formulários)
-async function fazerLogin(email, password) {
+async function fazerLogin(email, password, rememberDevice = true) {
     UIUtils.showLoading(true);
-    const result = await authSystem.login(email, password);
+    const result = await authSystem.login(email, password, rememberDevice);
     UIUtils.showLoading(false);
     
     if (result.success) {
         UIUtils.showAlert(result.message, 'success');
-        // Redirecionar baseado no tipo de usuário
+        
+        // Mostrar informações da sessão
         setTimeout(() => {
-            // Redirecionar todos os usuários para a página principal
+            if (result.session) {
+                UIUtils.showAlert(
+                    `Sessão criada até: ${result.session.expiresAt}${result.session.rememberDevice ? ' (Dispositivo lembrado)' : ''}`, 
+                    'info'
+                );
+            }
+        }, 2000);
+        
+        // Redirecionar todos os usuários para a página principal
+        setTimeout(() => {
             window.location.href = 'ts1.html';
         }, 1500);
     } else {

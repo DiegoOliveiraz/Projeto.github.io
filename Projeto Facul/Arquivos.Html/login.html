@@ -928,7 +928,7 @@
               "Login realizado com sucesso! Redirecionando..."
             );
 
-            // Redirecionar após 1 segundo
+            // Redirecionar após 1 segundo para a página principal
             setTimeout(() => {
               window.location.href = "ts1.html";
             }, 1000);
@@ -948,6 +948,352 @@
           // Se já está logado, pode redirecionar ou mostrar mensagem
           console.log("Usuário já logado:", session.user);
         }
+      });
+    </script>
+
+    <!-- Sistema de APIs -->
+    <script src="Arquivos.Js/APIs.js" onerror="console.error('Erro ao carregar APIs.js'); showAlert('error', 'Erro ao carregar sistema de autenticação');"></script>
+    
+    <script>
+      // Integração com o novo sistema de APIs
+      let authSystemIntegrated = false;
+
+      // Aguardar carregamento do sistema de APIs
+      function aguardarSistemaAPIs() {
+        console.log('Verificando sistema de APIs...');
+        if (typeof authSystem !== 'undefined') {
+          authSystemIntegrated = true;
+          console.log('Sistema de APIs carregado com sucesso');
+          
+          // Verificar se já está logado no novo sistema
+          if (authSystem.isAuthenticated()) {
+            const user = authSystem.getCurrentUser();
+            console.log('Usuário já logado detectado:', user);
+            showAlert('info', `Você já está logado como ${user.name}`);
+            
+            setTimeout(() => {
+              console.log('Redirecionando usuário logado para página principal...');
+              window.location.href = 'ts1.html';
+            }, 2000);
+          }
+          
+          // Adicionar usuários de demonstração
+          adicionarUsuariosDemonstracao();
+          
+        } else {
+          console.log('Sistema de APIs ainda não carregado, tentando novamente...');
+          setTimeout(aguardarSistemaAPIs, 100);
+        }
+      }
+
+      // Adicionar seção de usuários de demonstração
+      function adicionarUsuariosDemonstracao() {
+        const loginCard = document.querySelector('.login-card');
+        if (loginCard && !document.querySelector('.demo-users')) {
+          const demoSection = document.createElement('div');
+          demoSection.className = 'demo-users';
+          demoSection.innerHTML = `
+            <h6 class="text-center mb-3" style="color: var(--text-color);">
+              <i class="bi bi-person-gear"></i> Usuários de Teste
+            </h6>
+            
+            <div class="demo-user" onclick="preencherLogin('admin@fastwork.com', 'admin123')">
+              <img src="https://ui-avatars.com/api/?name=Admin&background=1976d2&color=fff" alt="Admin">
+              <div class="demo-user-info">
+                <strong>Administrador</strong>
+                <small>admin@fastwork.com</small>
+              </div>
+              <span class="badge bg-primary">Admin</span>
+            </div>
+            
+            <div class="demo-user" onclick="preencherLogin('empresa@exemplo.com', 'empresa123')">
+              <img src="https://ui-avatars.com/api/?name=TechCorp&background=28a745&color=fff" alt="Empresa">
+              <div class="demo-user-info">
+                <strong>TechCorp Solutions</strong>
+                <small>empresa@exemplo.com</small>
+              </div>
+              <span class="badge bg-success">Empresa</span>
+            </div>
+            
+            <div class="demo-user" onclick="preencherLogin('joao@email.com', 'joao123')">
+              <img src="https://ui-avatars.com/api/?name=João+Silva&background=dc3545&color=fff" alt="João">
+              <div class="demo-user-info">
+                <strong>João Silva</strong>
+                <small>joao@email.com</small>
+              </div>
+              <span class="badge bg-danger">Profissional</span>
+            </div>
+            
+            <div class="demo-user" onclick="preencherLogin('maria@email.com', 'maria123')">
+              <img src="https://ui-avatars.com/api/?name=Maria+Santos&background=6f42c1&color=fff" alt="Maria">
+              <div class="demo-user-info">
+                <strong>Maria Santos</strong>
+                <small>maria@email.com</small>
+              </div>
+              <span class="badge bg-secondary">Profissional</span>
+            </div>
+
+            <div style="margin-top: 20px; padding: 15px; background: rgba(13, 110, 253, 0.1); border-radius: 10px;">
+              <h6 style="color: var(--text-color); margin-bottom: 10px;">
+                <i class="bi bi-cloud"></i> Demonstração de APIs
+              </h6>
+              <div style="display: flex; flex-wrap: wrap; gap: 5px;">
+                <button class="btn btn-outline-primary btn-sm" onclick="testarCEP()" style="flex: 1; min-width: 80px;">
+                  <i class="bi bi-geo-alt"></i> CEP
+                </button>
+                <button class="btn btn-outline-success btn-sm" onclick="testarCitacao()" style="flex: 1; min-width: 80px;">
+                  <i class="bi bi-chat-quote"></i> Citação
+                </button>
+                <button class="btn btn-outline-warning btn-sm" onclick="testarGitHub()" style="flex: 1; min-width: 80px;">
+                  <i class="bi bi-github"></i> GitHub
+                </button>
+                <button class="btn btn-outline-info btn-sm" onclick="testarVagas()" style="flex: 1; min-width: 80px;">
+                  <i class="bi bi-briefcase"></i> Vagas
+                </button>
+              </div>
+            </div>
+          `;
+          
+          // Adicionar estilos para os usuários demo
+          const demoStyles = document.createElement('style');
+          demoStyles.textContent = `
+            .demo-users {
+              background: var(--card-bg);
+              border: 1px solid var(--border-color);
+              border-radius: 15px;
+              padding: 20px;
+              margin-top: 30px;
+            }
+
+            .demo-user {
+              display: flex;
+              align-items: center;
+              gap: 10px;
+              padding: 12px;
+              margin: 10px 0;
+              background: var(--input-bg);
+              border-radius: 10px;
+              cursor: pointer;
+              transition: all 0.3s ease;
+              border: 2px solid transparent;
+            }
+
+            .demo-user:hover {
+              border-color: var(--primary-color);
+              transform: translateX(5px);
+              background: rgba(25, 118, 210, 0.1);
+            }
+
+            .demo-user img {
+              width: 40px;
+              height: 40px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+
+            .demo-user-info {
+              flex: 1;
+            }
+
+            .demo-user-info strong {
+              display: block;
+              font-size: 14px;
+              color: var(--text-color);
+              font-weight: 600;
+            }
+
+            .demo-user-info small {
+              color: var(--text-color);
+              opacity: 0.7;
+              font-size: 12px;
+            }
+
+            .demo-user .badge {
+              font-size: 10px;
+              padding: 4px 8px;
+            }
+          `;
+          document.head.appendChild(demoStyles);
+          
+          loginCard.appendChild(demoSection);
+        }
+      }
+
+      // Função para preencher formulário de login
+      window.preencherLogin = function(email, senha) {
+        document.getElementById('email').value = email;
+        document.getElementById('password').value = senha;
+        
+        // Feedback visual
+        document.querySelectorAll('.demo-user').forEach(user => {
+          user.style.borderColor = 'transparent';
+        });
+        event.target.closest('.demo-user').style.borderColor = 'var(--primary-color)';
+        
+        showAlert('info', 'Dados preenchidos! Clique em "Entrar" para fazer login.');
+      };
+
+      // Funções para demonstração de APIs
+      window.testarCEP = async function() {
+        if (!authSystemIntegrated) return showAlert('error', 'Sistema de APIs não carregado');
+        
+        try {
+          showAlert('info', 'Buscando CEP 01310-100...');
+          const result = await apiService.buscarCEP('01310-100');
+          
+          if (result.success) {
+            showAlert('success', `CEP encontrado: ${result.data.logradouro}, ${result.data.bairro} - ${result.data.localidade}/${result.data.uf}`);
+          } else {
+            showAlert('error', result.message);
+          }
+        } catch (error) {
+          showAlert('error', 'Erro ao testar API de CEP');
+        }
+      };
+
+      window.testarCitacao = async function() {
+        if (!authSystemIntegrated) return showAlert('error', 'Sistema de APIs não carregado');
+        
+        try {
+          showAlert('info', 'Buscando citação motivacional...');
+          const result = await apiService.obterCitacaoMotivacional();
+          
+          if (result.success) {
+            showAlert('success', `"${result.data.content}" - ${result.data.author}`);
+          } else {
+            showAlert('error', result.message);
+          }
+        } catch (error) {
+          showAlert('error', 'Erro ao obter citação');
+        }
+      };
+
+      window.testarGitHub = async function() {
+        if (!authSystemIntegrated) return showAlert('error', 'Sistema de APIs não carregado');
+        
+        try {
+          showAlert('info', 'Buscando usuário octocat no GitHub...');
+          const result = await apiService.buscarUsuarioGitHub('octocat');
+          
+          if (result.success) {
+            showAlert('success', `GitHub: ${result.data.name} (@${result.data.login}) - ${result.data.public_repos} repositórios`);
+          } else {
+            showAlert('error', result.message);
+          }
+        } catch (error) {
+          showAlert('error', 'Erro ao buscar usuário GitHub');
+        }
+      };
+
+      window.testarVagas = async function() {
+        if (!authSystemIntegrated) return showAlert('error', 'Sistema de APIs não carregado');
+        
+        try {
+          showAlert('info', 'Carregando vagas disponíveis...');
+          const result = await apiService.buscarVagas();
+          
+          if (result.success) {
+            showAlert('success', `${result.data.length} vagas encontradas! Primeira: ${result.data[0].titulo} na ${result.data[0].empresa}`);
+          } else {
+            showAlert('error', result.message);
+          }
+        } catch (error) {
+          showAlert('error', 'Erro ao buscar vagas');
+        }
+      };
+
+      // Modificar função de login para usar novo sistema
+      const originalLoginForm = document.getElementById('loginForm');
+      if (originalLoginForm) {
+        originalLoginForm.addEventListener('submit', async function(e) {
+          e.preventDefault();
+          
+          const email = document.getElementById("email").value.trim();
+          const senha = document.getElementById("password").value;
+          
+          // Validações básicas
+          if (!email || !senha) {
+            showAlert('error', 'Por favor, preencha todos os campos');
+            return;
+          }
+          
+          if (!document.getElementById("email").validity.valid) {
+            showAlert('error', 'E-mail inválido');
+            return;
+          }
+          
+          if (senha.length < 6) {
+            showAlert('error', 'Senha deve ter pelo menos 6 caracteres');
+            return;
+          }
+          
+          // Tentar login com o novo sistema se disponível
+          if (authSystemIntegrated) {
+            console.log('Tentando login com sistema integrado...');
+            showAlert('info', 'Fazendo login...');
+            try {
+              const result = await fazerLogin(email, senha);
+              console.log('Resultado do login:', result);
+              // O resultado já é tratado na função fazerLogin
+            } catch (error) {
+              console.error('Erro no login integrado:', error);
+              showAlert('error', 'Erro no sistema de login: ' + error.message);
+            }
+          } else {
+            console.log('Sistema integrado não disponível, usando fallback...');
+            // Fallback para sistema antigo
+            const result = db.authenticate(email, senha, selectedUserType);
+            console.log('Resultado do fallback:', result);
+            
+            if (result.success) {
+              showAlert('success', 'Login realizado com sucesso! Redirecionando...');
+              setTimeout(() => {
+                // Redirecionar todos os usuários para a página principal
+                console.log('Redirecionando para página principal...');
+                window.location.href = "ts1.html";
+              }, 1000);
+            } else {
+              showAlert('error', result.message);
+            }
+          }
+        });
+      }
+
+      // Inicializar integração
+      document.addEventListener("DOMContentLoaded", () => {
+        console.log('DOM carregado, inicializando sistema...');
+        
+        // Inicializar tema como antes
+        const storedTheme = getStoredTheme();
+        setTheme(storedTheme);
+        
+        // Verificar sessão antiga
+        const session = db.getSession();
+        if (session) {
+          console.log("Sessão antiga encontrada:", session.user);
+        }
+        
+        // Aguardar sistema de APIs com timeout
+        let tentativas = 0;
+        const maxTentativas = 50; // 5 segundos máximo
+        
+        function verificarSistemaComTimeout() {
+          tentativas++;
+          console.log(`Tentativa ${tentativas} de carregar sistema de APIs...`);
+          
+          if (typeof authSystem !== 'undefined') {
+            console.log('Sistema de APIs encontrado!');
+            aguardarSistemaAPIs();
+          } else if (tentativas >= maxTentativas) {
+            console.warn('Sistema de APIs não carregou no tempo esperado, usando apenas sistema antigo');
+            showAlert('warning', 'Sistema avançado indisponível, usando sistema básico');
+            authSystemIntegrated = false;
+          } else {
+            setTimeout(verificarSistemaComTimeout, 100);
+          }
+        }
+        
+        setTimeout(verificarSistemaComTimeout, 500);
       });
     </script>
   </body>

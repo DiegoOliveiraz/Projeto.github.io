@@ -206,11 +206,20 @@
         </h1>
         <div class="cabecalho-direita">
           <!-- Nome do usuário logado -->
-          <div id="userNameDisplay" style="display: none; margin-right: 20px; color: #1976d2; font-weight: 600; font-size: 16px;">
-            <i class="bi bi-person-circle" style="margin-right: 5px;"></i>
+          <div
+            id="userNameDisplay"
+            style="
+              display: none;
+              margin-right: 20px;
+              color: #1976d2;
+              font-weight: 600;
+              font-size: 16px;
+            "
+          >
+            <i class="bi bi-person-circle" style="margin-right: 5px"></i>
             <span id="userName"></span>
           </div>
-          
+
           <div class="menu-hamburger">
             <button class="hamburger-btn" onclick="toggleMenu()">
               <span class="hamburger-line"></span>
@@ -233,7 +242,21 @@
                 <span class="theme-text">Modo Claro</span>
               </button>
               <!-- Botão de logout se estiver logado -->
-              <button id="logoutBtn" style="display: none; background: #d32f2f; color: white; border: none; padding: 10px 20px; border-radius: 8px; cursor: pointer; margin-top: 10px; width: 100%;" onclick="logout()">
+              <button
+                id="logoutBtn"
+                style="
+                  display: none;
+                  background: #d32f2f;
+                  color: white;
+                  border: none;
+                  padding: 10px 20px;
+                  border-radius: 8px;
+                  cursor: pointer;
+                  margin-top: 10px;
+                  width: 100%;
+                "
+                onclick="logout()"
+              >
                 <i class="bi bi-box-arrow-right"></i> Sair
               </button>
             </div>
@@ -482,7 +505,7 @@
 
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-    
+
     <!-- Sistema de APIs -->
     <script src="Arquivos.Js/APIs.js"></script>
 
@@ -490,34 +513,37 @@
 
     <script>
       // Integração com sistema de autenticação
-      document.addEventListener('DOMContentLoaded', function() {
+      document.addEventListener("DOMContentLoaded", function () {
         // VERIFICAR SESSÃO DO USUÁRIO LOGADO
         checkUserSession();
-        
+
         // Aguardar carregamento do sistema de APIs
         setTimeout(() => {
-          if (typeof authSystem !== 'undefined') {
-            console.log('Sistema de autenticação carregado');
-            
+          if (typeof authSystem !== "undefined") {
+            console.log("Sistema de autenticação carregado");
+
             // Adicionar elementos de perfil de usuário se logado
             if (authSystem.isAuthenticated()) {
               const user = authSystem.getCurrentUser();
-              console.log('Usuário logado:', user);
-              
+              console.log("Usuário logado:", user);
+
               // Mostrar mensagem de boas-vindas
               setTimeout(() => {
-                if (typeof UIUtils !== 'undefined') {
-                  UIUtils.showAlert(`Bem-vindo(a), ${user.name}! Você está na página principal.`, 'success');
+                if (typeof UIUtils !== "undefined") {
+                  UIUtils.showAlert(
+                    `Bem-vindo(a), ${user.name}! Você está na página principal.`,
+                    "success"
+                  );
                 }
               }, 500);
-              
+
               // Adicionar informações do usuário no header
               adicionarPerfilUsuario(user);
-              
+
               // Modificar botões de cadastro se usuário está logado
               modificarBotoesCadastro(user);
             }
-            
+
             // APIs removidas da página principal
           }
         }, 1000);
@@ -527,18 +553,18 @@
       function checkUserSession() {
         try {
           // Tentar ler sessão do localStorage
-          const sessionData = localStorage.getItem('fastwork_session');
-          
+          const sessionData = localStorage.getItem("fastwork_session");
+
           if (sessionData) {
             const session = JSON.parse(sessionData);
-            console.log('Sessão completa encontrada:', session);
-            
+            console.log("Sessão completa encontrada:", session);
+
             // A sessão tem estrutura: {user: {...}, timestamp: ...}
             const userData = session.user || session;
-            console.log('Dados do usuário:', userData);
-            
+            console.log("Dados do usuário:", userData);
+
             // Determinar o nome a exibir
-            let displayName = '';
+            let displayName = "";
             if (userData.nome) {
               displayName = userData.nome; // Profissionais
             } else if (userData.nomeFantasia) {
@@ -546,62 +572,62 @@
             } else if (userData.name) {
               displayName = userData.name; // Fallback
             } else if (userData.email) {
-              displayName = userData.email.split('@')[0]; // Usar parte do email como fallback
+              displayName = userData.email.split("@")[0]; // Usar parte do email como fallback
             } else {
-              displayName = 'Usuário'; // Fallback final
+              displayName = "Usuário"; // Fallback final
             }
-            
+
             // Mostrar nome no header
-            const userNameDisplay = document.getElementById('userNameDisplay');
-            const userName = document.getElementById('userName');
-            const logoutBtn = document.getElementById('logoutBtn');
-            
+            const userNameDisplay = document.getElementById("userNameDisplay");
+            const userName = document.getElementById("userName");
+            const logoutBtn = document.getElementById("logoutBtn");
+
             if (userNameDisplay && userName) {
               userName.textContent = displayName;
-              userNameDisplay.style.display = 'flex';
-              userNameDisplay.style.alignItems = 'center';
-              console.log('✅ Nome exibido com sucesso:', displayName);
+              userNameDisplay.style.display = "flex";
+              userNameDisplay.style.alignItems = "center";
+              console.log("✅ Nome exibido com sucesso:", displayName);
             } else {
-              console.error('❌ Elementos não encontrados:', {
+              console.error("❌ Elementos não encontrados:", {
                 userNameDisplay: !!userNameDisplay,
-                userName: !!userName
+                userName: !!userName,
               });
             }
-            
+
             // Mostrar botão de logout
             if (logoutBtn) {
-              logoutBtn.style.display = 'block';
+              logoutBtn.style.display = "block";
             }
           } else {
-            console.log('ℹ️ Nenhuma sessão encontrada');
+            console.log("ℹ️ Nenhuma sessão encontrada");
           }
         } catch (error) {
-          console.error('❌ Erro ao verificar sessão:', error);
+          console.error("❌ Erro ao verificar sessão:", error);
         }
       }
 
       // FUNÇÃO DE LOGOUT
       function logout() {
-        if (confirm('Deseja realmente sair?')) {
+        if (confirm("Deseja realmente sair?")) {
           // Limpar sessão
-          localStorage.removeItem('fastwork_session');
-          
+          localStorage.removeItem("fastwork_session");
+
           // Redirecionar para login
-          alert('Você foi desconectado com sucesso!');
-          window.location.href = 'login.html';
+          alert("Você foi desconectado com sucesso!");
+          window.location.href = "login.html";
         }
       }
 
       // Adicionar perfil do usuário no header
       function adicionarPerfilUsuario(user) {
-        const headerRight = document.querySelector('.cabecalho-direita');
-        if (headerRight && !document.querySelector('.user-profile-display')) {
-          const perfilDiv = document.createElement('div');
-          perfilDiv.className = 'user-profile-display';
-          perfilDiv.style.marginRight = '20px';
-          
+        const headerRight = document.querySelector(".cabecalho-direita");
+        if (headerRight && !document.querySelector(".user-profile-display")) {
+          const perfilDiv = document.createElement("div");
+          perfilDiv.className = "user-profile-display";
+          perfilDiv.style.marginRight = "20px";
+
           headerRight.insertBefore(perfilDiv, headerRight.firstChild);
-          
+
           // O sistema já vai popular automaticamente
           authSystem.updateUserInterface();
         }
@@ -609,12 +635,12 @@
 
       // Modificar botões de cadastro baseado no usuário logado
       function modificarBotoesCadastro(user) {
-        const botoesContainer = document.querySelector('.botoes-cadastro');
+        const botoesContainer = document.querySelector(".botoes-cadastro");
         if (botoesContainer) {
-          let novosBotoes = '';
-          
+          let novosBotoes = "";
+
           switch (user.type) {
-            case 'admin':
+            case "admin":
               novosBotoes = `
                 <button class="btn-cadastro" onclick="window.location.href='dashboard.html'">
                   <i class="bi bi-speedometer2"></i> Dashboard Admin
@@ -627,8 +653,8 @@
                 </button>
               `;
               break;
-              
-            case 'empresa':
+
+            case "empresa":
               novosBotoes = `
                 <button class="btn-cadastro" onclick="window.location.href='dashboard.html'">
                   <i class="bi bi-speedometer2"></i> Meu Dashboard
@@ -641,8 +667,8 @@
                 </button>
               `;
               break;
-              
-            case 'profissional':
+
+            case "profissional":
               novosBotoes = `
                 <button class="btn-cadastro" onclick="window.location.href='dashboard.html'">
                   <i class="bi bi-speedometer2"></i> Meu Dashboard
@@ -656,14 +682,12 @@
               `;
               break;
           }
-          
+
           if (novosBotões) {
             botoesContainer.innerHTML = novosBotões;
           }
         }
       }
-
-
     </script>
   </body>
 </html>

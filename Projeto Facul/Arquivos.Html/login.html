@@ -695,7 +695,7 @@
         initializeDB() {
           // FORÇAR ATUALIZAÇÃO DOS DADOS - Remover após primeira execução
           const forceUpdate = true; // Mude para false depois de testar
-          
+
           if (!localStorage.getItem("fastwork_users") || forceUpdate) {
             // Criar usuários de exemplo
             const exampleUsers = {

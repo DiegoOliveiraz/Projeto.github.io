@@ -407,6 +407,24 @@
         }
       }
 
+      /* Estilos para botão buscar CEP */
+      #btnBuscar:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(25, 118, 210, 0.4);
+      }
+
+      #btnBuscar:active {
+        transform: translateY(0);
+      }
+
+      .message.active {
+        opacity: 1 !important;
+      }
+
+      #loading.active {
+        opacity: 1 !important;
+      }
+
       /* Footer */
       footer {
         background: var(--card-bg);
@@ -613,14 +631,55 @@
 
             <div class="form-group">
               <label for="cep">CEP:</label>
-              <input
-                type="text"
-                id="cep"
-                name="cep"
-                pattern="^\d{5}-?\d{3}$"
-                placeholder="XXXXX-XXX"
-                required
-              />
+              <div style="display: flex; gap: 10px; align-items: flex-start">
+                <input
+                  type="text"
+                  id="cep"
+                  name="cep"
+                  placeholder="00000-000"
+                  maxlength="9"
+                  required
+                  style="flex: 1"
+                />
+                <button
+                  type="button"
+                  id="btnBuscar"
+                  style="
+                    padding: 12px 20px;
+                    background: var(--primary-color);
+                    color: white;
+                    border: none;
+                    border-radius: 8px;
+                    cursor: pointer;
+                    font-weight: 600;
+                    transition: all 0.3s ease;
+                    white-space: nowrap;
+                  "
+                >
+                  🔍 Buscar
+                </button>
+              </div>
+              <div
+                id="loading"
+                style="
+                  display: none;
+                  color: var(--primary-color);
+                  font-size: 14px;
+                  margin-top: 8px;
+                "
+              >
+                ⏳ Buscando CEP...
+              </div>
+              <div
+                id="message"
+                style="
+                  display: none;
+                  padding: 10px;
+                  border-radius: 8px;
+                  margin-top: 8px;
+                  font-size: 14px;
+                "
+              ></div>
               <div class="error-message" id="cep-error"></div>
             </div>
           </div>
@@ -946,66 +1005,225 @@
         }
       });
 
-      // CEP formatting and API integration
-      document.getElementById("cep").addEventListener("input", function (e) {
-        let value = e.target.value.replace(/\D/g, "");
-        if (value.length >= 5) {
-          value = value.replace(/^(\d{5})(\d)/, "$1-$2");
+      // ========================================
+      // CONSULTA DE CEP - VIA CEP API - VERSÃO FINAL
+      // ========================================
+
+      // Aguardar DOM carregar
+      window.addEventListener("DOMContentLoaded", function () {
+        console.log("Inicializando sistema de CEP...");
+
+        const cepInput = document.getElementById("cep");
+        const btnBuscar = document.getElementById("btnBuscar");
+        const loadingEl = document.getElementById("loading");
+        const messageEl = document.getElementById("message");
+        const enderecoInput = document.getElementById("endereco");
+        const cidadeInput = document.getElementById("cidade");
+        const ufInput = document.getElementById("uf");
+
+        if (!cepInput) {
+          console.error("Campo CEP não encontrado!");
+          return;
         }
-        e.target.value = value;
-      });
 
-      // Consultar API ViaCEP quando CEP estiver completo
-      document
-        .getElementById("cep")
-        .addEventListener("blur", async function (e) {
-          const cep = e.target.value.replace(/\D/g, "");
+        console.log("Elementos encontrados:", {
+          cep: !!cepInput,
+          endereco: !!enderecoInput,
+          cidade: !!cidadeInput,
+          uf: !!ufInput,
+          botao: !!btnBuscar,
+        });
 
-          if (cep.length === 8) {
-            try {
-              // Mostrar loading (opcional)
-              const enderecoField = document.getElementById("endereco");
-              const cidadeField = document.getElementById("cidade");
+        let buscando = false;
 
-              enderecoField.value = "Buscando...";
-              cidadeField.value = "Buscando...";
+        // Formatar CEP
+        function formatarCEP(valor) {
+          const numeros = valor.replace(/\D/g, "");
+          if (numeros.length <= 5) return numeros;
+          return numeros.substring(0, 5) + "-" + numeros.substring(5, 8);
+        }
 
-              // Consultar API
-              const response = await fetch(
-                `https://viacep.com.br/ws/${cep}/json/`
-              );
-              const data = await response.json();
+        // Validar CEP
+        function validarCEP(cep) {
+          const limpo = cep.replace(/\D/g, "");
+          return limpo.length === 8;
+        }
 
-              if (!data.erro) {
-                // Preencher campos automaticamente
-                enderecoField.value = data.logradouro || "";
-                cidadeField.value = data.localidade || "";
-                document.getElementById("uf").value = data.uf || "";
+        // Mostrar mensagem
+        function exibirMensagem(texto, tipo) {
+          if (!messageEl) return;
 
-                // Se houver bairro, adicionar ao endereço
-                if (data.bairro) {
-                  enderecoField.value = `${data.logradouro}, ${data.bairro}`;
-                }
+          messageEl.textContent = texto;
+          messageEl.style.display = "block";
+          messageEl.style.backgroundColor =
+            tipo === "success"
+              ? "rgba(76, 175, 80, 0.2)"
+              : "rgba(244, 67, 54, 0.2)";
+          messageEl.style.color = tipo === "success" ? "#4caf50" : "#f44336";
+          messageEl.style.border =
+            tipo === "success" ? "1px solid #4caf50" : "1px solid #f44336";
 
-                // Limpar erros dos campos preenchidos
-                if (data.logradouro) clearError(enderecoField);
-                if (data.localidade) clearError(cidadeField);
+          setTimeout(() => {
+            messageEl.style.display = "none";
+          }, 5000);
+        }
 
-                // Focar no campo de número
-                document.getElementById("numero").focus();
-              } else {
-                enderecoField.value = "";
-                cidadeField.value = "";
-                showError(e.target, "CEP não encontrado");
-              }
-            } catch (error) {
-              console.error("Erro ao buscar CEP:", error);
-              document.getElementById("endereco").value = "";
-              document.getElementById("cidade").value = "";
-              showError(e.target, "Erro ao consultar CEP. Tente novamente.");
+        // Toggle loading
+        function toggleLoading(ativo) {
+          if (loadingEl) {
+            loadingEl.style.display = ativo ? "block" : "none";
+          }
+          if (btnBuscar) {
+            btnBuscar.disabled = ativo;
+          }
+          if (cepInput) {
+            cepInput.disabled = ativo;
+          }
+        }
+
+        // Limpar campos
+        function limparCampos() {
+          if (enderecoInput) enderecoInput.value = "";
+          if (cidadeInput) cidadeInput.value = "";
+          if (ufInput) ufInput.value = "";
+        }
+
+        // Buscar CEP
+        async function consultarCEP(cep) {
+          if (buscando) {
+            console.log("Já existe uma busca em andamento");
+            return;
+          }
+
+          const cepLimpo = cep.replace(/\D/g, "");
+
+          if (!validarCEP(cep)) {
+            exibirMensagem("❌ CEP inválido! Digite 8 dígitos", "error");
+            return;
+          }
+
+          buscando = true;
+          toggleLoading(true);
+          limparCampos();
+
+          try {
+            const url = `https://viacep.com.br/ws/${cepLimpo}/json/`;
+            console.log("Consultando:", url);
+
+            const response = await fetch(url);
+
+            if (!response.ok) {
+              throw new Error("Erro HTTP: " + response.status);
             }
+
+            const dados = await response.json();
+            console.log("Dados recebidos da API:", dados);
+
+            if (dados.erro) {
+              exibirMensagem("❌ CEP não encontrado!", "error");
+              limparCampos();
+              return;
+            }
+
+            // Preencher endereço
+            let enderecoCompleto = "";
+            if (dados.logradouro) {
+              enderecoCompleto = dados.logradouro;
+              if (dados.bairro) {
+                enderecoCompleto += ", " + dados.bairro;
+              }
+            } else if (dados.bairro) {
+              enderecoCompleto = dados.bairro;
+            }
+
+            console.log("Preenchendo campos:", {
+              endereco: enderecoCompleto,
+              cidade: dados.localidade,
+              uf: dados.uf,
+            });
+
+            if (enderecoInput) {
+              enderecoInput.value = enderecoCompleto;
+              console.log("Endereço preenchido:", enderecoInput.value);
+            }
+
+            if (cidadeInput) {
+              cidadeInput.value = dados.localidade || "";
+              console.log("Cidade preenchida:", cidadeInput.value);
+            }
+
+            if (ufInput) {
+              ufInput.value = dados.uf || "";
+              console.log("UF preenchida:", ufInput.value);
+            }
+
+            // Limpar erros de validação
+            if (enderecoCompleto && enderecoInput) {
+              const formGroup = enderecoInput.closest(".form-group");
+              if (formGroup) formGroup.classList.remove("error");
+            }
+            if (dados.localidade && cidadeInput) {
+              const formGroup = cidadeInput.closest(".form-group");
+              if (formGroup) formGroup.classList.remove("error");
+            }
+            if (dados.uf && ufInput) {
+              const formGroup = ufInput.closest(".form-group");
+              if (formGroup) formGroup.classList.remove("error");
+            }
+
+            exibirMensagem(`✅ ${dados.localidade} - ${dados.uf}`, "success");
+
+            // Focar próximo campo
+            setTimeout(() => {
+              const profissao = document.getElementById("profissao");
+              if (profissao) profissao.focus();
+            }, 100);
+          } catch (erro) {
+            console.error("Erro completo:", erro);
+            exibirMensagem(
+              "❌ Erro ao consultar. Verifique sua conexão.",
+              "error"
+            );
+            limparCampos();
+          } finally {
+            toggleLoading(false);
+            buscando = false;
+          }
+        }
+
+        // Eventos
+        cepInput.addEventListener("input", function (e) {
+          e.target.value = formatarCEP(e.target.value);
+        });
+
+        cepInput.addEventListener("keypress", function (e) {
+          if (e.key === "Enter") {
+            e.preventDefault();
+            consultarCEP(this.value);
           }
         });
+
+        cepInput.addEventListener("blur", function () {
+          const valor = this.value.trim();
+          if (valor && validarCEP(valor)) {
+            consultarCEP(valor);
+          }
+        });
+
+        if (btnBuscar) {
+          btnBuscar.addEventListener("click", function (e) {
+            e.preventDefault();
+            const valor = cepInput.value.trim();
+            if (valor) {
+              consultarCEP(valor);
+            } else {
+              exibirMensagem("⚠️ Digite um CEP", "error");
+            }
+          });
+        }
+
+        console.log("✅ Sistema de CEP ativado com sucesso!");
+      });
 
       // Phone formatting
       document

@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
@@ -191,6 +191,263 @@
           max-width: 300px !important;
         }
       }
+
+      /* ===== Modal de edição de perfil ===== */
+      dialog.edit-profile-modal {
+        border: 2px solid var(--border-color, #1976d2);
+        border-radius: 16px;
+        padding: 0;
+        width: 100%;
+        max-width: 500px;
+        background: var(--card-bg, rgba(0, 0, 0, 0.92));
+        color: var(--text-color, #fff);
+        box-shadow: 0 16px 48px rgba(0, 0, 0, 0.6);
+        backdrop-filter: blur(18px);
+      }
+
+      dialog.edit-profile-modal::backdrop {
+        background: rgba(0, 0, 0, 0.75);
+      }
+
+      .epm-header {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 22px 28px 14px;
+        border-bottom: 1px solid var(--border-color, #1976d2);
+      }
+
+      .epm-header h2 {
+        margin: 0;
+        font-size: 1.25rem;
+        display: flex;
+        align-items: center;
+        gap: 9px;
+        color: var(--text-color, #fff);
+      }
+
+      .epm-header h2 i {
+        color: var(--primary-color, #1976d2);
+      }
+
+      .epm-close {
+        background: none;
+        border: none;
+        color: var(--text-color, #fff);
+        font-size: 1.4rem;
+        cursor: pointer;
+        opacity: 0.6;
+        padding: 2px 6px;
+        border-radius: 6px;
+        line-height: 1;
+        transition: opacity 0.2s;
+      }
+
+      .epm-close:hover {
+        opacity: 1;
+      }
+
+      .epm-body {
+        padding: 20px 28px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 14px;
+      }
+
+      .epm-body .epm-field-full {
+        grid-column: span 2;
+      }
+
+      .epm-field label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 600;
+        opacity: 0.75;
+        margin-bottom: 5px;
+        color: var(--text-color, #fff);
+      }
+
+      .epm-field label i {
+        color: var(--primary-color, #1976d2);
+        margin-right: 4px;
+      }
+
+      .epm-field input {
+        width: 100%;
+        padding: 9px 12px;
+        border: 2px solid var(--border-color, #1976d2);
+        border-radius: 8px;
+        background: var(--input-bg, rgba(0, 0, 0, 0.5));
+        color: var(--text-color, #fff);
+        font-size: 0.93rem;
+        transition:
+          border-color 0.2s,
+          background 0.2s;
+      }
+
+      .epm-field input:focus {
+        outline: none;
+        border-color: var(--primary-color, #1976d2);
+      }
+
+      .epm-field .pw-wrap {
+        position: relative;
+      }
+
+      .epm-field .pw-wrap input {
+        padding-right: 40px;
+      }
+
+      .epm-field .pw-eye {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-color, #fff);
+        cursor: pointer;
+        opacity: 0.55;
+        font-size: 0.95rem;
+        padding: 0;
+        line-height: 1;
+      }
+
+      .epm-field .pw-eye:hover {
+        opacity: 1;
+      }
+
+      .epm-field input.changed {
+        border-color: #42a5f5;
+        background: rgba(66, 165, 245, 0.08);
+      }
+
+      .epm-confirm {
+        padding: 0 28px 10px;
+      }
+
+      .epm-confirm label {
+        display: block;
+        font-size: 0.82rem;
+        font-weight: 700;
+        margin-bottom: 5px;
+        color: #ef9a9a;
+      }
+
+      .epm-confirm .pw-wrap {
+        position: relative;
+      }
+
+      .epm-confirm .pw-wrap input {
+        width: 100%;
+        padding: 9px 40px 9px 12px;
+        border: 2px solid #e57373;
+        border-radius: 8px;
+        background: rgba(229, 57, 53, 0.08);
+        color: var(--text-color, #fff);
+        font-size: 0.93rem;
+      }
+
+      .epm-confirm .pw-wrap input:focus {
+        outline: none;
+        border-color: #e53935;
+        background: rgba(229, 57, 53, 0.14);
+      }
+
+      .epm-footer {
+        display: flex;
+        gap: 10px;
+        padding: 16px 28px 22px;
+        border-top: 1px solid var(--border-color, #1976d2);
+      }
+
+      .epm-footer .epm-btn {
+        flex: 1;
+        padding: 11px;
+        border-radius: 9px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+
+      .epm-btn-save {
+        background: var(--primary-color, #1976d2);
+        color: #fff;
+        border-color: var(--primary-color, #1976d2) !important;
+      }
+
+      .epm-btn-save:hover {
+        filter: brightness(0.86);
+      }
+
+      .epm-btn-cancel {
+        background: transparent;
+        color: var(--text-color, #fff);
+        border-color: var(--border-color, #1976d2) !important;
+      }
+
+      .epm-btn-cancel:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .epm-alert {
+        margin: 0 28px 12px;
+        padding: 10px 14px;
+        border-radius: 8px;
+        font-size: 0.88rem;
+        display: none;
+      }
+
+      .epm-alert.ok {
+        background: rgba(76, 175, 80, 0.18);
+        border: 1px solid #66bb6a;
+        color: #a5d6a7;
+        display: block;
+      }
+
+      .epm-alert.err {
+        background: rgba(229, 57, 53, 0.16);
+        border: 1px solid #e57373;
+        color: #ef9a9a;
+        display: block;
+      }
+
+      /* Botão no dropdown */
+      #editProfileBtn {
+        display: none;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: none;
+        padding: 12px 20px;
+        color: var(--text-color, #fff);
+        font-size: 15px;
+        cursor: pointer;
+        gap: 10px;
+        align-items: center;
+        transition: all 0.2s ease;
+        font-family: "Nunito Sans", sans-serif;
+      }
+
+      #editProfileBtn.visible {
+        display: flex;
+      }
+
+      #editProfileBtn:hover {
+        background: rgba(25, 118, 210, 0.1);
+        padding-left: 25px;
+      }
+
+      [data-theme="light"] #editProfileBtn:hover {
+        background: rgba(255, 193, 7, 0.1);
+      }
+
+      #editProfileBtn i {
+        color: var(--primary-color, #1976d2);
+        font-size: 18px;
+      }
     </style>
   </head>
 
@@ -240,6 +497,10 @@
               <button class="theme-toggle-menu" onclick="toggleTheme()">
                 <i class="bi bi-moon-stars"></i>
                 <span class="theme-text">Modo Claro</span>
+              </button>
+              <!-- Editar Perfil (visível apenas quando logado) -->
+              <button id="editProfileBtn" onclick="abrirModalPerfil()">
+                <i class="bi bi-pencil-square"></i> Editar Perfil
               </button>
               <!-- Botão de logout se estiver logado -->
               <button
@@ -421,6 +682,422 @@
       </div>
     </footer>
 
+    <!-- ===== Modal Editar Perfil (só quando logado) ===== -->
+    <dialog
+      class="edit-profile-modal"
+      id="editProfileModal"
+      aria-labelledby="epmTitle"
+    >
+      <div class="epm-header">
+        <h2 id="epmTitle"><i class="bi bi-person-gear"></i> Editar Perfil</h2>
+        <button
+          class="epm-close"
+          onclick="fecharModalPerfil()"
+          aria-label="Fechar"
+        >
+          &times;
+        </button>
+      </div>
+
+      <div id="epmBody" class="epm-body">
+        <!-- Campos preenchidos dinamicamente por JS -->
+      </div>
+
+      <div class="epm-confirm">
+        <label for="epmSenhaConfirm">
+          <i class="bi bi-lock-fill"></i> Senha atual * (obrigatória para
+          salvar)
+        </label>
+        <div class="pw-wrap">
+          <input
+            type="password"
+            id="epmSenhaConfirm"
+            placeholder="Digite sua senha atual"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="pw-eye"
+            onclick="epmTogglePw('epmSenhaConfirm', this)"
+          >
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div id="epmAlert" class="epm-alert"></div>
+
+      <div class="epm-footer">
+        <button class="epm-btn epm-btn-cancel" onclick="fecharModalPerfil()">
+          Cancelar
+        </button>
+        <button class="epm-btn epm-btn-save" onclick="salvarPerfilEditado()">
+          <i class="bi bi-check2-circle"></i> Salvar alterações
+        </button>
+      </div>
+    </dialog>
+
+    <script>
+      // ======= UserDatabase (espelha o mesmo localStorage de login.html) =======
+      const USERS_KEY = "fastwork_users";
+      const SESSION_KEY = "fastwork_session";
+
+      const tsDB = {
+        getUsers() {
+          return JSON.parse(localStorage.getItem(USERS_KEY) || "null");
+        },
+        saveUsers(u) {
+          localStorage.setItem(USERS_KEY, JSON.stringify(u));
+        },
+        getSession() {
+          const s = localStorage.getItem(SESSION_KEY);
+          return s ? JSON.parse(s) : null;
+        },
+        saveSession(s) {
+          localStorage.setItem(SESSION_KEY, JSON.stringify(s));
+        },
+
+        updateUser(id, changes, userType) {
+          const users = this.getUsers();
+          if (!users)
+            return {
+              success: false,
+              message: "Banco de dados não encontrado.",
+            };
+
+          const lista =
+            userType === "profissional" ? users.profissionais : users.empresas;
+          const idx = lista.findIndex((u) => u.id === id);
+          if (idx === -1)
+            return { success: false, message: "Usuário não encontrado." };
+
+          // Verificar conflito de e-mail
+          if (changes.email) {
+            const conflito = lista.find(
+              (u) => u.email === changes.email && u.id !== id,
+            );
+            if (conflito)
+              return { success: false, message: "Este e-mail já está em uso." };
+          }
+
+          const atualizado = {
+            ...lista[idx],
+            ...changes,
+            id: lista[idx].id,
+            created_at: lista[idx].created_at,
+            updated_at: new Date().toISOString(),
+          };
+          lista[idx] = atualizado;
+
+          if (userType === "profissional") users.profissionais = lista;
+          else users.empresas = lista;
+          this.saveUsers(users);
+
+          // Atualizar sessão sem expor a senha
+          const session = this.getSession();
+          if (session) {
+            session.user = { ...atualizado };
+            delete session.user.senha;
+            this.saveSession(session);
+          }
+          return { success: true, user: atualizado };
+        },
+      };
+
+      // ======= Definição de campos por tipo =======
+      const CAMPOS_PERFIL = {
+        profissional: [
+          {
+            key: "nome",
+            label: "Nome completo",
+            icon: "bi-person",
+            type: "text",
+            required: true,
+            full: false,
+          },
+          {
+            key: "email",
+            label: "E-mail",
+            icon: "bi-envelope",
+            type: "email",
+            required: true,
+            full: false,
+          },
+          {
+            key: "profissao",
+            label: "Profissão",
+            icon: "bi-briefcase",
+            type: "text",
+            required: true,
+            full: false,
+          },
+          {
+            key: "telefone",
+            label: "Telefone",
+            icon: "bi-telephone",
+            type: "tel",
+            required: false,
+            full: false,
+          },
+          {
+            key: "senha",
+            label: "Nova senha",
+            icon: "bi-lock",
+            type: "password",
+            required: false,
+            full: true,
+            placeholder: "Deixe em branco para manter a senha atual",
+          },
+        ],
+        empresa: [
+          {
+            key: "nomeFantasia",
+            label: "Nome Fantasia",
+            icon: "bi-building",
+            type: "text",
+            required: true,
+            full: false,
+          },
+          {
+            key: "razaoSocial",
+            label: "Razão Social",
+            icon: "bi-file-text",
+            type: "text",
+            required: true,
+            full: false,
+          },
+          {
+            key: "email",
+            label: "E-mail",
+            icon: "bi-envelope",
+            type: "email",
+            required: true,
+            full: false,
+          },
+          {
+            key: "cnpj",
+            label: "CNPJ",
+            icon: "bi-card-text",
+            type: "text",
+            required: false,
+            full: false,
+          },
+          {
+            key: "telefone",
+            label: "Telefone",
+            icon: "bi-telephone",
+            type: "tel",
+            required: false,
+            full: false,
+          },
+          {
+            key: "senha",
+            label: "Nova senha",
+            icon: "bi-lock",
+            type: "password",
+            required: false,
+            full: true,
+            placeholder: "Deixe em branco para manter a senha atual",
+          },
+        ],
+      };
+
+      // ======= Abrir / fechar modal =======
+      function abrirModalPerfil() {
+        const session = tsDB.getSession();
+        if (!session) {
+          alert("Você precisa estar logado para editar o perfil.");
+          return;
+        }
+
+        const { user, userType } = session;
+        const campos = CAMPOS_PERFIL[userType] || CAMPOS_PERFIL.profissional;
+        const body = document.getElementById("epmBody");
+
+        body.innerHTML = campos
+          .map((c) => {
+            const val = c.key === "senha" ? "" : user[c.key] || "";
+            const reqMark = c.required
+              ? ' <span style="color:#e57373;">*</span>'
+              : "";
+            const fullClass = c.full ? " epm-field-full" : "";
+            const isPw = c.type === "password";
+
+            return `
+            <div class="epm-field${fullClass}">
+              <label for="epm_${c.key}"><i class="bi ${c.icon}"></i> ${c.label}${reqMark}</label>
+              ${
+                isPw
+                  ? `<div class="pw-wrap">
+                    <input type="password" id="epm_${c.key}" placeholder="${c.placeholder || ""}" />
+                    <button type="button" class="pw-eye" onclick="epmTogglePw('epm_${c.key}',this)">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>`
+                  : `<input type="${c.type}" id="epm_${c.key}" value="${escapeAtr(val)}" />`
+              }
+            </div>`;
+          })
+          .join("");
+
+        // Highlight de campo alterado
+        campos.forEach((c) => {
+          const inp = document.getElementById("epm_" + c.key);
+          if (!inp) return;
+          const orig = c.key === "senha" ? "" : user[c.key] || "";
+          inp.addEventListener("input", () =>
+            inp.classList.toggle("changed", inp.value !== orig),
+          );
+        });
+
+        document.getElementById("epmSenhaConfirm").value = "";
+        epmMostrarAlerta("");
+
+        const dlg = document.getElementById("editProfileModal");
+        if (dlg.showModal) dlg.showModal();
+
+        // Fechar ao clicar no backdrop
+        dlg.onclick = (e) => {
+          const r = dlg.getBoundingClientRect();
+          if (
+            e.clientX < r.left ||
+            e.clientX > r.right ||
+            e.clientY < r.top ||
+            e.clientY > r.bottom
+          )
+            fecharModalPerfil();
+        };
+      }
+
+      function fecharModalPerfil() {
+        const dlg = document.getElementById("editProfileModal");
+        if (dlg.close) dlg.close();
+        // Fechar dropdown também
+        document.getElementById("dropdownMenu")?.classList.remove("show");
+        document.querySelector(".hamburger-btn")?.classList.remove("active");
+      }
+
+      // ======= Salvar alterações =======
+      function salvarPerfilEditado() {
+        const session = tsDB.getSession();
+        if (!session) return;
+
+        const { user, userType } = session;
+        const campos = CAMPOS_PERFIL[userType] || CAMPOS_PERFIL.profissional;
+        const senhaAtual = document
+          .getElementById("epmSenhaConfirm")
+          .value.trim();
+
+        if (!senhaAtual) {
+          destacarCampo("epmSenhaConfirm");
+          epmMostrarAlerta("Informe sua senha atual para salvar.", "err");
+          return;
+        }
+
+        // Verificar senha no banco
+        const banco = tsDB.getUsers();
+        if (!banco) {
+          epmMostrarAlerta("Erro ao acessar banco de dados.", "err");
+          return;
+        }
+        const lista =
+          userType === "profissional" ? banco.profissionais : banco.empresas;
+        const userBanco = lista.find((u) => u.id === user.id);
+
+        if (!userBanco || userBanco.senha !== senhaAtual) {
+          destacarCampo("epmSenhaConfirm");
+          epmMostrarAlerta("Senha atual incorreta.", "err");
+          return;
+        }
+
+        // Coletar e validar campos
+        const updates = {};
+        for (const c of campos) {
+          const inp = document.getElementById("epm_" + c.key);
+          if (!inp) continue;
+          const val = inp.value.trim();
+
+          if (c.required && !val) {
+            destacarCampo("epm_" + c.key);
+            epmMostrarAlerta(`O campo "${c.label}" é obrigatório.`, "err");
+            return;
+          }
+
+          if (
+            c.key === "email" &&
+            val &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)
+          ) {
+            destacarCampo("epm_" + c.key);
+            epmMostrarAlerta("Formato de e-mail inválido.", "err");
+            return;
+          }
+
+          if (c.key === "senha") {
+            if (val && val.length < 6) {
+              destacarCampo("epm_" + c.key);
+              epmMostrarAlerta(
+                "Nova senha deve ter pelo menos 6 caracteres.",
+                "err",
+              );
+              return;
+            }
+            if (val) updates.senha = val;
+          } else if (val) {
+            updates[c.key] = val;
+          }
+        }
+
+        const result = tsDB.updateUser(user.id, updates, userType);
+
+        if (result.success) {
+          epmMostrarAlerta("Perfil atualizado com sucesso!", "ok");
+
+          // Atualizar nome exibido no cabeçalho
+          const novo = result.user;
+          const novoNome = novo.nome || novo.nomeFantasia || "Usuário";
+          const elNome = document.getElementById("userName");
+          if (elNome) elNome.textContent = novoNome;
+
+          // Fechar modal após 1.2s
+          setTimeout(fecharModalPerfil, 1200);
+        } else {
+          epmMostrarAlerta(result.message, "err");
+        }
+      }
+
+      // ======= Helpers =======
+      function epmTogglePw(id, btn) {
+        const inp = document.getElementById(id);
+        const ic = btn.querySelector("i");
+        inp.type = inp.type === "password" ? "text" : "password";
+        ic.className =
+          inp.type === "password" ? "bi bi-eye" : "bi bi-eye-slash";
+      }
+
+      function epmMostrarAlerta(msg, tipo) {
+        const el = document.getElementById("epmAlert");
+        el.className = "epm-alert" + (tipo ? " " + tipo : "");
+        el.textContent = msg;
+      }
+
+      function destacarCampo(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.borderColor = "#e53935";
+        el.focus();
+        setTimeout(() => {
+          el.style.borderColor = "";
+        }, 2000);
+      }
+
+      function escapeAtr(s) {
+        return String(s || "")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
+    </script>
+
     <script>
       // Theme management - Consolidated logic to prevent conflicts
       let isThemeInitialized = false;
@@ -532,7 +1209,7 @@
                 if (typeof UIUtils !== "undefined") {
                   UIUtils.showAlert(
                     `Bem-vindo(a), ${user.name}! Você está na página principal.`,
-                    "success"
+                    "success",
                   );
                 }
               }, 500);
@@ -597,6 +1274,12 @@
             // Mostrar botão de logout
             if (logoutBtn) {
               logoutBtn.style.display = "block";
+            }
+
+            // Mostrar botão Editar Perfil
+            const editProfileBtn = document.getElementById("editProfileBtn");
+            if (editProfileBtn) {
+              editProfileBtn.classList.add("visible");
             }
           } else {
             console.log("ℹ️ Nenhuma sessão encontrada");

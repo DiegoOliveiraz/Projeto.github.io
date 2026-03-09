@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="pt-br" data-theme="dark">
   <head>
     <meta charset="UTF-8" />
@@ -552,6 +552,282 @@
           padding: 30px 15px 15px;
         }
       }
+
+      /* ===== RF04 & RF05 – Painel de sessão ativa ===== */
+      .profile-panel {
+        background: var(--card-bg);
+        border: 2px solid var(--border-color);
+        border-radius: 15px;
+        padding: 28px;
+        width: 100%;
+        max-width: 500px;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+        backdrop-filter: blur(10px);
+      }
+
+      .profile-avatar {
+        width: 80px;
+        height: 80px;
+        border-radius: 50%;
+        background: var(--primary-color);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 2.2rem;
+        color: #fff;
+        margin: 0 auto 16px;
+      }
+
+      .profile-info-row {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+        border-bottom: 1px solid var(--border-color);
+        font-size: 0.9rem;
+      }
+
+      .profile-info-row:last-of-type {
+        border-bottom: none;
+      }
+
+      .profile-info-row i {
+        color: var(--primary-color);
+        font-size: 1.1rem;
+        width: 20px;
+        flex-shrink: 0;
+      }
+
+      .profile-info-label {
+        font-weight: 600;
+        min-width: 110px;
+        opacity: 0.8;
+      }
+
+      .profile-actions {
+        display: flex;
+        gap: 12px;
+        margin-top: 22px;
+      }
+
+      .profile-actions .btn {
+        flex: 1;
+        padding: 11px;
+        border-radius: 8px;
+        font-weight: 600;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.25s ease;
+      }
+
+      .btn-edit-profile {
+        background: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color);
+      }
+
+      .btn-edit-profile:hover {
+        filter: brightness(0.88);
+        transform: translateY(-2px);
+      }
+
+      .btn-delete-account {
+        background: transparent;
+        color: #e53935;
+        border-color: #e53935;
+      }
+
+      .btn-delete-account:hover {
+        background: #e53935;
+        color: #fff;
+        transform: translateY(-2px);
+      }
+
+      .btn-logout-profile {
+        background: transparent;
+        color: var(--text-color);
+        border-color: var(--border-color);
+      }
+
+      .btn-logout-profile:hover {
+        background: rgba(255, 255, 255, 0.08);
+        transform: translateY(-2px);
+      }
+
+      /* ===== Modais RF04 / RF05 ===== */
+      dialog.fw-modal {
+        border: 2px solid var(--border-color);
+        border-radius: 16px;
+        padding: 32px;
+        width: 100%;
+        max-width: 480px;
+        background: var(--card-bg);
+        color: var(--text-color);
+        box-shadow: 0 12px 40px rgba(0, 0, 0, 0.5);
+        backdrop-filter: blur(16px);
+        animation: modalIn 0.25s ease;
+      }
+
+      dialog.fw-modal::backdrop {
+        background: rgba(0, 0, 0, 0.72);
+      }
+
+      @keyframes modalIn {
+        from {
+          opacity: 0;
+          transform: translateY(-20px) scale(0.97);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0) scale(1);
+        }
+      }
+
+      .fw-modal h2 {
+        font-size: 1.4rem;
+        margin-bottom: 6px;
+        color: var(--text-color);
+      }
+
+      .fw-modal .modal-subtitle {
+        font-size: 0.88rem;
+        opacity: 0.7;
+        margin-bottom: 22px;
+        color: var(--text-color);
+      }
+
+      .fw-modal .form-group {
+        margin-bottom: 14px;
+      }
+
+      .fw-modal label {
+        display: block;
+        margin-bottom: 6px;
+        font-size: 0.88rem;
+        font-weight: 600;
+        color: var(--text-color);
+        opacity: 0.85;
+      }
+
+      .fw-modal input {
+        width: 100%;
+        padding: 10px 13px;
+        border: 2px solid var(--border-color);
+        border-radius: 8px;
+        background: var(--input-bg);
+        color: var(--text-color);
+        font-size: 0.95rem;
+        transition: border-color 0.2s;
+      }
+
+      .fw-modal input:focus {
+        outline: none;
+        border-color: var(--primary-color);
+      }
+
+      .fw-modal .modal-actions {
+        display: flex;
+        gap: 10px;
+        margin-top: 20px;
+      }
+
+      .fw-modal .modal-actions .btn {
+        flex: 1;
+        padding: 11px;
+        border-radius: 8px;
+        font-weight: 700;
+        font-size: 0.95rem;
+        cursor: pointer;
+        border: 2px solid transparent;
+        transition: all 0.2s;
+      }
+
+      .fw-btn-primary {
+        background: var(--primary-color);
+        color: #fff;
+        border-color: var(--primary-color) !important;
+      }
+
+      .fw-btn-primary:hover {
+        filter: brightness(0.88);
+      }
+
+      .fw-btn-cancel {
+        background: transparent;
+        color: var(--text-color);
+        border-color: var(--border-color) !important;
+      }
+
+      .fw-btn-cancel:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+
+      .fw-btn-danger {
+        background: #e53935;
+        color: #fff;
+        border-color: #e53935 !important;
+      }
+
+      .fw-btn-danger:hover {
+        filter: brightness(0.88);
+      }
+
+      .delete-warning {
+        background: rgba(229, 57, 53, 0.12);
+        border: 1px solid #e53935;
+        border-radius: 10px;
+        padding: 14px;
+        margin-bottom: 18px;
+        font-size: 0.9rem;
+        color: #ef9a9a;
+        line-height: 1.5;
+      }
+
+      .delete-warning strong {
+        color: #ef5350;
+      }
+
+      .confirm-delete-input-wrap {
+        margin-top: 10px;
+      }
+
+      .confirm-delete-input-wrap label {
+        font-size: 0.85rem;
+        color: var(--text-color);
+        opacity: 0.8;
+      }
+
+      .pw-toggle {
+        position: relative;
+      }
+
+      .pw-toggle input {
+        padding-right: 42px;
+      }
+
+      .pw-toggle .eye-btn {
+        position: absolute;
+        right: 10px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        color: var(--text-color);
+        cursor: pointer;
+        opacity: 0.6;
+        font-size: 1rem;
+        padding: 0;
+      }
+
+      .pw-toggle .eye-btn:hover {
+        opacity: 1;
+      }
+
+      .field-changed {
+        border-color: #42a5f5 !important;
+        background: rgba(66, 165, 245, 0.08) !important;
+      }
     </style>
   </head>
   <body>
@@ -680,6 +956,156 @@
       </div>
     </div>
 
+    <!-- ===== PAINEL DE SESSÃO ATIVA (RF04 / RF05) ===== -->
+    <div class="login-container" id="profileContainer" style="display: none">
+      <div class="profile-panel" id="profilePanel">
+        <div class="profile-avatar" id="profileAvatar">
+          <i class="bi bi-person-fill"></i>
+        </div>
+        <h2
+          style="
+            text-align: center;
+            margin-bottom: 4px;
+            color: var(--text-color);
+          "
+          id="profileName"
+        >
+          —
+        </h2>
+        <p
+          style="
+            text-align: center;
+            font-size: 0.85rem;
+            opacity: 0.65;
+            margin-bottom: 18px;
+            color: var(--text-color);
+          "
+          id="profileBadge"
+        >
+          —
+        </p>
+
+        <div id="profileInfoRows"></div>
+
+        <div class="profile-actions">
+          <button class="btn btn-edit-profile" onclick="abrirModalEdicao()">
+            <i class="bi bi-pencil-fill"></i> Editar dados
+          </button>
+          <button class="btn btn-delete-account" onclick="abrirModalExclusao()">
+            <i class="bi bi-trash3-fill"></i> Excluir conta
+          </button>
+          <button class="btn btn-logout-profile" onclick="fazerLogoutPerfil()">
+            <i class="bi bi-box-arrow-right"></i>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ===== MODAL RF04 – EDITAR DADOS CADASTRAIS ===== -->
+    <dialog
+      class="fw-modal"
+      id="modalEdicao"
+      aria-labelledby="modalEdicaoTitle"
+    >
+      <h2 id="modalEdicaoTitle">
+        <i class="bi bi-pencil-square" style="color: var(--primary-color)"></i>
+        Editar dados cadastrais
+      </h2>
+      <p class="modal-subtitle">
+        Campos em azul foram alterados. A senha atual é obrigatória para salvar.
+      </p>
+
+      <div id="editFieldsContainer"></div>
+
+      <div
+        class="form-group confirm-delete-input-wrap"
+        style="margin-top: 10px"
+      >
+        <label for="editConfirmSenha"
+          ><i class="bi bi-lock-fill"></i> Senha atual
+          <span style="color: #e57373">*</span></label
+        >
+        <div class="pw-toggle">
+          <input
+            type="password"
+            id="editConfirmSenha"
+            placeholder="Confirme sua senha atual"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="eye-btn"
+            onclick="toggleSenhaVisibilidade('editConfirmSenha', this)"
+          >
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button class="btn fw-btn-cancel" onclick="fecharModal('modalEdicao')">
+          Cancelar
+        </button>
+        <button class="btn fw-btn-primary" onclick="salvarEdicaoCadastral()">
+          <i class="bi bi-check2"></i> Salvar alterações
+        </button>
+      </div>
+    </dialog>
+
+    <!-- ===== MODAL RF05 – EXCLUIR CONTA ===== -->
+    <dialog
+      class="fw-modal"
+      id="modalExclusao"
+      aria-labelledby="modalExclusaoTitle"
+    >
+      <h2 id="modalExclusaoTitle" style="color: #e53935">
+        <i class="bi bi-exclamation-triangle-fill"></i> Excluir conta
+      </h2>
+      <p class="modal-subtitle">
+        Esta ação é permanente e não pode ser desfeita.
+      </p>
+
+      <div class="delete-warning">
+        Ao confirmar, <strong>todos os seus dados serão apagados</strong> e você
+        será desconectado imediatamente. Não será possível recuperar as
+        informações após a exclusão.
+      </div>
+
+      <div class="form-group">
+        <label for="deleteConfirmSenha"
+          ><i class="bi bi-lock-fill"></i> Confirme sua senha
+          <span style="color: #e57373">*</span></label
+        >
+        <div class="pw-toggle">
+          <input
+            type="password"
+            id="deleteConfirmSenha"
+            placeholder="Digite sua senha para confirmar"
+            autocomplete="current-password"
+          />
+          <button
+            type="button"
+            class="eye-btn"
+            onclick="toggleSenhaVisibilidade('deleteConfirmSenha', this)"
+          >
+            <i class="bi bi-eye"></i>
+          </button>
+        </div>
+      </div>
+
+      <div class="modal-actions">
+        <button
+          class="btn fw-btn-cancel"
+          onclick="fecharModal('modalExclusao')"
+        >
+          Cancelar
+        </button>
+        <button class="btn fw-btn-danger" onclick="confirmarExclusaoConta()">
+          <i class="bi bi-trash3-fill"></i> Excluir permanentemente
+        </button>
+      </div>
+    </dialog>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
@@ -772,7 +1198,7 @@
             };
             localStorage.setItem(
               "fastwork_users",
-              JSON.stringify(exampleUsers)
+              JSON.stringify(exampleUsers),
             );
           }
         }
@@ -791,7 +1217,7 @@
             userType === "profissional" ? users.profissionais : users.empresas;
 
           const user = userList.find(
-            (u) => u.email === email && u.senha === senha
+            (u) => u.email === email && u.senha === senha,
           );
 
           if (user) {
@@ -844,10 +1270,453 @@
           const session = localStorage.getItem("fastwork_session");
           return session ? JSON.parse(session) : null;
         }
+
+        // RF04 – Atualizar dados cadastrais
+        updateUser(id, updatedData, userType) {
+          const users = this.getUsers();
+          const lista =
+            userType === "profissional" ? users.profissionais : users.empresas;
+          const idx = lista.findIndex((u) => u.id === id);
+
+          if (idx === -1)
+            return { success: false, message: "Usuário não encontrado." };
+
+          // Verificar conflito de e-mail com outro usuário
+          const emailConflito = lista.find(
+            (u) => u.email === updatedData.email && u.id !== id,
+          );
+          if (emailConflito)
+            return { success: false, message: "Este e-mail já está em uso." };
+
+          // Mesclar dados preservando campos imutáveis
+          const userAtualizado = {
+            ...lista[idx],
+            ...updatedData,
+            id: lista[idx].id,
+            created_at: lista[idx].created_at,
+            updated_at: new Date().toISOString(),
+          };
+
+          lista[idx] = userAtualizado;
+
+          if (userType === "profissional") users.profissionais = lista;
+          else users.empresas = lista;
+
+          this.saveUsers(users);
+
+          // Atualizar sessão ativa sem a senha
+          const session = this.getSession();
+          if (session) {
+            session.user = { ...userAtualizado };
+            delete session.user.senha;
+            localStorage.setItem("fastwork_session", JSON.stringify(session));
+          }
+
+          return { success: true, user: userAtualizado };
+        }
+
+        // RF05 – Excluir conta do usuário
+        deleteUser(id, userType) {
+          const users = this.getUsers();
+          const lista =
+            userType === "profissional" ? users.profissionais : users.empresas;
+          const idx = lista.findIndex((u) => u.id === id);
+
+          if (idx === -1)
+            return { success: false, message: "Usuário não encontrado." };
+
+          lista.splice(idx, 1);
+
+          if (userType === "profissional") users.profissionais = lista;
+          else users.empresas = lista;
+
+          this.saveUsers(users);
+          this.logout();
+
+          return { success: true };
+        }
       }
 
       // Inicializar banco de dados
       const db = new UserDatabase();
+
+      // ========== RF04 / RF05 – PAINEL DE PERFIL ==========
+
+      const CAMPOS_PROFISSIONAL = [
+        {
+          key: "nome",
+          label: "Nome completo",
+          icon: "bi-person",
+          type: "text",
+          required: true,
+        },
+        {
+          key: "email",
+          label: "E-mail",
+          icon: "bi-envelope",
+          type: "email",
+          required: true,
+        },
+        {
+          key: "profissao",
+          label: "Profissão",
+          icon: "bi-briefcase",
+          type: "text",
+          required: true,
+        },
+        {
+          key: "telefone",
+          label: "Telefone",
+          icon: "bi-telephone",
+          type: "tel",
+          required: false,
+        },
+        {
+          key: "senha",
+          label: "Nova senha",
+          icon: "bi-lock",
+          type: "password",
+          required: false,
+          placeholder: "Deixe em branco p/ manter",
+        },
+      ];
+
+      const CAMPOS_EMPRESA = [
+        {
+          key: "nomeFantasia",
+          label: "Nome Fantasia",
+          icon: "bi-building",
+          type: "text",
+          required: true,
+        },
+        {
+          key: "razaoSocial",
+          label: "Razão Social",
+          icon: "bi-file-text",
+          type: "text",
+          required: true,
+        },
+        {
+          key: "email",
+          label: "E-mail",
+          icon: "bi-envelope",
+          type: "email",
+          required: true,
+        },
+        {
+          key: "cnpj",
+          label: "CNPJ",
+          icon: "bi-card-text",
+          type: "text",
+          required: false,
+        },
+        {
+          key: "telefone",
+          label: "Telefone",
+          icon: "bi-telephone",
+          type: "tel",
+          required: false,
+        },
+        {
+          key: "senha",
+          label: "Nova senha",
+          icon: "bi-lock",
+          type: "password",
+          required: false,
+          placeholder: "Deixe em branco p/ manter",
+        },
+      ];
+
+      function exibirPainelPerfil(session) {
+        const { user, userType } = session;
+
+        document.getElementById("loginContainer") &&
+          (document.getElementById("loginContainer").style.display = "none");
+
+        // Ocultar formulário de login
+        const loginCont = document.querySelector(
+          ".login-container:not(#profileContainer)",
+        );
+        if (loginCont) loginCont.style.display = "none";
+
+        document.getElementById("profileContainer").style.display = "flex";
+
+        const displayName = user.nome || user.nomeFantasia || "Usuário";
+        const initials = displayName
+          .split(" ")
+          .map((w) => w[0])
+          .slice(0, 2)
+          .join("");
+
+        document.getElementById("profileAvatar").innerHTML =
+          initials || '<i class="bi bi-person-fill"></i>';
+        document.getElementById("profileName").textContent = displayName;
+        document.getElementById("profileBadge").textContent =
+          userType === "profissional"
+            ? `Profissional${user.profissao ? " · " + user.profissao : ""}`
+            : `Empresa${user.nomeFantasia ? " · " + user.nomeFantasia : ""}`;
+
+        const campos =
+          userType === "profissional" ? CAMPOS_PROFISSIONAL : CAMPOS_EMPRESA;
+        const rowsEl = document.getElementById("profileInfoRows");
+        rowsEl.innerHTML = campos
+          .filter((c) => c.key !== "senha" && user[c.key])
+          .map(
+            (c) => `
+            <div class="profile-info-row">
+              <i class="bi ${c.icon}"></i>
+              <span class="profile-info-label">${c.label}</span>
+              <span>${c.key === "senha" ? "••••••" : user[c.key] || "—"}</span>
+            </div>
+          `,
+          )
+          .join("");
+      }
+
+      function fazerLogoutPerfil() {
+        db.logout();
+        const profileCont = document.getElementById("profileContainer");
+        if (profileCont) profileCont.style.display = "none";
+        const loginCont = document.querySelector(
+          ".login-container:not(#profileContainer)",
+        );
+        if (loginCont) loginCont.style.display = "flex";
+        showAlert("success", "Logout realizado com sucesso.");
+      }
+
+      // ---- RF04: Abrir modal de edição ----
+      function abrirModalEdicao() {
+        const session = db.getSession();
+        if (!session) return;
+
+        const { user, userType } = session;
+        const campos =
+          userType === "profissional" ? CAMPOS_PROFISSIONAL : CAMPOS_EMPRESA;
+
+        const container = document.getElementById("editFieldsContainer");
+        container.innerHTML = campos
+          .map((campo) => {
+            const valor = campo.key === "senha" ? "" : user[campo.key] || "";
+            const isPw = campo.type === "password";
+            return `
+            <div class="form-group">
+              <label for="edit_${campo.key}">
+                <i class="bi ${campo.icon}"></i> ${campo.label}${campo.required ? ' <span style="color:#e57373;">*</span>' : ""}
+              </label>
+              ${
+                isPw
+                  ? `<div class="pw-toggle">
+                    <input type="password" id="edit_${campo.key}"
+                           placeholder="${campo.placeholder || ""}" />
+                    <button type="button" class="eye-btn"
+                            onclick="toggleSenhaVisibilidade('edit_${campo.key}', this)">
+                      <i class="bi bi-eye"></i>
+                    </button>
+                  </div>`
+                  : `<input type="${campo.type}" id="edit_${campo.key}"
+                          value="${escapeAttr(valor)}" />`
+              }
+            </div>`;
+          })
+          .join("");
+
+        // Marcar campo alterado visualmente
+        campos.forEach((campo) => {
+          const input = document.getElementById("edit_" + campo.key);
+          if (!input) return;
+          const original = campo.key === "senha" ? "" : user[campo.key] || "";
+          input.addEventListener("input", () => {
+            input.classList.toggle("field-changed", input.value !== original);
+          });
+        });
+
+        document.getElementById("editConfirmSenha").value = "";
+        abrirModal("modalEdicao");
+      }
+
+      function salvarEdicaoCadastral() {
+        const session = db.getSession();
+        if (!session) return;
+
+        const { user, userType } = session;
+        const campos =
+          userType === "profissional" ? CAMPOS_PROFISSIONAL : CAMPOS_EMPRESA;
+        const senhaConfirm = document
+          .getElementById("editConfirmSenha")
+          .value.trim();
+
+        if (!senhaConfirm) {
+          pulsarCampo("editConfirmSenha");
+          showAlert(
+            "error",
+            "Informe sua senha atual para salvar as alterações.",
+          );
+          return;
+        }
+
+        // Verificar senha atual no banco
+        const users = db.getUsers();
+        const lista =
+          userType === "profissional" ? users.profissionais : users.empresas;
+        const userBanco = lista.find((u) => u.id === user.id);
+        if (!userBanco || userBanco.senha !== senhaConfirm) {
+          pulsarCampo("editConfirmSenha");
+          showAlert("error", "Senha atual incorreta.");
+          return;
+        }
+
+        // Coletar dados atualizados
+        const dadosAtualizados = {};
+        for (const campo of campos) {
+          const input = document.getElementById("edit_" + campo.key);
+          if (!input) continue;
+          const val = input.value.trim();
+
+          if (campo.required && !val) {
+            pulsarCampo("edit_" + campo.key);
+            showAlert("error", `O campo "${campo.label}" é obrigatório.`);
+            return;
+          }
+
+          if (
+            campo.key === "email" &&
+            val &&
+            !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(val)
+          ) {
+            pulsarCampo("edit_" + campo.key);
+            showAlert("error", "Informe um e-mail válido.");
+            return;
+          }
+
+          if (campo.key === "senha") {
+            if (val && val.length < 6) {
+              pulsarCampo("edit_" + campo.key);
+              showAlert(
+                "error",
+                "Nova senha deve ter pelo menos 6 caracteres.",
+              );
+              return;
+            }
+            // Só atualiza a senha se o campo foi preenchido
+            if (val) dadosAtualizados.senha = val;
+          } else if (val) {
+            dadosAtualizados[campo.key] = val;
+          }
+        }
+
+        const resultado = db.updateUser(user.id, dadosAtualizados, userType);
+
+        if (resultado.success) {
+          fecharModal("modalEdicao");
+          showAlert("success", "Dados cadastrais atualizados com sucesso!");
+          const sessaoAtualizada = db.getSession();
+          if (sessaoAtualizada) exibirPainelPerfil(sessaoAtualizada);
+          displayTestAccounts();
+        } else {
+          showAlert("error", resultado.message);
+        }
+      }
+
+      // ---- RF05: Abrir modal de exclusão ----
+      function abrirModalExclusao() {
+        document.getElementById("deleteConfirmSenha").value = "";
+        abrirModal("modalExclusao");
+      }
+
+      function confirmarExclusaoConta() {
+        const session = db.getSession();
+        if (!session) return;
+
+        const { user, userType } = session;
+        const senhaDigitada = document
+          .getElementById("deleteConfirmSenha")
+          .value.trim();
+
+        if (!senhaDigitada) {
+          pulsarCampo("deleteConfirmSenha");
+          showAlert("error", "Digite sua senha para confirmar a exclusão.");
+          return;
+        }
+
+        // Verificar senha no banco
+        const users = db.getUsers();
+        const lista =
+          userType === "profissional" ? users.profissionais : users.empresas;
+        const userBanco = lista.find((u) => u.id === user.id);
+        if (!userBanco || userBanco.senha !== senhaDigitada) {
+          pulsarCampo("deleteConfirmSenha");
+          showAlert("error", "Senha incorreta. Exclusão cancelada.");
+          return;
+        }
+
+        const resultado = db.deleteUser(user.id, userType);
+
+        if (resultado.success) {
+          fecharModal("modalExclusao");
+          const profileCont = document.getElementById("profileContainer");
+          if (profileCont) profileCont.style.display = "none";
+          const loginCont = document.querySelector(
+            ".login-container:not(#profileContainer)",
+          );
+          if (loginCont) loginCont.style.display = "flex";
+          showAlert("success", "Conta excluída permanentemente. Até mais!");
+          displayTestAccounts();
+        } else {
+          showAlert("error", resultado.message);
+        }
+      }
+
+      // ---- Helpers de modal (native <dialog>) ----
+      function abrirModal(id) {
+        const dlg = document.getElementById(id);
+        if (dlg && typeof dlg.showModal === "function") dlg.showModal();
+      }
+
+      function fecharModal(id) {
+        const dlg = document.getElementById(id);
+        if (dlg && typeof dlg.close === "function") dlg.close();
+      }
+
+      // Fechar ao clicar no ::backdrop
+      document.querySelectorAll("dialog.fw-modal").forEach((dlg) => {
+        dlg.addEventListener("click", (e) => {
+          const rect = dlg.getBoundingClientRect();
+          const clickedBackdrop =
+            e.clientX < rect.left ||
+            e.clientX > rect.right ||
+            e.clientY < rect.top ||
+            e.clientY > rect.bottom;
+          if (clickedBackdrop) dlg.close();
+        });
+      });
+
+      function toggleSenhaVisibilidade(inputId, btn) {
+        const input = document.getElementById(inputId);
+        const icone = btn.querySelector("i");
+        if (input.type === "password") {
+          input.type = "text";
+          icone.className = "bi bi-eye-slash";
+        } else {
+          input.type = "password";
+          icone.className = "bi bi-eye";
+        }
+      }
+
+      function pulsarCampo(id) {
+        const el = document.getElementById(id);
+        if (!el) return;
+        el.style.borderColor = "#e53935";
+        el.focus();
+        setTimeout(() => {
+          el.style.borderColor = "";
+        }, 1800);
+      }
+
+      function escapeAttr(str) {
+        return String(str || "")
+          .replace(/"/g, "&quot;")
+          .replace(/'/g, "&#39;");
+      }
 
       // ========== EXIBIR CONTAS DE TESTE ==========
       function displayTestAccounts() {
@@ -881,7 +1750,7 @@
               </div>
             </div>
           </div>
-        `
+        `,
           )
           .join("");
       }
@@ -1007,7 +1876,7 @@
 
       function showAlert(type, message) {
         const alertElement = document.getElementById(
-          type === "error" ? "alertError" : "alertSuccess"
+          type === "error" ? "alertError" : "alertSuccess",
         );
         alertElement.textContent = message;
         alertElement.style.display = "block";
@@ -1064,13 +1933,13 @@
           if (!senha) {
             showError(
               document.getElementById("password"),
-              "Senha é obrigatória"
+              "Senha é obrigatória",
             );
             hasError = true;
           } else if (senha.length < 6) {
             showError(
               document.getElementById("password"),
-              "Senha deve ter pelo menos 6 caracteres"
+              "Senha deve ter pelo menos 6 caracteres",
             );
             hasError = true;
           }
@@ -1083,7 +1952,7 @@
           if (result.success) {
             showAlert(
               "success",
-              "Login realizado com sucesso! Redirecionando..."
+              "Login realizado com sucesso! Redirecionando...",
             );
 
             // Redirecionar após 1 segundo para a página principal
@@ -1103,11 +1972,10 @@
         // Exibir contas de teste ao carregar
         displayTestAccounts();
 
-        // Verificar se já está logado
+        // Verificar se já está logado e exibir painel de perfil
         const session = db.getSession();
         if (session) {
-          // Se já está logado, pode redirecionar ou mostrar mensagem
-          console.log("Usuário já logado:", session.user);
+          exibirPainelPerfil(session);
         }
       });
     </script>
@@ -1115,7 +1983,10 @@
     <!-- Sistema de APIs -->
     <script
       src="Arquivos.Js/APIs.js"
-      onerror="console.error('Erro ao carregar APIs.js'); showAlert('error', 'Erro ao carregar sistema de autenticação');"
+      onerror="
+        console.error('Erro ao carregar APIs.js');
+        showAlert('error', 'Erro ao carregar sistema de autenticação');
+      "
     ></script>
 
     <script>
@@ -1137,7 +2008,7 @@
 
             setTimeout(() => {
               console.log(
-                "Redirecionando usuário logado para página principal..."
+                "Redirecionando usuário logado para página principal...",
               );
               window.location.href = "ts1.html";
             }, 2000);
@@ -1147,7 +2018,7 @@
           adicionarUsuariosDemonstracao();
         } else {
           console.log(
-            "Sistema de APIs ainda não carregado, tentando novamente..."
+            "Sistema de APIs ainda não carregado, tentando novamente...",
           );
           setTimeout(aguardarSistemaAPIs, 100);
         }
@@ -1300,7 +2171,7 @@
 
         showAlert(
           "info",
-          'Dados preenchidos! Clique em "Entrar" para fazer login.'
+          'Dados preenchidos! Clique em "Entrar" para fazer login.',
         );
       };
 
@@ -1316,7 +2187,7 @@
           if (result.success) {
             showAlert(
               "success",
-              `CEP encontrado: ${result.data.logradouro}, ${result.data.bairro} - ${result.data.localidade}/${result.data.uf}`
+              `CEP encontrado: ${result.data.logradouro}, ${result.data.bairro} - ${result.data.localidade}/${result.data.uf}`,
             );
           } else {
             showAlert("error", result.message);
@@ -1337,7 +2208,7 @@
           if (result.success) {
             showAlert(
               "success",
-              `"${result.data.content}" - ${result.data.author}`
+              `"${result.data.content}" - ${result.data.author}`,
             );
           } else {
             showAlert("error", result.message);
@@ -1358,7 +2229,7 @@
           if (result.success) {
             showAlert(
               "success",
-              `GitHub: ${result.data.name} (@${result.data.login}) - ${result.data.public_repos} repositórios`
+              `GitHub: ${result.data.name} (@${result.data.login}) - ${result.data.public_repos} repositórios`,
             );
           } else {
             showAlert("error", result.message);
@@ -1379,7 +2250,7 @@
           if (result.success) {
             showAlert(
               "success",
-              `${result.data.length} vagas encontradas! Primeira: ${result.data[0].titulo} na ${result.data[0].empresa}`
+              `${result.data.length} vagas encontradas! Primeira: ${result.data[0].titulo} na ${result.data[0].empresa}`,
             );
           } else {
             showAlert("error", result.message);
@@ -1437,7 +2308,7 @@
             if (result.success) {
               showAlert(
                 "success",
-                "Login realizado com sucesso! Redirecionando..."
+                "Login realizado com sucesso! Redirecionando...",
               );
               setTimeout(() => {
                 // Redirecionar todos os usuários para a página principal
@@ -1459,18 +2330,11 @@
         const storedTheme = getStoredTheme();
         setTheme(storedTheme);
 
-        // Verificar sessão antiga
+        // Verificar sessão ativa — exibir painel de perfil (RF04/RF05)
         const session = db.getSession();
         if (session) {
-          console.log("Sessão antiga encontrada:", session.user);
-        }
-
-        // Aguardar sistema de APIs com timeout
-        let tentativas = 0;
-        const maxTentativas = 50; // 5 segundos máximo
-
-        function verificarSistemaComTimeout() {
-          tentativas++;
+          console.log("Sessão ativa encontrada:", session.user);
+          exibirPainelPerfil(session);
           console.log(`Tentativa ${tentativas} de carregar sistema de APIs...`);
 
           if (typeof authSystem !== "undefined") {
@@ -1478,11 +2342,11 @@
             aguardarSistemaAPIs();
           } else if (tentativas >= maxTentativas) {
             console.warn(
-              "Sistema de APIs não carregou no tempo esperado, usando apenas sistema antigo"
+              "Sistema de APIs não carregou no tempo esperado, usando apenas sistema antigo",
             );
             showAlert(
               "warning",
-              "Sistema avançado indisponível, usando sistema básico"
+              "Sistema avançado indisponível, usando sistema básico",
             );
             authSystemIntegrated = false;
           } else {

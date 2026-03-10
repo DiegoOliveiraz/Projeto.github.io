@@ -1,4 +1,4 @@
-let listaServicos = [
+const listaServicos = [
   {
     nome: "Pedreiro",
     img: "Arquivos.Css/Imagens/pedreiro.jpg",

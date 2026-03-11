@@ -1,43 +1,43 @@
 const listaServicos = [
   {
     nome: "Pedreiro",
-    img: "Arquivos.Css/Imagens/pedreiro.jpg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/pedreiro.jpg",
   },
   {
     nome: "Babá",
-    img: "Arquivos.Css/Imagens/Babá.jpeg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/Babá.jpeg",
   },
   {
     nome: "Cuidadora",
-    img: "Arquivos.Css/Imagens/cudadora.jpg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/cudadora.jpg",
   },
   {
     nome: "Faxineira",
-    img: "Arquivos.Css/Imagens/faxineira.jpg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/faxineira.jpg",
   },
   {
     nome: "Garçom",
-    img: "Arquivos.Css/Imagens/Garçom.jpg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/Garçom.jpg",
   },
   {
     nome: "Limpador de Piscina",
-    img: "Arquivos.Css/Imagens/LDP.jpg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/LDP.jpg",
   },
   {
     nome: "Entregador",
-    img: "Arquivos.Css/Imagens/entregadorcria.jpeg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/entregadorcria.jpeg",
   },
   {
     nome: "Pintor",
-    img: "Arquivos.Css/Imagens/pintor.jpg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/pintor.jpg",
   },
   {
     nome: "Jardineiro",
-    img: "Arquivos.Css/Imagens/corrtador de grama.jpg",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/corrtador de grama.jpg",
   },
   {
     nome: "Marceneiro",
-    img: "Arquivos.Css/Imagens/marceneirocria.avif",
+    img: "Projeto Facul/Arquivos.Html/Arquivos.Css/Imagens/marceneirocria.avif",
   },
 ];
 
@@ -79,7 +79,7 @@ function criarGaleriaServicos() {
 
     // Adicionar classes e atributos
     servicoDiv.className = "servico";
-    link.href = "contrato.html";
+    link.href = "Projeto Facul/Arquivos.Html/contrato_new.html";
     link.target = "_blank";
     img.src = servico.img;
     img.alt = servico.nome;

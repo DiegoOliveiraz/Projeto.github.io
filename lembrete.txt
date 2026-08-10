@@ -1,0 +1,13 @@
+<header>	Cabeçalho de uma página ou seção. Geralmente contém logo, título, informações introdutórias e/ou navegação.
+
+<nav>	Navegação. Agrupa links que levam para outras partes do site ou da página.
+
+<main>	Conteúdo principal da página. Deve representar o conteúdo central e único daquela página.
+
+<section>	Seção temática de conteúdo. Normalmente representa um agrupamento que possui um tema próprio e, frequentemente, um título.
+
+<article>	Conteúdo independente que poderia fazer sentido por si só, como uma notícia, post, comentário ou produto.
+
+<aside>	Conteúdo complementar ao conteúdo principal, como uma barra lateral, links relacionados ou informações adicionais.
+
+<footer>	Rodapé de uma página ou seção. Pode conter copyright, contatos, links, informações legais etc.

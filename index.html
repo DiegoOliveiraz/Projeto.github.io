@@ -1,5 +1,5 @@
 <!doctype html>
-<html lang="en">
+<html lang="pt-br">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -10,32 +10,86 @@
     <title>Home page</title>
   </head>
   <body>
-    <header>
-      <div>
-        <img src="src/public/images/Logo_FAVICON.png" />
+    <header
+      class="header d-flex align-items-center gap-3 border-bottom border-2 border-secondary"
+    >
+      <div class="">
+        <img src="src/public/images/Logo_FAVICON.png" width="80px" />
       </div>
       <div>
-        <h1>FastWork</h1>
+        <h1 class="mb-0">FastWork</h1>
       </div>
-      
+
+      <nav>
+        <div class="">
+          <a href="#">link 1</a>
+          <a href="#">link 2</a>
+          <a href="#">link 3</a>
+          <a href="#">link 4</a>
+          <a href="#">link 5</a>
+        </div>
+      </nav>
     </header>
 
-    <nav>
-      <div class="link">
-        <a href="#">link 1</a>
-        <a href="#">link 2</a>
-        <a href="#">link 3</a>
-        <a href="#">link 4</a>
-        <a href="#">link 5</a>
+    <div class="d-flex gap-4 p-4">
+      <div>
+        <img
+          src="https://tse3.mm.bing.net/th/id/OIP.n55Pyr_1rj8_Vbv8PAnLNwHaHa?cb=iwc2&rs=1&pid=ImgDetMain"
+          alt="imagem decorativa cinza"
+          class="img-fluid rounded-3 hero-image"
+        />
       </div>
-    </nav>
 
-    
+      <div
+        class="d-flex flex-column gap-3 justify-content-center action-buttons"
+      >
+        <button class="btn-custom">
+          <i class="bi bi-building"></i>
+          CADASTRAR EMPRESA
+        </button>
+        <button class="btn-custom">
+          <i class="bi bi-person-plus"></i>
+          CADASTRAR PROFISSIONAL
+        </button>
+        <button class="btn-custom">
+          <i class="bi bi-box-arrow-in-right"></i>
+          FAZER LOGIN
+        </button>
+      </div>
+    </div>
+
+    <div class="container-fluid py-4">
+      <!-- titulo -->
+      <div class="title-banner mb-4">
+        <h2 class="mb-0">Serviços Disponiveis</h2>
+      </div>
+
+
+
+      <div>imagem (ser feita com javascript)</div>
+    </div>
+
+    <div>
+      <div>dicas de carreira</div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima hic
+        neque, libero alias perspiciatis reiciendis ex enim impedit quibusdam
+        nihil repudiandae ratione quos dignissimos id assumenda? Earum sequi
+        impedit repellat laboriosam consequuntur molestiae quae, explicabo qui
+        laborum nisi aperiam amet quas ut. Laudantium reiciendis, ex
+        consequuntur harum hic minus pariatur.
+      </div>
+      <div>imagens fodas</div>
+    </div>
+
+    <div>
+      <button>saiba mais</button>
+    </div>
 
     <footer>
       <div class="FastWork">
         <p>FastWork</p>
-        <a href="#">link1</a> 
+        <a href="#">link1</a>
         <a href="#">link2</a>
       </div>
       <div class="comunidades">
@@ -45,7 +99,6 @@
         <a href="#">link3</a>
         <a href="#">link4</a>
       </div>
-
       <div class="links-uteis">
         <p>link uteis</p>
         <a href="#">link1</a>
@@ -56,17 +109,13 @@
         <a href="#">link6</a>
       </div>
       <div class="redesocial">
-        <img src="#" alt="#">fotos=da=rede=social</img>
-        <img src="#" alt="#">fotos=da=rede=social</img>
-        <img src="#" alt="#">fotos=da=rede=social</img>
+        <img src="#" alt="instagram" />
+        <img src="#" alt="facebook" />
+        <img src="#" alt="whatzap" />
       </div>
 
-      
-    
-
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"
-    />
+      <div>todos os direitos reservados</div>
+    </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>

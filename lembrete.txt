@@ -11,3 +11,21 @@
 <aside>	Conteúdo complementar ao conteúdo principal, como uma barra lateral, links relacionados ou informações adicionais.
 
 <footer>	Rodapé de uma página ou seção. Pode conter copyright, contatos, links, informações legais etc.
+
+
+  <!-- <div>
+      <div>dicas de carreira</div>
+      <div>
+        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima hic
+        neque, libero alias perspiciatis reiciendis ex enim impedit quibusdam
+        nihil repudiandae ratione quos dignissimos id assumenda? Earum sequi
+        impedit repellat laboriosam consequuntur molestiae quae, explicabo qui
+        laborum nisi aperiam amet quas ut. Laudantium reiciendis, ex
+        consequuntur harum hic minus pariatur.
+      </div>
+      <div>imagens fodas</div>
+    </div>
+
+    <div>
+      <button>saiba mais</button>
+    </div> -->

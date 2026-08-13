@@ -1,121 +1,155 @@
 <!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css"
-    />
-    <title>Home page</title>
-  </head>
-  <body>
-    <header
-      class="header d-flex align-items-center gap-3 border-bottom border-2 border-secondary"
-    >
-      <div class="">
-        <img src="src/public/images/Logo_FAVICON.png" width="80px" />
-      </div>
-      <div>
-        <h1 class="mb-0">FastWork</h1>
-      </div>
 
-      <nav>
-        <div class="">
-          <a href="#">link 1</a>
-          <a href="#">link 2</a>
-          <a href="#">link 3</a>
-          <a href="#">link 4</a>
-          <a href="#">link 5</a>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <title>Home page</title>
+</head>
+
+<body>
+  <header class="header d-flex align-items-center gap-3 border-bottom border-1 border-primary"
+    style="background-color: #000000;">
+    <div class="align-items-center">
+      <img src="src/public/images/Logo_FAVICON.png" width="80px" />
+    </div>
+    <div>
+      <h1 class="mb-0" style="color: #ffffff;">FastWork</h1>
+    </div>
+
+    <nav class="navbar navbar-expand-lg bg-body-tertiary position-absolute end-0">
+      <div class="container-fluid">
+        <a class="navbar-brand" href="#">Navbar</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+            <li class="nav-item">
+              <a class="nav-link active" aria-current="page" href="#">Home</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#">Link</a>
+            </li>
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
+                aria-expanded="false">
+                Dropdown
+              </a>
+              <ul class="dropdown-menu">
+                <li><a class="dropdown-item" href="#">Action</a></li>
+                <li><a class="dropdown-item" href="#">Another action</a></li>
+                <li>
+                  <hr class="dropdown-divider"> 
+                </li>
+                <li><a class="dropdown-item" href="#">Something else here</a></li>
+              </ul>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+            </li>
+          </ul>
+          <form class="d-flex" role="search">
+            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
+            <button class="btn btn-outline-success" type="submit">Search</button>
+          </form>
         </div>
-      </nav>
-    </header>
-
-    <div class="d-flex gap-4 p-4">
-      <div>
-        <img
-          src="https://tse3.mm.bing.net/th/id/OIP.n55Pyr_1rj8_Vbv8PAnLNwHaHa?cb=iwc2&rs=1&pid=ImgDetMain"
-          alt="imagem decorativa cinza"
-          class="img-fluid rounded-3 hero-image"
-        />
       </div>
+    </nav>
+  </header>
 
-      <div
-        class="d-flex flex-column gap-3 justify-content-center action-buttons"
-      >
-        <button class="btn-custom">
-          <i class="bi bi-building"></i>
-          CADASTRAR EMPRESA
-        </button>
-        <button class="btn-custom">
-          <i class="bi bi-person-plus"></i>
-          CADASTRAR PROFISSIONAL
-        </button>
-        <button class="btn-custom">
-          <i class="bi bi-box-arrow-in-right"></i>
-          FAZER LOGIN
-        </button>
+  <div class="d-flex gap-4 p-4 justify-content-around">
+    <div class="flex-shrink-0">
+      <img src="https://tse3.mm.bing.net/th/id/OIP.n55Pyr_1rj8_Vbv8PAnLNwHaHa?cb=iwc2&rs=1&pid=ImgDetMain"
+        alt="imagem decorativa cinza" class="img-fluid rounded-3 hero-image" />
+    </div>
+
+    <div class="d-flex flex-column gap-5 action-buttons ">
+      <button class="btn-custom rounded-pill h-25 bg-primary" style="width: 550px;">
+        <i class="bi bi-building"></i>
+        CADASTRAR EMPRESA
+      </button>
+      <button class="btn-custom rounded-pill h-25 bg-primary" style="width: 550px;">
+        <i class="bi bi-person-plus"></i>
+        CADASTRAR PROFISSIONAL
+      </button>
+      <button class="btn-custom rounded-pill h-25 bg-primary" style="width: 550px;">
+        <i class="bi bi-box-arrow-in-right"></i>
+        FAZER LOGIN
+      </button>
+    </div>
+  </div>
+
+  <div class="container-fluid p-4">
+    <!-- titulo -->
+    <div class="title-banner mb-4 p-3 rounded-pill bg-primary text-center" style="color: #ffffff;">
+      <h2 class="mb-0">Serviços Disponiveis</h2>
+    </div>
+
+
+
+    <div class="card" style="width: 18rem;">
+      <img class="card-img-top" src="src/public/images/pedreiro.jpg" alt="Card image cap">
+      <div class="card-body">
+        <h5 class="card-title"></h5>
+        <a href="#" class="btn btn-primary">Pedreiro</a>
       </div>
     </div>
 
-    <div class="container-fluid py-4">
-      <!-- titulo -->
-      <div class="title-banner mb-4">
-        <h2 class="mb-0">Serviços Disponiveis</h2>
+
+
+    <footer class="bg-black text-white pt-5 pb-4 border-top border-primary">
+      <div class="container">
+        <div class="row gy-4">
+          <div class="col-6 col-md-3 ">
+            <h5 class="text-primary mb-3">FastWork</h5>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link1</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link2</a>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="text-primary mb-3">Comunidades</h5>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link1</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link2</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link3</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link4</a>
+          </div>
+          <div class="col-6 col-md-3">
+            <h5 class="text-primary mb-3">link uteis</h5>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link1</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link2</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link3</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link4</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link5</a>
+            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link6</a>
+          </div>
+
+          <div class="col-6 col-md-3">
+            <h5 class="text-primary mb-3">Redes sociais</h5>
+            <div class="d-flex gap-3">
+              <a href="#" class="text-white border rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 38px; height: 38px;">
+                <i class="bi bi-instagram"></i>
+              </a>
+              <a href="#" class="text-white border rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 38px; height: 38px;">
+                <i class="bi bi-twitter-x"></i>
+              </a>
+              <a href="#" class="text-white border rounded-circle d-flex align-items-center justify-content-center"
+                style="width: 38px; height: 38px;">
+                <i class="bi bi-facebook"></i>
+              </a>
+            </div>
+
+          </div>
+        </div>
       </div>
-
-
-
-      <div>imagem (ser feita com javascript)</div>
-    </div>
-
-    <div>
-      <div>dicas de carreira</div>
-      <div>
-        Lorem ipsum dolor sit amet consectetur, adipisicing elit. Minima hic
-        neque, libero alias perspiciatis reiciendis ex enim impedit quibusdam
-        nihil repudiandae ratione quos dignissimos id assumenda? Earum sequi
-        impedit repellat laboriosam consequuntur molestiae quae, explicabo qui
-        laborum nisi aperiam amet quas ut. Laudantium reiciendis, ex
-        consequuntur harum hic minus pariatur.
-      </div>
-      <div>imagens fodas</div>
-    </div>
-
-    <div>
-      <button>saiba mais</button>
-    </div>
-
-    <footer>
-      <div class="FastWork">
-        <p>FastWork</p>
-        <a href="#">link1</a>
-        <a href="#">link2</a>
-      </div>
-      <div class="comunidades">
-        <p>Comunidades</p>
-        <a href="#">link1</a>
-        <a href="#">link2</a>
-        <a href="#">link3</a>
-        <a href="#">link4</a>
-      </div>
-      <div class="links-uteis">
-        <p>link uteis</p>
-        <a href="#">link1</a>
-        <a href="#">link2</a>
-        <a href="#">link3</a>
-        <a href="#">link4</a>
-        <a href="#">link5</a>
-        <a href="#">link6</a>
-      </div>
-      <div class="redesocial">
-        <img src="#" alt="instagram" />
-        <img src="#" alt="facebook" />
-        <img src="#" alt="whatzap" />
-      </div>
-
-      <div>todos os direitos reservados</div>
+      <div class="p-2 text-center small text-white-50 mt-4 border-top border-primary">Português (Brasil)</div>
+      <div class="p-2 text-center small text-white-50 mt-4">© 2025 - 2026 FastWork Todos os direitos reservados</div>
     </footer>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
+</body>
+
 </html>

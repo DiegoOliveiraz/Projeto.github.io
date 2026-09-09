@@ -1,683 +1,79 @@
-﻿<!doctype html>
+<!doctype html>
 <html lang="pt-br">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Empregos - FastWork</title>
-    <link
-      rel="shortcut icon"
-      href="../public/images/Logo_FAVICON.png"
-      type="image/x-icon"
-    />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="shortcut icon" href="../public/images/Logo_FAVICON.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Roboto", "Nunito Sans", sans-serif;
-      }
-
-      :root {
-        --primary-color: #1976d2;
-        --secondary-color: #000000;
-        --text-color: #ffffff;
-        --bg-color: #000000;
-        --border-color: #1976d2;
-        --card-bg: rgba(0, 0, 0, 0.8);
-        --bg-image: url("../public/images/textured-black-background-vector.jpg");
-      }
-
-      [data-theme="light"] {
-        --primary-color: #ffc107;
-        --secondary-color: #ffffff;
-        --text-color: #000000;
-        --bg-color: #ffffff;
-        --border-color: #ffc107;
-        --card-bg: rgba(255, 255, 255, 0.9);
-        --bg-image: url("../public/images/novo-backgroundclaro.png");
-        --title-color: #000000;
-        --card-text-color: #000000;
-        --footer-text-color: #000000;
-        --content-text-color: #000000;
-      }
-
-      body {
-        min-height: 100vh;
-        background-color: var(--bg-color);
-        background-image: var(--bg-image);
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-        color: var(--text-color);
-        display: flex;
-        flex-direction: column;
-        transition: all 0.3s ease;
-      }
-
-      /* Header */
-      .cabecalho {
-        background-color: var(--secondary-color);
-        padding: 15px 0;
-        border-bottom: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-
-      .cabecalho-container {
-        height: 50px;
-        max-width: 2000px;
-        margin: 0 auto;
-        padding: 0 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .fastwork {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-      }
-
-      .cabecalho-direita {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-      }
-
-      .navegacao {
-        display: flex;
-        gap: 20px;
-      }
-
-      .navegacao a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-      }
-
-      [data-theme="light"] .navegacao a {
-        color: #000000 !important;
-      }
-
-      .navegacao a:hover {
-        opacity: 0.8;
-      }
-
-      .menu-hamburger {
-        display: flex;
-        flex-direction: column;
-        cursor: pointer;
-        padding: 8px;
-        gap: 5px;
-        transition: transform 0.3s ease;
-      }
-
-      .menu-hamburger:hover {
-        transform: scale(1.1);
-      }
-
-      .menu-hamburger span {
-        width: 32px;
-        height: 4px;
-        background-color: var(--primary-color);
-        transition: all 0.3s ease;
-        border-radius: 3px;
-      }
-
-      .menu-hamburger.active span:nth-child(1) {
-        transform: rotate(45deg) translate(8px, 8px);
-      }
-
-      .menu-hamburger.active span:nth-child(2) {
-        opacity: 0;
-      }
-
-      .menu-hamburger.active span:nth-child(3) {
-        transform: rotate(-45deg) translate(8px, -8px);
-      }
-
-      .menu-dropdown {
-        position: absolute;
-        top: 100%;
-        right: 0;
-        background: var(--card-bg);
-        border: 2px solid var(--border-color);
-        border-radius: 10px;
-        padding: 15px;
-        min-width: 200px;
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(10px);
-        opacity: 0;
-        visibility: hidden;
-        transform: translateY(-10px);
-        transition: all 0.3s ease;
-        z-index: 1000;
-      }
-
-      .menu-dropdown.active {
-        opacity: 1;
-        visibility: visible;
-        transform: translateY(0);
-      }
-
-      .menu-dropdown a {
-        display: block;
-        color: var(--text-color);
-        text-decoration: none;
-        padding: 8px 0;
-        border-bottom: 1px solid var(--border-color);
-        transition: color 0.3s ease;
-      }
-
-      .menu-dropdown a:last-child {
-        border-bottom: none;
-      }
-
-      .menu-dropdown a:hover {
-        color: var(--primary-color);
-      }
-
-      .theme-toggle-menu {
-        display: block;
-        width: 100%;
-        background: var(--primary-color);
-        color: white;
-        border: none;
-        padding: 12px;
-        border-radius: 5px;
-        cursor: pointer;
-        margin-top: 10px;
-        font-family: "Roboto", sans-serif;
-        transition: all 0.3s ease;
-      }
-
-      .theme-toggle-menu:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-      }
-
-      .menu-container {
-        position: relative;
-      }
-
-      /* Main Content */
-      .conteudo-principal {
-        flex: 1;
-        padding: 40px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .hero-section {
-        text-align: center;
-        padding: 60px 0;
-        background: var(--card-bg);
-        border-radius: 20px;
-        margin-bottom: 40px;
-        backdrop-filter: blur(10px);
-        border: 2px solid var(--border-color);
-      }
-
-      .hero-title {
-        font-size: 3rem;
-        margin-bottom: 20px;
-        background: linear-gradient(
-          45deg,
-          var(--primary-color),
-          var(--text-color)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .hero-subtitle {
-        font-size: 1.2rem;
-        color: var(--text-color);
-        opacity: 0.8;
-      }
-
-      .coming-soon {
-        background: var(--card-bg);
-        padding: 40px;
-        border-radius: 15px;
-        border: 2px solid var(--border-color);
-        backdrop-filter: blur(10px);
-        text-align: center;
-        margin-bottom: 40px;
-      }
-
-      .coming-soon h2 {
-        color: var(--primary-color);
-        font-size: 2rem;
-        margin-bottom: 20px;
-      }
-
-      .coming-soon p {
-        color: var(--text-color);
-        font-size: 1.1rem;
-        line-height: 1.6;
-        opacity: 0.9;
-      }
-
-      .back-button {
-        display: inline-block;
-        padding: 15px 30px;
-        background: var(--primary-color);
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        margin-top: 20px;
-      }
-
-      .back-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      }
-
-      /* Footer */
-      .rodape {
-        background-color: var(--secondary-color);
-        padding: 30px 0 10px;
-        border-top: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-
-      .rodape-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        margin-bottom: 20px;
-      }
-
-      .rodape-coluna {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-
-      .rodape-titulo {
-        color: var(--primary-color);
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-      }
-
-      .rodape-coluna a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 0.9rem;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-      }
-
-      [data-theme="light"] .rodape-coluna a {
-        color: #000000 !important;
-      }
-
-      .rodape-coluna a:hover {
-        color: var(--primary-color) !important;
-        opacity: 1;
-      }
-
-      .rodape-creditos {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid var(--border-color);
-        color: var(--text-color);
-        opacity: 0.7;
-        font-size: 0.8rem;
-      }
-
-      /* Redes Sociais */
-      .redes-sociais {
-        display: flex;
-        gap: 15px;
-        margin-top: 10px;
-      }
-
-      .redes-sociais a {
-        display: inline-block;
-        transition: transform 0.3s ease;
-      }
-
-      .redes-sociais a:hover {
-        transform: scale(1.1);
-      }
-
-      .redes-sociais img {
-        width: 30px;
-        height: 30px;
-        filter: brightness(0) invert(1);
-        transition: filter 0.3s ease;
-      }
-
-      [data-theme="light"] .redes-sociais img {
-        filter: brightness(0) invert(0);
-      }
-
-      /* Responsive */
-      @media (max-width: 768px) {
-        .cabecalho-container {
-          flex-direction: column;
-          gap: 15px;
+        body {
+            background: radial-gradient(circle at top, rgba(13, 110, 253, .22), transparent 28%), linear-gradient(180deg, #050505 0%, #0d1117 100%);
+            min-height: 100vh;
         }
-
-        .hero-title {
-          font-size: 2rem;
-        }
-      }
-      /* Footer Styles */
-      .footer-section {
-        background: linear-gradient(
-          135deg,
-          var(--secondary-color) 0%,
-          rgba(0, 0, 0, 0.9) 100%
-        );
-        color: var(--text-color);
-        padding: 60px 20px 20px;
-        margin-top: 80px;
-        border-top: 3px solid var(--primary-color);
-      }
-
-      .footer-content {
-        max-width: 1200px;
-        margin: 0 auto;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-        gap: 40px;
-        margin-bottom: 30px;
-      }
-
-      .footer-column h3 {
-        color: var(--primary-color);
-        font-size: 18px;
-        font-weight: 600;
-        margin-bottom: 20px;
-        text-transform: uppercase;
-        letter-spacing: 1px;
-      }
-
-      .footer-column p {
-        color: var(--text-color);
-        line-height: 1.6;
-        margin-bottom: 15px;
-      }
-
-      .footer-column a {
-        display: block;
-        color: #ffffff;
-        text-decoration: none;
-        padding: 8px 0;
-        transition: all 0.3s ease;
-        font-size: 14px;
-      }
-
-      [data-theme="light"] .footer-column a {
-        color: #000000;
-      }
-
-      .footer-column a:hover {
-        color: var(--primary-color);
-        transform: translateX(5px);
-      }
-
-      .social-links {
-        display: flex;
-        gap: 15px;
-        margin-top: 15px;
-      }
-
-      .social-links a {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 40px;
-        height: 40px;
-        background: var(--primary-color);
-        border-radius: 50%;
-        color: #fff;
-        font-size: 18px;
-        transition: all 0.3s ease;
-        padding: 0;
-      }
-
-      .social-links a:hover {
-        transform: translateY(-5px) scale(1.1);
-        box-shadow: 0 5px 15px rgba(25, 118, 210, 0.4);
-      }
-
-      .footer-bottom {
-        text-align: center;
-        padding-top: 30px;
-        border-top: 1px solid rgba(255, 255, 255, 0.1);
-        color: var(--text-color);
-      }
-
-      .footer-bottom p {
-        margin: 0;
-        font-size: 14px;
-        opacity: 0.8;
-      }
-
-      @media (max-width: 768px) {
-        .footer-content {
-          grid-template-columns: 1fr;
-          gap: 30px;
-        }
-
-        .footer-section {
-          padding: 40px 20px 20px;
-          margin-top: 60px;
-        }
-      }
     </style>
-    <link rel="stylesheet" href="/src/public/css/style.css" />
-  </head>
+</head>
 
-  <body>
-    <header class="cabecalho">
-      <div class="cabecalho-container">
-        <h1 class="fastwork">
-          FastWork |
-          <img
-            src="/src/public/images/Logo_FAVICON.png"
-            alt="FastWork Logo"
-            style="height: 20px; vertical-align: middle; margin-left: 5px"
-          />
-        </h1>
-        <div class="cabecalho-direita">
-          <div class="menu-container">
-            <div class="menu-hamburger" onclick="toggleMenu()">
-              <span></span>
-              <span></span>
-              <span></span>
+<body class="text-light">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-black border-bottom border-primary">
+        <div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html"><img
+                    src="../public/images/Logo_FAVICON.png" width="40" alt="Logo FastWork" /><span
+                    class="fw-bold fs-4">FastWork</span></a><button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse justify-content-end" id="menu">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="sobre.html">Sobre</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="empregos.html">Empregos</a></li>
+                </ul>
             </div>
-            <div class="menu-dropdown" id="menuDropdown">
-              <a href="/index.html">Home</a>
-              <a href="sobre.html">Sobre</a>
-              <a href="ajuda.html">Ajuda</a>
-              <a href="formu.html">Cadastrar</a>
-              <button
-                class="theme-toggle-menu"
-                onclick="toggleTheme()"
-                id="themeToggleMenu"
-              >
-                Modo Claro
-              </button>
-            </div>
-          </div>
         </div>
-      </div>
-    </header>
-
-    <main class="conteudo-principal">
-      <section class="hero-section">
-        <h1 class="hero-title">Oportunidades de Emprego</h1>
-        <p class="hero-subtitle">Encontre a oportunidade perfeita para você</p>
-      </section>
-
-      <div class="coming-soon">
-        <h2>?? Em Desenvolvimento</h2>
-        <p>
-          Nossa seção de empregos está sendo desenvolvida para oferecer a melhor
-          experiência na busca por oportunidades de trabalho. Em breve você
-          poderá navegar por vagas exclusivas, filtrar por área de interesse e
-          se candidatar diretamente pela plataforma.
-        </p>
-        <p style="margin-top: 20px">
-          Fique ligado! Grandes novidades estão chegando.
-        </p>
-        <a href="../../index.html" class="back-button">Voltar Home</a>
-      </div>
+    </nav>
+    <main class="container py-5">
+        <section class="text-center py-5 mb-5">
+            <p class="text-primary text-uppercase fw-semibold mb-2">Oportunidades</p>
+            <h1 class="display-5 fw-bold mb-3">Empregos</h1>
+            <p class="lead text-white-50 mx-auto" style="max-width:760px;">Confira as áreas mais buscadas e use esta
+                página como ponto de entrada para novas vagas.</p>
+        </section>
+        <section class="row row-cols-1 row-cols-md-3 g-4">
+            <div class="col">
+                <div class="card bg-black border-primary h-100">
+                    <div class="card-body p-4"><i class="bi bi-hammer display-6 text-primary"></i>
+                        <h2 class="h4 mt-3">Construção</h2>
+                        <p class="text-white-50 mb-0">Vagas para pedreiro, ajudante, acabamento e serviços relacionados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-black border-primary h-100">
+                    <div class="card-body p-4"><i class="bi bi-lightning-charge display-6 text-primary"></i>
+                        <h2 class="h4 mt-3">Elétrica</h2>
+                        <p class="text-white-50 mb-0">Oportunidades para eletricistas e profissionais de manutenção.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col">
+                <div class="card bg-black border-primary h-100">
+                    <div class="card-body p-4"><i class="bi bi-brush display-6 text-primary"></i>
+                        <h2 class="h4 mt-3">Acabamento</h2>
+                        <p class="text-white-50 mb-0">Pintura, marcenaria, reformas e outros serviços especializados.
+                        </p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <footer class="rodape">
-      <div class="rodape-container">
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">FastWork</h3>
-          <a href="sobre.html">Sobre</a>
-          <a href="empregos.html">Empregos</a>
+    <footer class="bg-black border-top border-primary pt-5 pb-4 mt-auto">
+        <div class="container">
+            <p class="text-center text-white-50 small mt-4 pt-3 border-top border-primary mb-0">© 2025–2026 FastWork ·
+                Todos os direitos reservados</p>
         </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Comunidades</h3>
-          <a href="Dev.html">Desenvolvedores</a>
-          <a href="publicidade.html">Publicidade</a>
-          <a href="investidores.html">Investidores</a>
-          <a href="fornecedores.html">Fornecedores</a>
-        </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Links uteis</h3>
-          <a href="ajuda.html">Suporte</a>
-          <a href="legal.html">Legal</a>
-          <a href="seguranca.html">Segurança e privacidade</a>
-          <a href="politicas.html">Políticas de privacidade</a>
-          <a href="cookies.html">Cookies</a>
-          <a href="acessibilidade.html">Acessibilidade</a>
-        </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Redes sociais</h3>
-          <div class="redes-sociais">
-            <a href="https://www.instagram.com/unifoa/" target="_blank"
-              ><img
-                src="/src/public/images/icons8-instagram-logo-500.png"
-                alt="Instagram"
-            /></a>
-            <a href="https://x.com/home?lang=pt-br" target="_blank"
-              ><img
-                src="/src/public/images/icons8-twitterx-500.png"
-                alt="Twitter"
-            /></a>
-            <a
-              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
-              target="_blank"
-              ><img
-                src="/src/public/images/icons8-facebook-novo-500.png"
-                alt="Facebook"
-            /></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="rodape-creditos">
-        <p>Português (Brasil)</p>
-        <p>© 2025 FastWork. Todos os direitos reservados.</p>
-      </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-    <script>
-      // Theme management
-      function getStoredTheme() {
-        return localStorage.getItem("theme") || "dark";
-      }
-
-      function setStoredTheme(theme) {
-        localStorage.setItem("theme", theme);
-      }
-
-      function setTheme(theme) {
-        document.documentElement.setAttribute("data-theme", theme);
-        const themeToggle = document.getElementById("themeToggleMenu");
-
-        if (theme === "light") {
-          if (themeToggle) themeToggle.textContent = "Modo Escuro";
-        } else {
-          if (themeToggle) themeToggle.textContent = "Modo Claro";
-        }
-      }
-
-      function toggleTheme() {
-        const currentTheme =
-          document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-
-        setTheme(newTheme);
-        setStoredTheme(newTheme);
-        updateThemeToggleText(newTheme);
-      }
-
-      function updateThemeToggleText(theme) {
-        const themeToggleMenu = document.getElementById("themeToggleMenu");
-        if (themeToggleMenu) {
-          themeToggleMenu.textContent =
-            theme === "light" ? "Modo Escuro" : "Modo Claro";
-        }
-      }
-
-      // Menu hamburger management
-      function toggleMenu() {
-        const menuHamburger = document.querySelector(".menu-hamburger");
-        const menuDropdown = document.getElementById("menuDropdown");
-
-        menuHamburger.classList.toggle("active");
-        menuDropdown.classList.toggle("active");
-      }
-
-      // Close menu when clicking outside
-      document.addEventListener("click", function (event) {
-        const menuContainer = document.querySelector(".menu-container");
-        const menuDropdown = document.getElementById("menuDropdown");
-        const menuHamburger = document.querySelector(".menu-hamburger");
-
-        if (menuContainer && !menuContainer.contains(event.target)) {
-          menuDropdown.classList.remove("active");
-          menuHamburger.classList.remove("active");
-        }
-      });
-
-      // Initialize theme on page load
-      document.addEventListener("DOMContentLoaded", () => {
-        const storedTheme = getStoredTheme();
-        setTheme(storedTheme);
-        updateThemeToggleText(storedTheme);
-      });
-    </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
 </html>

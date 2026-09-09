@@ -1,591 +1,80 @@
-﻿<!doctype html> 
-<!-- //oi sou um comentario -->
+<!doctype html>
 <html lang="pt-br">
-  <head>
+
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Acessibilidade - FastWork</title>
-    <link
-      rel="shortcut icon"
-      href="../public/images/Logo_FAVICON.png"
-      type="image/x-icon"
-    />
-
-    <!-- Bootstrap CSS -->
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <!-- Bootstrap Icons -->
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    />
-
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
+    <link rel="shortcut icon" href="../public/images/Logo_FAVICON.png" type="image/x-icon" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
     <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Roboto", "Nunito Sans", sans-serif;
-      }
-
-      :root {
-        --primary-color: #1976d2;
-        --secondary-color: #000000;
-        --text-color: #ffffff;
-        --bg-color: #000000;
-        --border-color: #1976d2;
-        --card-bg: rgba(0, 0, 0, 0.8);
-        --bg-image: url("../public/images/textured-black-background-vector.jpg");
-      }
-
-      [data-theme="light"] {
-        --primary-color: #ffc107;
-        --secondary-color: #ffffff;
-        --text-color: #000000;
-        --bg-color: #ffffff;
-        --border-color: #ffc107;
-        --card-bg: rgba(255, 255, 255, 0.9);
-        --bg-image: url("../public/images/novo-backgroundclaro.png");
-        --title-color: #000000;
-        --card-text-color: #000000;
-        --footer-text-color: #000000;
-        --content-text-color: #000000;
-      }
-
-      body {
-        min-height: 100vh;
-        background-color: var(--bg-color);
-        background-image: var(--bg-image);
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-        color: var(--text-color);
-        display: flex;
-        flex-direction: column;
-        transition: all 0.3s ease;
-      }
-
-      /* Menu Hamburger */
-      .menu-hamburger {
-        position: relative;
-        display: inline-block;
-      }
-
-      .hamburger-btn {
-        background: none;
-        border: none;
-        cursor: pointer;
-        padding: 12px;
-        display: flex;
-        flex-direction: column;
-        gap: 5px;
-      }
-
-      .hamburger-line {
-        width: 32px;
-        height: 4px;
-        background-color: var(--primary-color);
-        transition: all 0.3s ease;
-      }
-
-      .dropdown-menu {
-        display: none;
-        position: absolute;
-        right: 0;
-        top: 100%;
-        background: var(--card-bg);
-        border: 2px solid var(--border-color);
-        border-radius: 10px;
-        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-        backdrop-filter: blur(10px);
-        min-width: 200px;
-        z-index: 1000;
-      }
-
-      .dropdown-menu.show {
-        display: block;
-      }
-
-      .dropdown-menu a {
-        display: block;
-        padding: 12px 20px;
-        color: var(--text-color);
-        text-decoration: none;
-        border-bottom: 1px solid var(--border-color);
-        transition: background-color 0.3s ease;
-      }
-
-      .dropdown-menu a:hover {
-        background-color: rgba(25, 118, 210, 0.1);
-      }
-
-      .dropdown-menu a:last-child {
-        border-bottom: none;
-      }
-
-      .theme-toggle-menu {
-        display: flex;
-        align-items: center;
-        gap: 0.5rem;
-        padding: 12px 16px;
-        background: none;
-        border: none;
-        color: var(--text-color);
-        text-decoration: none;
-        transition: all 0.3s ease;
-        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-        cursor: pointer;
-        width: 100%;
-        text-align: left;
-        font-family: inherit;
-      }
-
-      .theme-toggle-menu:hover {
-        background: var(--primary-color);
-        color: var(--secondary-color);
-        padding-left: 20px;
-      }
-
-      .theme-text {
-        font-size: 1rem;
-      }
-
-      .cabecalho {
-        background-color: var(--secondary-color);
-        padding: 15px 0;
-        border-bottom: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-
-      .cabecalho-container {
-        height: 50px;
-        max-width: 2000px;
-        margin: 0 auto;
-        padding: 0 20px;
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-      }
-
-      .fastwork {
-        font-size: 1.5rem;
-        color: var(--primary-color);
-      }
-      .cabecalho-direita {
-        display: flex;
-        align-items: center;
-        gap: 30px;
-      }
-      .navegacao {
-        display: flex;
-        gap: 20px;
-      }
-      .navegacao a {
-        color: #ffffff !important;
-        text-decoration: none;
-        font-size: 0.9rem;
-        transition: color 0.3s ease;
-      }
-
-      [data-theme="light"] .navegacao a {
-        color: #000000 !important;
-      }
-
-      .navegacao a:hover {
-        color: var(--primary-color) !important;
-      }
-
-      .conteudo-principal {
-        flex: 1;
-        padding: 40px 20px;
-        max-width: 1200px;
-        margin: 0 auto;
-        width: 100%;
-      }
-
-      .hero-section {
-        text-align: center;
-        padding: 60px 0;
-        background: var(--card-bg);
-        border-radius: 20px;
-        margin-bottom: 40px;
-        backdrop-filter: blur(10px);
-        border: 2px solid var(--border-color);
-      }
-
-      .hero-title {
-        font-size: 3rem;
-        margin-bottom: 20px;
-        background: linear-gradient(
-          45deg,
-          var(--primary-color),
-          var(--text-color)
-        );
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-      }
-
-      .hero-subtitle {
-        font-size: 1.2rem;
-        color: var(--text-color);
-        opacity: 0.8;
-      }
-
-      .accessibility-grid {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-        gap: 30px;
-        margin-bottom: 40px;
-      }
-
-      .accessibility-card {
-        background: var(--card-bg);
-        padding: 30px;
-        border-radius: 15px;
-        border: 2px solid var(--border-color);
-        backdrop-filter: blur(10px);
-        transition: transform 0.3s ease;
-      }
-
-      .accessibility-card:hover {
-        transform: translateY(-5px);
-      }
-
-      .accessibility-card h3 {
-        color: var(--primary-color);
-        font-size: 1.5rem;
-        margin-bottom: 15px;
-      }
-
-      .accessibility-card p {
-        line-height: 1.6;
-        color: var(--text-color);
-        opacity: 0.9;
-      }
-
-      .back-button {
-        display: inline-block;
-        padding: 15px 30px;
-        background: var(--primary-color);
-        color: white;
-        text-decoration: none;
-        border-radius: 8px;
-        font-weight: bold;
-        transition: all 0.3s ease;
-        margin-top: 20px;
-      }
-
-      .back-button:hover {
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-      }
-
-      .rodape {
-        background-color: var(--secondary-color);
-        padding: 30px 0 10px;
-        border-top: 1px solid var(--border-color);
-        transition: all 0.3s ease;
-      }
-
-      .rodape-container {
-        max-width: 1200px;
-        margin: 0 auto;
-        padding: 0 20px;
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        gap: 30px;
-        margin-bottom: 20px;
-      }
-
-      .rodape-coluna {
-        display: flex;
-        flex-direction: column;
-        gap: 10px;
-      }
-      .rodape-titulo {
-        color: var(--primary-color);
-        margin-bottom: 10px;
-        font-size: 1.1rem;
-      }
-      .rodape-coluna a {
-        color: #ffffff;
-        text-decoration: none;
-        font-size: 0.9rem;
-        opacity: 0.8;
-        transition: all 0.3s ease;
-      }
-
-      [data-theme="light"] .rodape-coluna a {
-        color: #000000 !important;
-      }
-
-      .rodape-coluna a:hover {
-        color: var(--primary-color) !important;
-        opacity: 1;
-      }
-
-      .rodape-creditos {
-        text-align: center;
-        padding-top: 20px;
-        border-top: 1px solid var(--border-color);
-        color: var(--text-color);
-        opacity: 0.7;
-        font-size: 0.8rem;
-      }
-
-      .redes-sociais {
-        display: flex;
-        gap: 15px;
-        margin-top: 10px;
-      }
-
-      .redes-sociais a {
-        display: inline-block;
-        transition: transform 0.3s ease;
-      }
-
-      .redes-sociais a:hover {
-        transform: scale(1.1);
-      }
-
-      .redes-sociais img {
-        width: 30px;
-        height: 30px;
-        filter: brightness(0) invert(1);
-        transition: filter 0.3s ease;
-      }
-
-      [data-theme="light"] .redes-sociais img {
-        filter: brightness(0) invert(0);
-      }
-
-      @media (max-width: 768px) {
-        .cabecalho-container {
-          flex-direction: column;
-          gap: 15px;
+        body {
+            background: radial-gradient(circle at top, rgba(13, 110, 253, .22), transparent 28%), linear-gradient(180deg, #050505 0%, #0d1117 100%);
+            min-height: 100vh;
         }
-        .hero-title {
-          font-size: 2rem;
-        }
-        .accessibility-grid {
-          grid-template-columns: 1fr;
-        }
-        .theme-toggle {
-          width: 50px;
-          height: 50px;
-          top: 15px;
-          right: 15px;
-        }
-      }
     </style>
-    <link rel="stylesheet" href="/src/public/css/style.css" />
-  </head>
+</head>
 
-  <body>
-    <header class="cabecalho">
-      <div class="cabecalho-container">
-        <h1 class="fastwork">
-          FastWork |
-          <img
-            src="/src/public/images/Logo_FAVICON.png"
-            alt="FastWork Logo"
-            style="height: 20px; vertical-align: middle; margin-left: 5px"
-          />
-        </h1>
-        <div class="cabecalho-direita">
-          <div class="menu-hamburger">
-            <button class="hamburger-btn" onclick="toggleMenu()">
-              <span class="hamburger-line"></span>
-              <span class="hamburger-line"></span>
-              <span class="hamburger-line"></span>
-            </button>
-            <div class="dropdown-menu" id="dropdownMenu">
-              <a href="formu.html" target="_self">Perfil</a>
-              <a href="empregos.html">Empregos</a>
-              <a href="/index.html">Home</a>
-              <a href="sobre.html">Sobre</a>
-              <a href="ajuda.html">Ajuda</a>
-              <button class="theme-toggle-menu" onclick="toggleTheme()">
-                <span class="theme-text">Modo Claro</span>
-              </button>
+<body class="text-light">
+    <nav class="navbar navbar-dark navbar-expand-lg bg-black border-bottom border-primary">
+        <div class="container"><a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html"><img
+                    src="../public/images/Logo_FAVICON.png" width="40" alt="Logo FastWork" /><span
+                    class="fw-bold fs-4">FastWork</span></a><button class="navbar-toggler" type="button"
+                data-bs-toggle="collapse" data-bs-target="#menu"><span class="navbar-toggler-icon"></span></button>
+            <div class="collapse navbar-collapse justify-content-end" id="menu">
+                <ul class="navbar-nav gap-2">
+                    <li class="nav-item"><a class="nav-link" href="../../index.html">Início</a></li>
+                    <li class="nav-item"><a class="nav-link" href="ajuda.html">Ajuda</a></li>
+                    <li class="nav-item"><a class="nav-link active" href="acessibilidade.html">Acessibilidade</a></li>
+                </ul>
             </div>
-          </div>
         </div>
-      </div>
-    </header>
-
-    <main class="conteudo-principal">
-      <section class="hero-section">
-        <h1 class="hero-title">Acessibilidade</h1>
-        <p class="hero-subtitle">
-          Uma plataforma inclusiva para todos os usuários
-        </p>
-      </section>
-
-      <div class="accessibility-grid">
-        <div class="accessibility-card">
-          <h3>🔍 Navegação por Teclado</h3>
-          <p>
-            Nossa plataforma é totalmente navegável usando apenas o teclado. Use
-            Tab para navegar entre elementos e Enter para ativar botões e links.
-            Todos os elementos interativos possuem foco visual.
-          </p>
-        </div>
-
-        <div class="accessibility-card">
-          <h3>🎨 Alto Contraste</h3>
-          <p>
-            Oferecemos temas com alto contraste para facilitar a leitura e
-            navegação. Use o botão de alternância de tema para escolher entre o
-            modo claro e escuro conforme sua preferência.
-          </p>
-        </div>
-
-        <div class="accessibility-card">
-          <h3>🔊 Leitores de Tela</h3>
-          <p>
-            Compatível com leitores de tela como NVDA, JAWS e Voice Over. Todo o
-            conteúdo possui descrições apropriadas e marcações semânticas para
-            facilitar a navegação assistiva.
-          </p>
-        </div>
-
-        <div class="accessibility-card">
-          <h3>🔍 Zoom e Redimensionamento</h3>
-          <p>
-            A plataforma suporta zoom até 200% sem perder funcionalidade. O
-            layout é responsivo e se adapta a diferentes tamanhos de tela e
-            preferências de visualização.
-          </p>
-        </div>
-
-        <div class="accessibility-card">
-          <h3>⏱️ Tempo Flexível</h3>
-          <p>
-            Não há limitações de tempo para completar formulários ou realizar
-            ações na plataforma. Você pode trabalhar no seu próprio ritmo sem
-            pressão temporal.
-          </p>
-        </div>
-
-        <div class="accessibility-card">
-          <h3>💬 Suporte Dedicado</h3>
-          <p>
-            Nossa equipe de suporte está preparada para auxiliar usuários com
-            necessidades especiais. Entre em contato conosco para obter ajuda
-            personalizada e específica.
-          </p>
-        </div>
-      </div>
-
-      <div style="text-align: center">
-        <a href="../../index.html" class="back-button">Voltar à Home</a>
-      </div>
+    </nav>
+    <main class="container py-5">
+        <section class="text-center py-5 mb-5">
+            <p class="text-primary text-uppercase fw-semibold mb-2">Inclusão</p>
+            <h1 class="display-5 fw-bold mb-3">Acessibilidade</h1>
+            <p class="lead text-white-50 mx-auto" style="max-width:760px;">A página reúne orientações básicas para
+                navegação mais clara, legibilidade e uso com leitores de tela.</p>
+        </section>
+        <section class="row g-4">
+            <div class="col-md-4">
+                <div class="card bg-black border-primary h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h4">Contraste</h2>
+                        <p class="text-white-50 mb-0">As áreas principais usam fundo escuro e destaque azul para
+                            facilitar a leitura.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-black border-primary h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h4">Navegação</h2>
+                        <p class="text-white-50 mb-0">A estrutura usa navbar e cartões simples para manter o caminho
+                            visual direto.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="card bg-black border-primary h-100">
+                    <div class="card-body p-4">
+                        <h2 class="h4">Suporte</h2>
+                        <p class="text-white-50 mb-0">Se encontrar barreiras de uso, a página de ajuda concentra o
+                            contato e os próximos passos.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
     </main>
-
-    <footer class="rodape">
-      <div class="rodape-container">
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">FastWork</h3>
-          <a href="sobre.html">Sobre</a>
-          <a href="empregos.html">Empregos</a>
+    <footer class="bg-black border-top border-primary pt-5 pb-4 mt-auto">
+        <div class="container">
+            <p class="text-center text-white-50 small mt-4 pt-3 border-top border-primary mb-0">© 2025–2026 FastWork ·
+                Todos os direitos reservados</p>
         </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Comunidades</h3>
-          <a href="desenvolvedores.html">Desenvolvedores</a>
-          <a href="publicidade.html">Publicidade</a>
-          <a href="investidores.html">Investidores</a>
-          <a href="fornecedores.html">Fornecedores</a>
-        </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Links úteis</h3>
-          <a href="ajuda.html">Suporte</a>
-          <a href="legal.html">Legal</a>
-          <a href="seguranca.html">Segurança e privacidade</a>
-          <a href="politicas.html">Políticas de privacidade</a>
-          <a href="cookies.html">Cookies</a>
-          <a href="acessibilidade.html">Acessibilidade</a>
-        </div>
-
-        <div class="rodape-coluna">
-          <h3 class="rodape-titulo">Redes sociais</h3>
-          <div class="redes-sociais">
-            <a href="https://www.instagram.com/unifoa/" target="_blank"
-              ><img
-                src="/src/public/images/icons8-instagram-logo-500.png"
-                alt="Instagram"
-            /></a>
-            <a href="https://x.com/home?lang=pt-br" target="_blank"
-              ><img
-                src="/src/public/images/icons8-twitterx-500.png"
-                alt="Twitter"
-            /></a>
-            <a
-              href="https://web.facebook.com/UniFOA/?locale=pt_BR&_rdc=1&_rdr#"
-              target="_blank"
-              ><img
-                src="/src/public/images/icons8-facebook-novo-500.png"
-                alt="Facebook"
-            /></a>
-          </div>
-        </div>
-      </div>
-
-      <div class="rodape-creditos">
-        <p>Português (Brasil)</p>
-        <p>� 2025 FastWork. Todos os direitos reservados.</p>
-      </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 
-    <script>
-      function toggleMenu() {
-        const dropdownMenu = document.getElementById("dropdownMenu");
-        dropdownMenu.classList.toggle("show");
-      }
-
-      function getStoredTheme() {
-        return localStorage.getItem("theme") || "dark";
-      }
-      function setStoredTheme(theme) {
-        localStorage.setItem("theme", theme);
-      }
-
-      function setTheme(theme) {
-        document.documentElement.setAttribute("data-theme", theme);
-        const themeText = document.querySelector(".theme-text");
-
-        if (theme === "light") {
-          if (themeText) themeText.textContent = "Modo Escuro";
-        } else {
-          if (themeText) themeText.textContent = "Modo Claro";
-        }
-      }
-
-      function toggleTheme() {
-        const currentTheme =
-          document.documentElement.getAttribute("data-theme");
-        const newTheme = currentTheme === "light" ? "dark" : "light";
-
-        setTheme(newTheme);
-        setStoredTheme(newTheme);
-      }
-
-      document.addEventListener("DOMContentLoaded", () => {
-        const storedTheme = getStoredTheme();
-        setTheme(storedTheme);
-      });
-    </script>
-
-    <!-- Bootstrap JS -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-  </body>
 </html>

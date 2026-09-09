@@ -1,413 +1,190 @@
-﻿<!DOCTYPE html>
+﻿<!doctype html>
 <html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Cadastro de Empresas - FastWork</title>
-    <link
-      rel="shortcut icon"
-      href="../public/images/Logo_FAVICON.png"
-      type="image/x-icon"
-    />
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
-    />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,opsz,wght@0,6..12,200..1000;1,6..12,200..1000&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
-      rel="stylesheet"
-    />
-    <style>
-      * {
-        box-sizing: border-box;
-        margin: 0;
-        padding: 0;
-        font-family: "Nunito Sans", sans-serif;
-      }
-      :root {
-        --primary-color: #1976d2;
-        --text-color: #ffffff;
-        --bg-color: #000000;
-        --card-bg: rgba(0, 0, 0, 0.8);
-        --input-bg: #1a1a1a;
-        --input-text: #ffffff;
-        --input-border: #444;
-        --bg-image: url("../public/images/textured-black-background-vector.jpg");
-      }
-      [data-theme="light"] {
-        --primary-color: #ffc107;
-        --text-color: #000000;
-        --bg-color: #ffffff;
-        --card-bg: rgba(255, 255, 255, 0.9);
-        --input-bg: #ffffff;
-        --input-text: #000000;
-        --input-border: #ddd;
-        --bg-image: url("../public/images/backgroundclaro.png");
-      }
-      body {
-        min-height: 100vh;
-        background-color: var(--bg-color);
-        background-image: var(--bg-image);
-        background-size: cover;
-        background-attachment: fixed;
-        background-position: center;
-        color: var(--text-color);
-        display: flex;
-        flex-direction: column;
-        transition: all 0.3s ease;
-      }
-      .theme-toggle {
-        position: fixed;
-        top: 20px;
-        right: 20px;
-        background: var(--primary-color);
-        border: none;
-        border-radius: 50%;
-        width: 60px;
-        height: 60px;
-        cursor: pointer;
-        z-index: 1000;
-        transition: all 0.3s ease;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-        color: white;
-        font-size: 12px;
-        font-weight: bold;
-        text-align: center;
-        padding: 8px;
-      }
-      .theme-toggle:hover { transform: scale(1.1); }
-      .conteudo-principal {
-        flex: 1;
-        padding: 40px 20px;
-        max-width: 800px;
-        margin: 0 auto;
-        width: 100%;
-        min-height: 100vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: center;
-      }
-      .hero-section {
-        text-align: center;
-        padding: 40px 0;
-        background: var(--card-bg);
-        border-radius: 20px;
-        margin-bottom: 40px;
-        backdrop-filter: blur(10px);
-        border: 2px solid var(--border-color, var(--primary-color));
-      }
-      .hero-title {
-        font-size: 2.5rem;
-        margin-bottom: 15px;
-        color: var(--primary-color);
-        font-weight: 700;
-      }
-      .hero-subtitle {
-        font-size: 1.1rem;
-        color: var(--text-color);
-        opacity: 0.8;
-      }
-      .form-container {
-        background: var(--card-bg);
-        padding: 40px;
-        border-radius: 15px;
-        border: 2px solid var(--border-color, var(--primary-color));
-        backdrop-filter: blur(10px);
-      }
-      .form-group { margin-bottom: 20px; }
-      label {
-        display: block;
-        margin-bottom: 8px;
-        color: var(--text-color);
-        font-weight: 500;
-        font-size: 1rem;
-      }
-      input, select, textarea {
-        width: 100%;
-        padding: 12px 15px;
-        border: 2px solid var(--input-border);
-        border-radius: 8px;
-        font-size: 16px;
-        background: var(--input-bg) !important;
-        color: var(--input-text) !important;
-        transition: all 0.3s ease;
-      }
-      input:focus, select:focus, textarea:focus {
-        outline: none;
-        border-color: var(--primary-color);
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-      }
-      .form-row {
-        display: grid;
-        grid-template-columns: 1fr 1fr;
-        gap: 20px;
-      }
-      .submit-btn {
-        background: var(--primary-color);
-        color: white;
-        padding: 15px 40px;
-        border: none;
-        border-radius: 8px;
-        font-size: 18px;
-        font-weight: bold;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        margin-top: 20px;
-        width: 100%;
-      }
-      .submit-btn:hover {
-        background: var(--primary-color);
-        filter: brightness(1.1);
-        transform: translateY(-2px);
-        box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
-      }
-      .error-message {
-        color: #ff4444;
-        font-size: 12px;
-        margin-top: 5px;
-        display: none;
-      }
-      .form-group.error input,
-      .form-group.error select,
-      .form-group.error textarea {
-        border-color: #ff4444;
-        box-shadow: 0 0 5px rgba(255, 68, 68, 0.3);
-        background-color: rgba(255, 68, 68, 0.05);
-      }
-      @media (max-width: 768px) {
-        .form-row { grid-template-columns: 1fr; }
-        .form-container { padding: 20px; }
-        .theme-toggle { width: 50px; height: 50px; top: 15px; right: 15px; }
-      }
-    </style>
-  </head>
-  <body>
-    <button class="theme-toggle" onclick="toggleTheme()">
-      <span class="theme-text">Modo Claro</span>
-    </button>
-    <main class="conteudo-principal">
-      <div style="text-align: left; margin-bottom: 20px">
-        <a href="../../index.html" style="color: var(--primary-color); text-decoration: none; font-size: 14px;">← Voltar ao FastWork</a>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Cadastro de Empresa - FastWork</title>
+  <link rel="shortcut icon" href="../public/images/Logo_FAVICON.png" type="image/x-icon" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
+  <style>
+    body {
+      background:
+        radial-gradient(circle at top, rgba(13, 110, 253, 0.22), transparent 28%),
+        linear-gradient(180deg, #050505 0%, #0d1117 100%);
+      min-height: 100vh;
+    }
+  </style>
+</head>
+
+<body class="text-light">
+
+  <nav class="navbar navbar-dark navbar-expand-lg bg-black border-bottom border-primary">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="../../index.html">
+        <img src="../public/images/Logo_FAVICON.png" width="40" alt="Logo FastWork" />
+        <span class="fw-bold fs-4">FastWork</span>
+      </a>
+      <div class="d-flex align-items-center gap-3 flex-wrap">
+        <a class="nav-link text-white-50 p-0" href="../../index.html">Início</a>
+        <a class="nav-link text-white-50 p-0" href="login.html">Entrar</a>
+        <a class="nav-link active p-0" href="cadastroem.html">Cadastrar empresa</a>
       </div>
-      <section class="hero-section">
-        <h1 class="hero-title">Cadastro de Empresas</h1>
-        <p class="hero-subtitle">Complete os dados da sua empresa</p>
-      </section>
-      <div class="form-container">
-        <form id="cadastroFormEmp">
-          <div class="form-group">
-            <label for="nome">Nome da Empresa:</label>
-            <input type="text" id="nome" name="nome" required placeholder="Digite o nome da empresa" />
-            <div class="error-message" id="nome-error"></div>
+    </div>
+  </nav>
+
+  <main class="container py-5">
+    <div class="row justify-content-center">
+      <div class="col-lg-7 col-xl-6">
+        <div class="text-center mb-4">
+          <p class="text-primary text-uppercase fw-semibold mb-2">Cadastro</p>
+          <h1 class="display-6 fw-bold mb-2">Cadastro de Empresa</h1>
+          <p class="text-white-50 mb-0">Complete os dados da sua empresa para começar a contratar.</p>
+        </div>
+
+        <div class="card bg-black border-primary shadow-lg">
+          <div class="card-body p-4 p-md-5">
+            <div id="alertaErro" class="alert alert-danger d-none"></div>
+
+            <!-- 'needs-validation' + 'novalidate' ativam a validação nativa do Bootstrap:
+             o navegador valida os campos (required, type=email, minlength...) e o
+             Bootstrap decide se mostra classes de erro (is-invalid) ou sucesso (is-valid) -->
+            <form id="formEmpresa" class="needs-validation" novalidate>
+
+              <div class="mb-3">
+                <label for="nome" class="form-label">Nome da Empresa</label>
+                <input type="text" class="form-control" id="nome" required minlength="3"
+                  placeholder="Digite o nome da empresa" />
+                <div class="invalid-feedback">Informe o nome da empresa (mín. 3 caracteres).</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="cnpj" class="form-label">CNPJ</label>
+                <input type="text" class="form-control" id="cnpj" required maxlength="18"
+                  placeholder="XX.XXX.XXX/XXXX-XX" />
+                <div class="invalid-feedback">Informe um CNPJ válido.</div>
+              </div>
+
+              <div class="row">
+                <div class="col-md-6 mb-3">
+                  <label for="email" class="form-label">E-mail</label>
+                  <input type="email" class="form-control" id="email" required placeholder="Digite o e-mail" />
+                  <div class="invalid-feedback">Informe um e-mail válido.</div>
+                </div>
+                <div class="col-md-6 mb-3">
+                  <label for="telefone" class="form-label">Telefone</label>
+                  <input type="tel" class="form-control" id="telefone" required placeholder="(XX) XXXXX-XXXX" />
+                  <div class="invalid-feedback">Informe um telefone válido.</div>
+                </div>
+              </div>
+
+              <div class="mb-3">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" class="form-control" id="senha" required minlength="6"
+                  placeholder="Digite sua senha" />
+                <div class="invalid-feedback">A senha deve ter pelo menos 6 caracteres.</div>
+              </div>
+
+              <div class="mb-3">
+                <label for="endereco" class="form-label">Endereço</label>
+                <textarea class="form-control" id="endereco" rows="3" required minlength="10"
+                  placeholder="Digite o endereço completo"></textarea>
+                <div class="invalid-feedback">Informe o endereço completo.</div>
+              </div>
+
+              <div class="mb-4">
+                <label for="setor" class="form-label">Setor de Atuação</label>
+                <select class="form-select" id="setor" required>
+                  <option value="">Selecione o setor</option>
+                  <option value="tecnologia">Tecnologia</option>
+                  <option value="saude">Saúde</option>
+                  <option value="educacao">Educação</option>
+                  <option value="comercio">Comércio</option>
+                  <option value="industria">Indústria</option>
+                  <option value="servicos">Serviços</option>
+                  <option value="outros">Outros</option>
+                </select>
+                <div class="invalid-feedback">Selecione um setor.</div>
+              </div>
+
+              <button type="submit" class="btn btn-primary w-100 btn-lg">Cadastrar Empresa</button>
+            </form>
           </div>
-          <div class="form-group">
-            <label for="cnpj">CNPJ:</label>
-            <input type="text" id="cnpj" name="cnpj" required placeholder="XX.XXX.XXX/XXXX-XX" maxlength="18" />
-            <div class="error-message" id="cnpj-error"></div>
-          </div>
-          <div class="form-row">
-            <div class="form-group">
-              <label for="email">E-mail:</label>
-              <input type="email" id="email" name="email" required placeholder="Digite o e-mail" />
-              <div class="error-message" id="email-error"></div>
-            </div>
-            <div class="form-group">
-              <label for="telefone">Telefone:</label>
-              <input type="tel" id="telefone" name="telefone" required placeholder="(XX) XXXXX-XXXX" />
-              <div class="error-message" id="telefone-error"></div>
-            </div>
-          </div>
-          <div class="form-group">
-            <label for="senha">Senha:</label>
-            <input type="password" id="senha" name="senha" required placeholder="Digite sua senha" minlength="6" />
-            <div class="error-message" id="senha-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="endereco">Endereço:</label>
-            <textarea id="endereco" name="endereco" rows="3" placeholder="Digite o endereço completo" required></textarea>
-            <div class="error-message" id="endereco-error"></div>
-          </div>
-          <div class="form-group">
-            <label for="setor">Setor de Atuação:</label>
-            <select id="setor" name="setor" required>
-              <option value="">Selecione o setor</option>
-              <option value="tecnologia">Tecnologia</option>
-              <option value="saude">Saúde</option>
-              <option value="educacao">Educação</option>
-              <option value="comercio">Comércio</option>
-              <option value="industria">Indústria</option>
-              <option value="servicos">Serviços</option>
-              <option value="outros">Outros</option>
-            </select>
-            <div class="error-message" id="setor-error"></div>
-          </div>
-          <button type="submit" class="submit-btn">Cadastrar Empresa</button>
-        </form>
+        </div>
       </div>
-    </main>
-    <script>
-      function toggleTheme() {
-        const currentTheme = document.documentElement.getAttribute("data-theme") || "dark";
-        const newTheme = currentTheme === "dark" ? "light" : "dark";
-        document.documentElement.setAttribute("data-theme", newTheme);
-        localStorage.setItem("theme", newTheme);
-        document.querySelector(".theme-text").textContent = newTheme === "light" ? "Modo Escuro" : "Modo Claro";
-      }
-      document.addEventListener("DOMContentLoaded", () => {
-        const storedTheme = localStorage.getItem("theme") || "dark";
-        document.documentElement.setAttribute("data-theme", storedTheme);
-        document.querySelector(".theme-text").textContent = storedTheme === "light" ? "Modo Escuro" : "Modo Claro";
-      });
+    </div>
+  </main>
 
-      function showError(field, message) {
-        const formGroup = field.closest(".form-group");
-        const errorElement = formGroup.querySelector(".error-message");
-        formGroup.classList.add("error");
-        errorElement.textContent = message;
-        errorElement.style.display = "block";
-      }
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+  <script>
+    const STORAGE_KEY = "fastwork_users";
+    const form = document.getElementById("formEmpresa");
+    const alertaErro = document.getElementById("alertaErro");
 
-      function clearError(field) {
-        const formGroup = field.closest(".form-group");
-        const errorElement = formGroup.querySelector(".error-message");
-        formGroup.classList.remove("error");
-        errorElement.style.display = "none";
-      }
+    // Máscara de CNPJ: só formata os números digitados, sem lib externa
+    document.getElementById("cnpj").addEventListener("input", (e) => {
+      let d = e.target.value.replace(/\D/g, "").slice(0, 14);
+      let out = d;
+      if (d.length > 2) out = d.slice(0, 2) + "." + d.slice(2);
+      if (d.length > 5) out = out.slice(0, 6) + "." + out.slice(6);
+      if (d.length > 8) out = out.slice(0, 10) + "/" + out.slice(10);
+      if (d.length > 12) out = out.slice(0, 15) + "-" + out.slice(15);
+      e.target.value = out;
+    });
 
-      function validateField(field) {
-        const value = field.value.trim();
-        let error = null;
-        switch (field.id) {
-          case "nome":
-            if (!value) error = "Nome da empresa é obrigatório";
-            else if (value.length < 3) error = "Nome deve ter pelo menos 3 caracteres";
-            break;
-          case "cnpj":
-            if (!value) error = "CNPJ é obrigatório";
-            else {
-              const cnpjDigits = value.replace(/\D/g, "");
-              if (cnpjDigits.length !== 14) error = "CNPJ deve ter 14 dígitos";
-            }
-            break;
-          case "email":
-            if (!value) error = "E-mail é obrigatório";
-            else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(value)) error = "E-mail inválido";
-            break;
-          case "telefone":
-            if (!value) error = "Telefone é obrigatório";
-            else if (!/^\(\d{2}\)\s?\d{4,5}-\d{4}$/.test(value)) error = "Telefone inválido. Use (XX) XXXXX-XXXX";
-            break;
-          case "senha":
-            if (!value) error = "Senha é obrigatória";
-            else if (value.length < 6) error = "Senha deve ter pelo menos 6 caracteres";
-            break;
-          case "endereco":
-            if (!value) error = "Endereço é obrigatório";
-            else if (value.length < 10) error = "Endereço deve ter pelo menos 10 caracteres";
-            break;
-          case "setor":
-            if (!field.value) error = "Setor é obrigatório";
-            break;
-        }
-        if (error) showError(field, error);
-        else clearError(field);
-        return !error;
+    // Máscara de telefone
+    document.getElementById("telefone").addEventListener("input", (e) => {
+      let v = e.target.value.replace(/\D/g, "").slice(0, 11);
+      if (v.length > 6) v = `(${v.slice(0, 2)}) ${v.slice(2, 7)}-${v.slice(7)}`;
+      else if (v.length > 2) v = `(${v.slice(0, 2)}) ${v.slice(2)}`;
+      e.target.value = v;
+    });
+
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      alertaErro.classList.add("d-none");
+
+      // 'checkValidity()' usa as regras nativas do HTML (required, minlength, type...)
+      // 'was-validated' faz o Bootstrap exibir os ícones/cores de erro e sucesso
+      if (!form.checkValidity()) {
+        form.classList.add("was-validated");
+        return;
       }
 
-      // CNPJ mask
-      document.getElementById("cnpj").addEventListener("input", e => {
-        let v = e.target.value.replace(/\D/g, "");
-        if (v.length > 14) v = v.slice(0, 14);
-        if (v.length >= 13) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})(\d{0,2})/, "$1.$2.$3/$4-$5");
-        else if (v.length >= 12) v = v.replace(/^(\d{2})(\d{3})(\d{3})(\d{4})/, "$1.$2.$3/$4-");
-        else if (v.length >= 9) v = v.replace(/^(\d{2})(\d{3})(\d{3})/, "$1.$2.$3/");
-        else if (v.length >= 6) v = v.replace(/^(\d{2})(\d{3})/, "$1.$2.");
-        else if (v.length >= 3) v = v.replace(/^(\d{2})/, "$1.");
-        e.target.value = v;
-      });
+      const dados = {
+        id: Date.now(),
+        nome: document.getElementById("nome").value,
+        cnpj: document.getElementById("cnpj").value,
+        email: document.getElementById("email").value,
+        telefone: document.getElementById("telefone").value,
+        senha: document.getElementById("senha").value,
+        endereco: document.getElementById("endereco").value,
+        setor: document.getElementById("setor").value,
+        created_at: new Date().toISOString(),
+      };
 
-      // Phone mask
-      document.getElementById("telefone").addEventListener("input", e => {
-        let v = e.target.value.replace(/\D/g, "");
-        if (v.length > 11) v = v.slice(0, 11);
-        if (v.length >= 10) v = v.replace(/^(\d{2})(\d{4})(\d{4})/, "($1) $2-$3");
-        else if (v.length >= 7) v = v.replace(/^(\d{2})(\d{4})/, "($1) $2-");
-        else if (v.length >= 3) v = v.replace(/^(\d{2})/, "($1) ");
-        e.target.value = v;
-      });
+      const db = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { profissionais: [], empresas: [] };
 
-      document.querySelectorAll("input, select, textarea").forEach(input => {
-        input.addEventListener("blur", () => validateField(input));
-      });
+      if (db.empresas.some((e) => e.email === dados.email)) {
+        alertaErro.textContent = "Este e-mail já está cadastrado.";
+        alertaErro.classList.remove("d-none");
+        return;
+      }
+      if (db.empresas.some((e) => e.cnpj === dados.cnpj)) {
+        alertaErro.textContent = "Este CNPJ já está cadastrado.";
+        alertaErro.classList.remove("d-none");
+        return;
+      }
 
-      document.getElementById("cadastroFormEmp").addEventListener("submit", async e => {
-        e.preventDefault();
-        const fields = ["nome", "cnpj", "email", "telefone", "senha", "endereco", "setor"];
-        let valid = true;
-        for (const id of fields) {
-          const f = document.getElementById(id);
-          if (f && !validateField(f)) valid = false;
-        }
-        if (!valid) return;
-        
-        const formData = {
-          id: Date.now(),
-          nome: document.getElementById("nome").value,
-          cnpj: document.getElementById("cnpj").value,
-          email: document.getElementById("email").value,
-          telefone: document.getElementById("telefone").value,
-          senha: document.getElementById("senha").value,
-          endereco: document.getElementById("endereco").value,
-          setor: document.getElementById("setor").value,
-          created_at: new Date().toISOString()
-        };
+      db.empresas.push(dados);
+      localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
 
-        // Salvar no localStorage
-        try {
-          const STORAGE_KEY = "fastwork_users";
-          const db = JSON.parse(localStorage.getItem(STORAGE_KEY)) || { profissionais: [], empresas: [] };
-          
-          console.log("=== CADASTRO DE EMPRESA ===");
-          console.log("Dados do formulário:", formData);
-          console.log("Banco antes:", db);
-          
-          // Verificar se email já existe
-          const emailExists = db.empresas.some(e => e.email === formData.email);
-          if (emailExists) {
-            alert("Este email já está cadastrado!");
-            console.warn("Email duplicado:", formData.email);
-            return;
-          }
-          
-          // Verificar se CNPJ já existe
-          const cnpjExists = db.empresas.some(e => e.cnpj === formData.cnpj);
-          if (cnpjExists) {
-            alert("Este CNPJ já está cadastrado!");
-            console.warn("CNPJ duplicado:", formData.cnpj);
-            return;
-          }
-          
-          db.empresas.push(formData);
-          localStorage.setItem(STORAGE_KEY, JSON.stringify(db));
-          
-          console.log("Banco depois:", db);
-          console.log("localStorage atualizado com sucesso!");
-          
-          alert("Empresa cadastrada com sucesso! Faça login para continuar.");
-          window.location.href = "login.html";
-        } catch (err) {
-          console.error("Erro ao salvar cadastro:", err);
-          alert("Erro ao processar cadastro");
-        }
-      });
-    </script>
-  </body>
+      alert("Empresa cadastrada com sucesso! Faça login para continuar.");
+      window.location.href = "login.html";
+    });
+  </script>
+</body>
+
 </html>

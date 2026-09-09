@@ -1,155 +1,148 @@
 <!doctype html>
 <html lang="pt-br">
-
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FastWork - Conectando profissionais e contratantes</title>
+  <link rel="shortcut icon" href="src/public/images/Logo_FAVICON.png" type="image/x-icon" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" />
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css" />
-  <title>Home page</title>
 </head>
+<body class="bg-dark text-light">
 
-<body>
-  <header class="header d-flex align-items-center gap-3 border-bottom border-1 border-primary"
-    style="background-color: #000000;">
-    <div class="align-items-center">
-      <img src="src/public/images/Logo_FAVICON.png" width="80px" />
+  <!-- NAVBAR -->
+  <nav class="navbar navbar-dark navbar-expand-lg bg-black border-bottom border-primary">
+    <div class="container">
+      <a class="navbar-brand d-flex align-items-center gap-2" href="index.html">
+        <img src="src/public/images/Logo_FAVICON.png" width="40" alt="Logo FastWork" />
+        <span class="fw-bold fs-4">FastWork</span>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#menu">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse justify-content-end" id="menu">
+        <ul class="navbar-nav gap-2">
+          <li class="nav-item"><a class="nav-link active" href="index.html">Início</a></li>
+          <li class="nav-item"><a class="nav-link" href="src/views/login.html">Entrar</a></li>
+        </ul>
+      </div>
     </div>
-    <div>
-      <h1 class="mb-0" style="color: #ffffff;">FastWork</h1>
-    </div>
+  </nav>
 
-    <nav class="navbar navbar-expand-lg bg-body-tertiary position-absolute end-0">
-      <div class="container-fluid">
-        <a class="navbar-brand" href="#">Navbar</a>
-        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="nav-link active" aria-current="page" href="#">Home</a>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link" href="#">Link</a>
-            </li>
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown"
-                aria-expanded="false">
-                Dropdown
-              </a>
-              <ul class="dropdown-menu">
-                <li><a class="dropdown-item" href="#">Action</a></li>
-                <li><a class="dropdown-item" href="#">Another action</a></li>
-                <li>
-                  <hr class="dropdown-divider"> 
-                </li>
-                <li><a class="dropdown-item" href="#">Something else here</a></li>
-              </ul>
-            </li>
-            <li class="nav-item">
-              <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-            </li>
-          </ul>
-          <form class="d-flex" role="search">
-            <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search" />
-            <button class="btn btn-outline-success" type="submit">Search</button>
-          </form>
+  <!-- HERO -->
+  <header class="container py-5">
+    <div class="row align-items-center g-4">
+      <div class="col-lg-6">
+        <h1 class="display-5 fw-bold">Conectando profissionais e contratantes</h1>
+        <p class="lead text-white-50">Encontre ou ofereça serviços na sua região de forma rápida e confiável.</p>
+        <div class="d-grid gap-3 col-lg-8">
+          <a href="src/views/cadastroem.html" class="btn btn-primary btn-lg">
+            <i class="bi bi-building"></i> Cadastrar empresa
+          </a>
+          <a href="src/views/formu.html" class="btn btn-primary btn-lg">
+            <i class="bi bi-person-plus"></i> Cadastrar profissional
+          </a>
+          <a href="src/views/login.html" class="btn btn-outline-light btn-lg">
+            <i class="bi bi-box-arrow-in-right"></i> Fazer login
+          </a>
         </div>
       </div>
-    </nav>
+      <div class="col-lg-6 text-center">
+        <img src="https://tse3.mm.bing.net/th/id/OIP.n55Pyr_1rj8_Vbv8PAnLNwHaHa?cb=iwc2&rs=1&pid=ImgDetMain"
+          alt="Profissionais trabalhando" class="img-fluid rounded-4" />
+      </div>
+    </div>
   </header>
 
-  <div class="d-flex gap-4 p-4 justify-content-around">
-    <div class="flex-shrink-0">
-      <img src="https://tse3.mm.bing.net/th/id/OIP.n55Pyr_1rj8_Vbv8PAnLNwHaHa?cb=iwc2&rs=1&pid=ImgDetMain"
-        alt="imagem decorativa cinza" class="img-fluid rounded-3 hero-image" />
-    </div>
+  <!-- SERVIÇOS -->
+  <section class="container py-5">
+    <h2 class="text-center bg-primary text-white rounded-pill py-2 mb-5">Serviços disponíveis</h2>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-4 g-4">
 
-    <div class="d-flex flex-column gap-5 action-buttons ">
-      <button class="btn-custom rounded-pill h-25 bg-primary" style="width: 550px;">
-        <i class="bi bi-building"></i>
-        CADASTRAR EMPRESA
-      </button>
-      <button class="btn-custom rounded-pill h-25 bg-primary" style="width: 550px;">
-        <i class="bi bi-person-plus"></i>
-        CADASTRAR PROFISSIONAL
-      </button>
-      <button class="btn-custom rounded-pill h-25 bg-primary" style="width: 550px;">
-        <i class="bi bi-box-arrow-in-right"></i>
-        FAZER LOGIN
-      </button>
-    </div>
-  </div>
-
-  <div class="container-fluid p-4">
-    <!-- titulo -->
-    <div class="title-banner mb-4 p-3 rounded-pill bg-primary text-center" style="color: #ffffff;">
-      <h2 class="mb-0">Serviços Disponiveis</h2>
-    </div>
-
-
-
-    <div class="card" style="width: 18rem;">
-      <img class="card-img-top" src="src/public/images/pedreiro.jpg" alt="Card image cap">
-      <div class="card-body">
-        <h5 class="card-title"></h5>
-        <a href="#" class="btn btn-primary">Pedreiro</a>
-      </div>
-    </div>
-
-
-
-    <footer class="bg-black text-white pt-5 pb-4 border-top border-primary">
-      <div class="container">
-        <div class="row gy-4">
-          <div class="col-6 col-md-3 ">
-            <h5 class="text-primary mb-3">FastWork</h5>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link1</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link2</a>
-          </div>
-          <div class="col-6 col-md-3">
-            <h5 class="text-primary mb-3">Comunidades</h5>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link1</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link2</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link3</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link4</a>
-          </div>
-          <div class="col-6 col-md-3">
-            <h5 class="text-primary mb-3">link uteis</h5>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link1</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link2</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link3</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link4</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link5</a>
-            <a href="#" class="d-block text-white-50 text-decoration-none mb-2">link6</a>
-          </div>
-
-          <div class="col-6 col-md-3">
-            <h5 class="text-primary mb-3">Redes sociais</h5>
-            <div class="d-flex gap-3">
-              <a href="#" class="text-white border rounded-circle d-flex align-items-center justify-content-center"
-                style="width: 38px; height: 38px;">
-                <i class="bi bi-instagram"></i>
-              </a>
-              <a href="#" class="text-white border rounded-circle d-flex align-items-center justify-content-center"
-                style="width: 38px; height: 38px;">
-                <i class="bi bi-twitter-x"></i>
-              </a>
-              <a href="#" class="text-white border rounded-circle d-flex align-items-center justify-content-center"
-                style="width: 38px; height: 38px;">
-                <i class="bi bi-facebook"></i>
-              </a>
-            </div>
-
+      <div class="col">
+        <div class="card bg-black border-primary h-100 text-center">
+          <div class="card-body">
+            <i class="bi bi-hammer display-5 text-primary"></i>
+            <h5 class="card-title mt-3">Pedreiro</h5>
+            <a href="#" class="btn btn-primary btn-sm">Ver profissionais</a>
           </div>
         </div>
       </div>
-      <div class="p-2 text-center small text-white-50 mt-4 border-top border-primary">Português (Brasil)</div>
-      <div class="p-2 text-center small text-white-50 mt-4">© 2025 - 2026 FastWork Todos os direitos reservados</div>
-    </footer>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
-</body>
 
+      <div class="col">
+        <div class="card bg-black border-primary h-100 text-center">
+          <div class="card-body">
+            <i class="bi bi-lightning-charge display-5 text-primary"></i>
+            <h5 class="card-title mt-3">Eletricista</h5>
+            <a href="#" class="btn btn-primary btn-sm">Ver profissionais</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card bg-black border-primary h-100 text-center">
+          <div class="card-body">
+            <i class="bi bi-brush display-5 text-primary"></i>
+            <h5 class="card-title mt-3">Pintor</h5>
+            <a href="#" class="btn btn-primary btn-sm">Ver profissionais</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="col">
+        <div class="card bg-black border-primary h-100 text-center">
+          <div class="card-body">
+            <i class="bi bi-wrench display-5 text-primary"></i>
+            <h5 class="card-title mt-3">Encanador</h5>
+            <a href="#" class="btn btn-primary btn-sm">Ver profissionais</a>
+          </div>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer class="bg-black border-top border-primary pt-5 pb-4">
+    <div class="container">
+      <div class="row gy-4">
+        <div class="col-6 col-md-3">
+          <h5 class="text-primary">FastWork</h5>
+          <a href="sobre.html" class="d-block link-light link-opacity-75 text-decoration-none">Sobre</a>
+          <a href="empregos.html" class="d-block link-light link-opacity-75 text-decoration-none">Empregos</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5 class="text-primary">Comunidades</h5>
+          <a href="Dev.html" class="d-block link-light link-opacity-75 text-decoration-none">Desenvolvedores</a>
+          <a href="src/views/publicidade.html" class="d-block link-light link-opacity-75 text-decoration-none">Publicidade</a>
+          <a href="src/views/investidores.html" class="d-block link-light link-opacity-75 text-decoration-none">Investidores</a>
+          <a href="src/views/fornecedores.html" class="d-block link-light link-opacity-75 text-decoration-none">Fornecedores</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5 class="text-primary">Links úteis</h5>
+          <a href="ajuda.html" class="d-block link-light link-opacity-75 text-decoration-none">Suporte</a>
+          <a href="src/views/legal.html" class="d-block link-light link-opacity-75 text-decoration-none">Legal</a>
+          <a href="src/views/seguranca.html" class="d-block link-light link-opacity-75 text-decoration-none">Segurança e privacidade</a>
+          <a href="src/views/politicas.html" class="d-block link-light link-opacity-75 text-decoration-none">Políticas de privacidade</a>
+          <a href="src/views/cookies.html" class="d-block link-light link-opacity-75 text-decoration-none">Cookies</a>
+          <a href="src/views/acessibilidade.html" class="d-block link-light link-opacity-75 text-decoration-none">Acessibilidade</a>
+        </div>
+        <div class="col-6 col-md-3">
+          <h5 class="text-primary">Redes sociais</h5>
+          <div class="d-flex gap-2">
+            <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="bi bi-instagram"></i></a>
+            <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="bi bi-facebook"></i></a>
+            <a href="#" class="btn btn-outline-light btn-sm rounded-circle"><i class="bi bi-twitter-x"></i></a>
+          </div>
+        </div>
+      </div>
+    
+    </div>
+      <p class="text-center text-white-50 small mt-4 pt-3 border-top border-primary mb-0 ">
+        © 2025–2026 FastWork · Todos os direitos reservados
+      </p>
+  </footer>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
+</body>
 </html>
